@@ -1,0 +1,32 @@
+.menu-card {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    width: 300px;
+    text-align: center;
+  }
+  
+  .menu-card img {
+    max-width: 100%;
+  }
+  
+  .menu-card button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .menu-card button:hover {
+    background-color: #0056b3;
+  }
+  
+  .comanda_pedido{
+    display: flex;
+    justify-content: end;
+    width: 500px;
+    height: 100px;
+    background-color: rgb(255, 167, 167);
+
+  }
