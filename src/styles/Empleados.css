@@ -1,0 +1,46 @@
+.empleados-table {
+    margin-top: 5%;
+    margin-left: 5%;
+    width: 100%;
+    font-size: 16pt;
+  }
+  
+  .acciones {
+    display: flex;
+    text-align: center;
+  }
+  
+  .ver-button {
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+  }
+  
+  .modificar-button {
+    border-radius: 10px;
+    background-color: yellow;
+    color: black;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 5px;
+  }
+  
+  .eliminar-button {
+    border-radius: 10px;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+  }
+  
+  .Empleados-page{
+    margin-top: 2%;
+    margin-left: 5%;
+}
+
+td{
+  margin-top: 20px;
+}
