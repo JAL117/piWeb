@@ -1,0 +1,85 @@
+###
+GET http://localhost:3006/usuario HTTP/1.1
+
+###
+POST http://localhost:3006/usuario/usuario HTTP/1.1
+Content-Type: application/json
+
+{
+"nombre": "Judas",
+"rol": "Mesero",
+"telefono": 96122311234,
+"contraseña": "12312312",
+"usuario": "mesero2"
+}
+
+
+
+###
+DELETE  http://localhost:3006/usuario/65290aa4353cbbbc14b8e6f4 HTTP/1.1
+
+
+
+###
+PUT  http://localhost:3006/usuario/Judas HTTP/1.1
+
+{
+"usuario": "Ana",
+"contraseña": "33331111"
+}
+
+###
+PUT  http://localhost:3006/usuario/todo/652915c0356c7adf66f14bc5 HTTP/1.1
+Content-Type: application/json
+
+{
+"nombre": "sss",
+"rol": "Mesero",
+"telefono": 96122311314,
+"contraseña": "12312366",
+"usuario": "mesero5"
+}
+
+###
+PUT  http://localhost:3006/usuario/remplazar/652915c0356c7adf66f14bc5 HTTP/1.1
+Content-Type: application/json
+
+{
+"nombre": "Rosa",
+"rol": "Cocinera",
+"telefono": 123456789,
+"contraseña": "12341234",
+"usuario": "cocinera1"
+}
+
+
+//***  Cliente  ***//
+###
+GET http://localhost:3006/cliente/ HTTP/1.1
+
+###
+POST http://localhost:3006/cliente/clientes HTTP/1.1
+Content-Type: application/json
+
+{
+"Cliente_id": 96122311234,
+"nombre": "Judas",
+"telefono": 96122311234,
+"referencia": "asasdssd"
+}
+###
+PUT http://localhost:3006/cliente/clientes/96122311234 HTTP/1.1
+Content-Type: application/json
+
+{
+"nombre": "Judas",
+"telefono": 96122311234,
+"referencia": "asasdssd"
+}
+
+###
+DELETE  http://localhost:3006/cliente/clientes/65297340b2272a1c6f850e99 HTTP/1.1
+
+//***  Productos  ***//
+###
+GET http://localhost:3006/producto/ HTTP/1.1
