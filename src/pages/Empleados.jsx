@@ -1,5 +1,5 @@
 import React from 'react'
-import TablaEmpleados from '../components/TablaEmpleados'
+import TablaEmpleados from '../components/Empleados/TablaEmpleados'
 
 function Empleados() {
   return (

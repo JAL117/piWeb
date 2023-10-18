@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import '../styles/Empleados.css'
+import '../../styles/Empleados.css'
 
 const datosEmpleados = [
   { id: 1, nombre: 'Juan Pérez', telefono: '123-456-7890', rol: 'Gerente' },

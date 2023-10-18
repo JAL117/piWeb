@@ -1,7 +1,7 @@
 import React from 'react'
-import PanelVentas from '../components/PanelVentas'
-import PanelOrdenes from '../components/PanelOrdenes'
-import PanelGrafica from '../components/PanelGrafica'
+import PanelVentas from '../components/Panel/PanelVentas'
+import PanelOrdenes from '../components/Panel/PanelOrdenes'
+import PanelGrafica from '../components/Panel/PanelGrafica'
 
 function Panel() {
   return (

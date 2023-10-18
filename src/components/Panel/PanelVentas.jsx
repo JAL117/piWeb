@@ -1,6 +1,6 @@
 import React from 'react'
 import {RiMoneyDollarCircleFill} from 'react-icons/ri'
-import '../styles/Panel.css'
+import '../../styles/Panel.css'
 
 function PanelVentas() {
   return (

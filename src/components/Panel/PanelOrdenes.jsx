@@ -1,5 +1,5 @@
 import React from "react";
-import "../styles/Panel.css";
+import "../../styles/Panel.css";
 import { RiEditBoxFill } from "react-icons/ri";
 function PanelOrdenes() {
   return (

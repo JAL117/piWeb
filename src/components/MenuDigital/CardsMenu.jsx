@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button, Row, Col } from "react-bootstrap";
-import "../styles/MenuDigital.css";
+import "../../styles/MenuDigital.css";
 import {FaCartArrowDown} from "react-icons/fa";
 
 class MenuCard extends React.Component {

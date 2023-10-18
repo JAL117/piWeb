@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/MenuDigital.css'
+import '../../styles/MenuDigital.css'
 
 function ComandaMenuDigital() {
   return (
