@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import '../../styles/Empleados.css'
+import { BsFillEyeFill , BsFillTrashFill ,BsFillPencilFill, BsPencilFill } from "react-icons/bs";
+
+
 
 const datosEmpleados = [
   { id: 1, nombre: 'Juan Pérez', telefono: '123-456-7890', rol: 'Gerente' },
@@ -32,9 +35,9 @@ class EmpleadosTable extends Component {
               <td>{empleado.telefono}</td>
               <td>{empleado.rol}</td>
               <td className="acciones">
-                <button className="ver-button" onClick={() => onVerClick(empleado.id)}>Ver</button>
-                <button className="modificar-button" onClick={() => onModificarClick(empleado.id)}>Modificar</button>
-                <button className="eliminar-button" onClick={() => onEliminarClick(empleado.id)}>Eliminar</button>
+                <button className="ver-button" onClick={() => onVerClick(empleado.id)}><BsFillEyeFill/></button>
+                <button className="modificar-button" onClick={() => onModificarClick(empleado.id)}><BsPencilFill/></button>
+                <button className="eliminar-button" onClick={() => onEliminarClick(empleado.id)}><BsFillTrashFill/></button>
               </td>
             </tr>
           ))}

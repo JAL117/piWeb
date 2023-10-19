@@ -1,4 +1,4 @@
-import { FaTrello, FaUserPlus, FaUsers, FaBars, FaUser } from "react-icons/fa";
+import { FaTrello, FaUserPlus, FaUsers, FaBars, FaUser ,FaGithub} from "react-icons/fa";
 import { FaKitchenSet } from "react-icons/fa6";
 import { MdBorderColor,MdOutlineMenuBook } from "react-icons/md";
 import { ImExit } from "react-icons/im";
@@ -62,10 +62,10 @@ const SideMenu = ({ children }) => {
   ];
 
   return (
-    <Container fluid style={{position:"sticky"}}>
+    <Container fluid style={{position:"sticky"}} className="bg-dark">
       <Row>
         <Col
-          xs={12}
+          xs={12}z
           md={isOpen ? 3 : 1}
           id="sidebar"
           className="d-flex flex-column align-items-center justify-content-between"

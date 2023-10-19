@@ -15,8 +15,11 @@
     background-color: green;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 10px;
     margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .modificar-button {
@@ -24,8 +27,11 @@
     background-color: yellow;
     color: black;
     border: none;
-    padding: 5px 10px;
+    padding: 10px;
     margin-right: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .eliminar-button {
@@ -33,7 +39,10 @@
     background-color: red;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding:  10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
   
   .Empleados-page{
