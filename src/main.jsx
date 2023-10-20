@@ -11,6 +11,7 @@ import Cocina from './pages/Cocina'
 import Ordenes from './pages/Ordenes'
 import Login from './pages/Login'
 import MenuDital from './pages/MenuDital';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
 {

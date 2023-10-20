@@ -3,8 +3,7 @@ import TablaEmpleados from '../components/Empleados/TablaEmpleados'
 
 function Empleados() {
   return (
-    <div className='Empleados-page'>
-      <h1>Empleados</h1><br/>
+    <div className='mt-5'>
      <TablaEmpleados/>
     </div>
   )
