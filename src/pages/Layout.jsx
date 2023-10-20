@@ -5,9 +5,10 @@ import Footer from "../components/Principal/Footer";
 function Layout() {
   return (
     <>
-      <SideMenu>
-        <Outlet />
-      </SideMenu>
+      <SideMenu />
+      <div className="mt-5">
+         <Outlet/>
+      </div>
       <Footer />
     </>
   );
