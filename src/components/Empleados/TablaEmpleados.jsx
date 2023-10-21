@@ -1,47 +1,143 @@
-import React, { Component } from 'react';
-import '../../styles/Empleados.css'
+import React, { useState } from "react";
+import Table from "react-bootstrap/Table";
+import Button from "react-bootstrap/Button";
+import { FaTrash ,FaEye } from "react-icons/fa";
+import { HiPencilAlt } from "react-icons/hi";
 
-const datosEmpleados = [
-  { id: 1, nombre: 'Juan Pérez', telefono: '123-456-7890', rol: 'Gerente' },
-  { id: 2, nombre: 'Ana Gómez', telefono: '987-654-3210', rol: 'Asistente' },
-  { id: 3, nombre: 'Luis Rodríguez', telefono: '555-555-5555', rol: 'Empleado' },
-];
+function Infor() {
+  const [data, setData] = useState([
+    {
+      id_coordinador: 1,
+      nombres: "Juan",
+      apellido_paterno: "Pérez",
+      apellido_materno: "López",
+      telefono: "1234567890",
+      rango: "Admin",
+    },
+    {
+      id_coordinador: 2,
+      nombres: "María",
+      apellido_paterno: "Gómez",
+      apellido_materno: "Martínez",
+      telefono: "9876543210",
+      rango: "Usuario",
+    },
+    {
+      id_coordinador: 2,
+      nombres: "María",
+      apellido_paterno: "Gómez",
+      apellido_materno: "Martínez",
+      telefono: "9876543210",
+      rango: "Usuario",
+    },
+    {
+      id_coordinador: 2,
+      nombres: "María",
+      apellido_paterno: "Gómez",
+      apellido_materno: "Martínez",
+      telefono: "9876543210",
+      rango: "Usuario",
+    },
+  ]);
 
-class EmpleadosTable extends Component {
-  render() {
-    const { onVerClick, onModificarClick, onEliminarClick } = this.props;
+  const [searchText, setSearchText] = useState("");
+  const [coordinadorSeleccionado, setCoordinadorSeleccionado] = useState(null);
 
-    if (!datosEmpleados || datosEmpleados.length === 0) {
-      return <div>No hay empleados para mostrar.</div>;
+  const handleLiquidarCuentaClick = (id_coordinador) => {
+    const newData = data.filter(
+      (item) => item.id_coordinador !== id_coordinador
+    );
+    setData(newData);
+  };
+
+  const trimmedSearchText = searchText.trim();
+  const searchKeywords = trimmedSearchText.split(" ");
+
+  const removeDiacritics = (text) => {
+    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  };
+
+  const filteredData = data.filter((pago) => {
+    if (trimmedSearchText === "") {
+      return true;
     }
 
-    return (
-      <table className="empleados-table">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Teléfono</th>
-            <th>Rol</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          {datosEmpleados.map((empleado) => (
-            <tr key={empleado.id}>
-              <td>{empleado.nombre}</td>
-              <td>{empleado.telefono}</td>
-              <td>{empleado.rol}</td>
-              <td className="acciones">
-                <button className="ver-button" onClick={() => onVerClick(empleado.id)}>Ver</button>
-                <button className="modificar-button" onClick={() => onModificarClick(empleado.id)}>Modificar</button>
-                <button className="eliminar-button" onClick={() => onEliminarClick(empleado.id)}>Eliminar</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    );
+    return searchKeywords.every((keyword) => {
+      const lowercasedKeyword = removeDiacritics(keyword.toLowerCase());
+      const lowercasedNombres = removeDiacritics(pago.nombres.toLowerCase());
+      const lowercasedApellidoPaterno = removeDiacritics(
+        pago.apellido_paterno.toLowerCase()
+      );
+      const lowercasedApellidoMaterno = removeDiacritics(
+        pago.apellido_materno.toLowerCase()
+      );
+
+      return (
+        lowercasedNombres.includes(lowercasedKeyword) ||
+        lowercasedApellidoPaterno.includes(lowercasedKeyword) ||
+        lowercasedApellidoMaterno.includes(lowercasedKeyword)
+      );
+    });
+  });
+
+  let message = null;
+
+  if (filteredData.length === 0 && !searchText) {
+    message = <div>No hay usuarios registrados.</div>;
   }
+
+  return (
+    <>
+      <section
+        className="container mb-5"
+        style={{
+          boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
+          padding: "15px",
+          borderRadius: "15px",
+          marginTop: "10%",
+        }}
+      >
+        {" "}
+        <h1 className="mb-5">Empleados</h1>
+        <div className="table-responsive">
+          <Table striped bordered>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Teléfono</th>
+                <th>Rol</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              {filteredData.map((item) => (
+                <tr key={item.id_coordinador}>
+                  <td>
+                    {item.nombres} {item.apellido_paterno}{" "}
+                    {item.apellido_materno}
+                  </td>
+                  <td>{item.telefono}</td>
+                  <td>{item.rango}</td>
+                  <td style={{display:"flex",justifyContent:"space-around"}}>
+                    <Button variant="success" >
+                      <FaEye />
+                    </Button>
+                    <Button variant="warning" >
+                      <HiPencilAlt />
+                    </Button>
+                    <Button variant="danger" >
+                      <FaTrash />
+                    </Button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+            {message}
+          </Table>
+        </div>
+      </section>
+    </>
+  );
 }
 
-export default EmpleadosTable;
+export default Infor;

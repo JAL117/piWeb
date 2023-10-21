@@ -1,19 +1,15 @@
 import { Outlet, useLocation } from "react-router-dom";
 import SideMenu from "../components/Principal/SideMenu";
-
+import Footer from "../components/Principal/Footer";
 
 function Layout() {
- /* const location = useLocation();
-  const isMenuRoute = location.pathname === "/inicio";*/
-  /* {!isMenuRoute&&<NavBar />} esta parte va en el return*/
   return (
     <>
-       <SideMenu>
-               <Outlet />
-       </SideMenu>
-
-  
-
+      <SideMenu />
+      <div className="mt-5">
+         <Outlet/>
+      </div>
+      <Footer />
     </>
   );
 }

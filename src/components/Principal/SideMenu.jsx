@@ -1,102 +1,90 @@
+import { useState } from "react";
+import { Navbar, Container, Offcanvas, Nav } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { FaTrello, FaUserPlus, FaUsers, FaBars, FaUser } from "react-icons/fa";
 import { FaKitchenSet } from "react-icons/fa6";
-import { MdBorderColor,MdOutlineMenuBook } from "react-icons/md";
+import { MdBorderColor, MdOutlineMenuBook } from "react-icons/md";
 import { ImExit } from "react-icons/im";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import {
-  Navbar,
-  Container,
-  Nav,
-  NavItem,
-  Row,
-  Col,
-} from "react-bootstrap";
-import "bootstrap/dist/css/bootstrap.min.css";
-import '../../App.css'
 
-const SideMenu = ({ children }) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const toggle = () => setIsOpen(!isOpen);
-  const menuItem = [
-    {
-      path: "/inicio/usuario",
-      name: "Usuario",
-      icon: <FaUser />,
-    },
-    {
-      path: "/inicio/panel",
-      name: "Panel",
-      icon: <FaTrello />,
-    },
-    {
-      path: "/inicio/agregarusuarios",
-      name: "Agregar usuario",
-      icon: <FaUserPlus />,
-    },
-    {
-      path: "/inicio/empleados",
-      name: "Empleados",
-      icon: <FaUsers />,
-    },
-    {
-      path: "/inicio/cocina",
-      name: "Cocina",
-      icon: <FaKitchenSet />,
-    },
-    {
-      path: "/inicio/ordenes",
-      name: "Ordenes",
-      icon: <MdBorderColor />,
-    },
-    {
-      path: "/inicio/menudigital",
-      name: "Menu digital",
-      icon: <MdOutlineMenuBook />,
-    },
-    {
-      path: "/",
-      name: "Salir",
-      icon: <ImExit />,
-    },
-  ];
+function NavbarComponent() {
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
+
+  const navbarStyle = {
+    position: "fixed", // Fijar la posición
+    top: 0, // Fijar en la parte superior
+    width: "100%", // Ancho completo
+    zIndex: 1000, // Asegurar que está por encima de otros elementos
+  };
 
   return (
-    <Container fluid style={{position:"sticky"}}>
-      <Row>
-        <Col
-          xs={12}
-          md={isOpen ? 3 : 1}
-          id="sidebar"
-          className="d-flex flex-column align-items-center justify-content-between"
-        >
-          <div className="top_section text-center mt-3">
-            <h1 className="logo" style={{ display: isOpen ? "block" : "none" }}>
-              Menu
-            </h1>
-            <div className="bars">
-              <FaBars onClick={toggle} />
-            </div>
-          </div>
-          <Nav className="flex-column">
-            {menuItem.map((item, index) => (
-              <NavItem key={index}>
-                <NavLink to={item.path} className="link" activeClassName="active">
-                  <div className="icon">{item.icon}</div>
-                  <div style={{ display: isOpen ? "block" : "none" }} className="link_text">
-                    {item.name}
-                  </div>
-                </NavLink>
-              </NavItem>
-            ))}
-          </Nav>
-        </Col>
-        <Col xs={12} md={isOpen ? 9 : 11} id="main-content">
-          {children}
-        </Col>
-      </Row>
-    </Container>
-  );
-};
+    <>
+      <Navbar
+        variant="dark"
+        className="bg-dark me-auto"
+        expand={false}
+        style={navbarStyle}
+      >
+        <Container>
+          
+          <Navbar.Brand as={Link} to="/inicio" className="mt-2 text-white">
+            Ardon - carnes && grill
+         </Navbar.Brand>
+         <Navbar.Toggle onClick={handleShow} />
+        </Container>
+      </Navbar>
 
-export default SideMenu;
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        placement="start"
+        className="bg-dark text-white"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Menu</Offcanvas.Title>
+        </Offcanvas.Header>
+
+        <Offcanvas.Body style={{ width: "200px" }}>
+          <Nav className="flex-column">
+            <Nav.Link as={Link} to="/inicio/usuario" className="text-white">
+              <FaUser />
+              Usuario
+            </Nav.Link>
+            <Nav.Link as={Link} to="/inicio/panel" className="text-white">
+              <FaTrello />
+              Panel
+            </Nav.Link>
+            <Nav.Link
+              as={Link}
+              to="/inicio/agregarusuarios"
+              className="text-white"
+            >
+              <FaUserPlus />
+              Agregar usuario
+            </Nav.Link>
+            <Nav.Link as={Link} to="/inicio/empleados" className="text-white">
+              <FaUsers /> Empleados
+            </Nav.Link>
+            <Nav.Link as={Link} to="/inicio/cocina" className="text-white">
+              <FaKitchenSet /> Cocina
+            </Nav.Link>
+            <Nav.Link as={Link} to="/inicio/ordenes" className="text-white">
+              <MdBorderColor /> Ordenes
+            </Nav.Link>
+            <Nav.Link as={Link} to="/inicio/menudigital" className="text-white">
+              <MdOutlineMenuBook /> Menu digital
+            </Nav.Link>
+            <Nav.Link as={Link} to="/" className="text-white">
+              <ImExit />
+              Salir
+            </Nav.Link>
+          </Nav>
+        </Offcanvas.Body>
+      </Offcanvas>
+    </>
+  );
+}
+
+export default NavbarComponent;

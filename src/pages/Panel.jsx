@@ -6,9 +6,10 @@ import PanelGrafica from '../components/Panel/PanelGrafica'
 function Panel() {
   return (
     <div className='panel_principal'>
-      
+      <>
       <PanelVentas/>
       <PanelOrdenes/>
+      </>
       <PanelGrafica/>
     </div>
   )

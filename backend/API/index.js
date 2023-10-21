@@ -16,6 +16,7 @@ app.use("/cliente", rutaCliente);
 app.use("/producto", rutaProductos);
 
 app.listen(port, () => console.log("Escuchando en el puerto ", port));
+
 //conexion
 mongoose
   .connect(process.env.URL_conect)

@@ -1,8 +1,11 @@
 import React from 'react'
+import Grafica from './Grafica'
 
 function PanelGrafica() {
   return (
-    <div>PanelGrafica</div>
+    <div>PanelGrafica
+      <Grafica/>
+    </div>
   )
 }
 
