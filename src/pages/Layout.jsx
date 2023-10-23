@@ -6,11 +6,9 @@ function Layout() {
   return (
     <>
       <SideMenu />
-         <div className="mt-1" style={{marginLeft:"10%"}}>
+      <div className="mt-5">
          <Outlet/>
       </div>
-   
-     
       <Footer />
     </>
   );
