@@ -3,7 +3,7 @@ import TablaEmpleados from '../components/Empleados/TablaEmpleados'
 
 function Empleados() {
   return (
-    <div className='mt-5'>
+    <div className='mt-2'>
      <TablaEmpleados/>
     </div>
   )
