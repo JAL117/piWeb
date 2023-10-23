@@ -4,7 +4,7 @@ import { FaGithub} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer  className=" text-white py-5" style={{backgroundColor:"#100b0bf7"}}>
+    <footer className="bg-dark text-white py-5">
       <Container>
         <Row>
           <Col lg={4} md={6}>
@@ -27,7 +27,7 @@ const Footer = () => {
           </Col>
         </Row>
       </Container>
-      <div className=" text-white text-center py-3">
+      <div className="bg-dark text-white text-center py-3">
         &copy; {new Date().getFullYear()} ARDON - carnes && grill
       </div>
     </footer>
