@@ -144,7 +144,7 @@ const opciones = [
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap component="div">
-            ARDON <MdOutdoorGrill size={35}/>
+            Ardon<MdOutdoorGrill size={35}/>
           </Typography>
         </Toolbar>
       </AppBar>
