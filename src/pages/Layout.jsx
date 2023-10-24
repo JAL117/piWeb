@@ -7,10 +7,7 @@ function Layout() {
     <>
       <SideMenu />
          <div style={{ marginLeft:"10%", marginTop:"7%"}}>
-         <Outlet/>
-      </div>
-   
-     
+         <Outlet/></div>
       <Footer />
     </>
   );

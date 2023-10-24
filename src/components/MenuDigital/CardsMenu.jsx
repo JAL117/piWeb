@@ -17,8 +17,78 @@ class MenuCard extends React.Component {
         descripcion: "Descripción del producto 1",
         precio: "$10.00",
       },
-   
-     
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
+      {
+        imagen: "../src/img/Fondo-Login.png",
+        nombre: "Producto ",
+        descripcion: "Descripción del producto 1",
+        precio: "$10.00",
+      },
     ];
 
     return (
