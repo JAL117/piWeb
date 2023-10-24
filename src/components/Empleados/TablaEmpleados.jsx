@@ -94,7 +94,7 @@ function Infor() {
           boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
           padding: "15px",
           borderRadius: "15px",
-          marginTop: "10%",
+          marginTop: "5%",
         }}
       >
         {" "}

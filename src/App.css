@@ -1,3 +1,23 @@
 .css-12i7wg6-MuiPaper-root-MuiDrawer-paper {
     background-color: #100b0bf7 !important;
 }
+
+.layout-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Establece la altura mínima de la vista */
+  }
+  
+  .content {
+    flex: 1; /* El contenido principal se expandirá para llenar el espacio disponible */
+    margin-left: 5%;
+    margin-top: 5%;
+  }
+  
+  /* Estilos para el footer */
+  Footer {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+  }
+  

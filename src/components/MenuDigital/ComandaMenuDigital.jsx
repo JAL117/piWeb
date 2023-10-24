@@ -3,10 +3,7 @@ import '../../styles/MenuDigital.css'
 
 function ComandaMenuDigital() {
   return (
-    <div>ComandaMenuDigital
-        <div className='comanda_pedido'>
-
-        </div>
+    <div>
     </div>
   )
 }

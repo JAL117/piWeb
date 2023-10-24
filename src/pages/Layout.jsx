@@ -4,12 +4,13 @@ import Footer from "../components/Principal/Footer";
 
 function Layout() {
   return (
-    <>
+    <div className="layout-container">
       <SideMenu />
-         <div style={{ marginLeft:"10%", marginTop:"7%"}}>
-         <Outlet/></div>
+      <div className="content">
+        <Outlet />
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -92,7 +92,7 @@ class MenuCard extends React.Component {
     ];
 
     return (
-      <Row className="menu-cards">
+      <Row className="menu-cards m-3">
         {menuItems.map((item, index) => (
           <Col key={index} xs={12} sm={6} md={4} lg={3}>
             <Card style={{ margin: "10px" }}>
