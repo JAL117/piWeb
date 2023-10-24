@@ -21,69 +21,82 @@ function NavbarComponent() {
 
   return (
     <>
-      <Navbar
-        variant="dark"
-        className="bg-dark me-auto"
-        expand={false}
-        style={navbarStyle}
-      >
-        <Container>
-          
-          <Navbar.Brand as={Link} to="/inicio" className="mt-2 text-white">
-            Ardon - carnes && grill
-         </Navbar.Brand>
-         <Navbar.Toggle onClick={handleShow} />
-        </Container>
-      </Navbar>
+    
+      <Box sx={{ display: 'flex' , backgroundColor:"#100b0bf7 " }}>
+      <CssBaseline sx={{backgroundColor:"#100b0bf7 "}} />
+      <AppBar position="fixed" open={open} sx={{backgroundColor:"#100b0bf7 "}}>
+        <Toolbar style={{backgroundColor:"#100b0bf7"}}>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            sx={{
+              marginRight: 5,
+              ...(open && { display: 'none' }),
+            }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div">
+            Ardon<MdOutdoorGrill size={35}/>
+          </Typography>
+        </Toolbar>
+      </AppBar>
 
-      <Offcanvas
-        show={show}
-        onHide={handleClose}
-        placement="start"
-        className="bg-dark text-white"
-      >
-        <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Menu</Offcanvas.Title>
-        </Offcanvas.Header>
+      <Drawer variant="permanent" open={open} sx={{backgroundColor:"#100b0bf7 "}} >
+        <DrawerHeader style={{backgroundColor:"#100b0bf7" , color:"white"}}>
+          <IconButton onClick={handleDrawerClose} style={{color:"white"}}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </DrawerHeader>
 
-        <Offcanvas.Body style={{ width: "200px" }}>
-          <Nav className="flex-column">
-            <Nav.Link as={Link} to="/inicio/usuario" className="text-white">
-              <FaUser />
-              Usuario
-            </Nav.Link>
-            <Nav.Link as={Link} to="/inicio/panel" className="text-white">
-              <FaTrello />
-              Panel
-            </Nav.Link>
-            <Nav.Link
-              as={Link}
-              to="/inicio/agregarusuarios"
-              className="text-white"
-            >
-              <FaUserPlus />
-              Agregar usuario
-            </Nav.Link>
-            <Nav.Link as={Link} to="/inicio/empleados" className="text-white">
-              <FaUsers /> Empleados
-            </Nav.Link>
-            <Nav.Link as={Link} to="/inicio/cocina" className="text-white">
-              <FaKitchenSet /> Cocina
-            </Nav.Link>
-            <Nav.Link as={Link} to="/inicio/ordenes" className="text-white">
-              <MdBorderColor /> Ordenes
-            </Nav.Link>
-            <Nav.Link as={Link} to="/inicio/menudigital" className="text-white">
-              <MdOutlineMenuBook /> Menu digital
-            </Nav.Link>
-            <Nav.Link as={Link} to="/" className="text-white">
-              <ImExit />
-              Salir
-            </Nav.Link>
-          </Nav>
-        </Offcanvas.Body>
-      </Offcanvas>
+
+
+
+
+
+        <List sx={{ backgroundColor: "#100b0bf7"  }}>
+  {opciones.map((opcion, index) => (
+    <ListItem key={opcion.text} disablePadding sx={{ display: 'block', marginLeft:'0px'}} as={Link} to={opcion.path}>
+      <ListItemButton
+        sx={{
+          minHeight: 48,
+          justifyContent: open ? 'initial' : 'center',
+          px: 2.5,
+        }}
+      >
+        <ListItemIcon
+          sx={{
+            minWidth: 0,
+            mr: open ? 3 : 'auto',
+            justifyContent: 'center',
+            color:'white'
+          }}
+        >
+          <Link to={opcion.path} style={{ textDecoration: 'none' , backgroundColor: "#100b0bf7" , color:'white'}} variant="dark">
+          {index % 8 === 0 ? <FaUser /> : index % 8 === 1 ? <FaTrello /> : index % 8 === 2 ? <FaUserPlus/>: index % 8 === 3 ? <FaUsers/>: index % 8 === 4 ? <FaKitchenSet/>: index % 8 === 5 ? <MdBorderColor/>: index % 8 === 6 ? <MdOutlineMenuBook/>: index % 8 === 7 ? <ImExit/>:<FaUser/>}
+          </Link>
+        </ListItemIcon>
+        <ListItemText primary={opcion.text} sx={{ opacity: open ? 1 : 0 }} style={{color:"white"}} />
+      </ListItemButton>
+    </ListItem>
+  ))}
+</List>
+
+      
+
+
+
+        
+      </Drawer>
+    
+   
+    
+     
+      </Box>
     </>
+  
   );
 }
 
