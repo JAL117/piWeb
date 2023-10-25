@@ -4,7 +4,7 @@ import ComandaMenuDigital from '../components/MenuDigital/ComandaMenuDigital'
 
 function MenuDital() {
   return (
-    <div>MenuDital
+    <div>
         <CardsMenu></CardsMenu>
         <ComandaMenuDigital/>
     </div>

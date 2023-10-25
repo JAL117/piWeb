@@ -12,7 +12,7 @@ function BasicExample() {
           <Nav className="me-auto">
             <Nav.Link
               as={Link}
-              to="/inicio/cocina/ordenCocina"
+              to="/inicio/cocina"
               className="text-blue"
             >
               Ordenes

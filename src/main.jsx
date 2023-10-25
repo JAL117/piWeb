@@ -45,7 +45,7 @@ const router = createBrowserRouter([
       element:<Cocina/>,
       children: [
         {
-          path: "ordenCocina",
+          index: true,
           element: <CardOrdenesCocina/>
         },{
           path: "insumos",

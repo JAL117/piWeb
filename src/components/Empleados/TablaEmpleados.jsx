@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import { FaTrash ,FaEye } from "react-icons/fa";
+import { FaTrash, FaEye } from "react-icons/fa";
 import { HiPencilAlt } from "react-icons/hi";
+import Swal from "sweetalert2";
 
 function Infor() {
   const [data, setData] = useState([
@@ -13,22 +14,6 @@ function Infor() {
       apellido_materno: "López",
       telefono: "1234567890",
       rango: "Admin",
-    },
-    {
-      id_coordinador: 2,
-      nombres: "María",
-      apellido_paterno: "Gómez",
-      apellido_materno: "Martínez",
-      telefono: "9876543210",
-      rango: "Usuario",
-    },
-    {
-      id_coordinador: 2,
-      nombres: "María",
-      apellido_paterno: "Gómez",
-      apellido_materno: "Martínez",
-      telefono: "9876543210",
-      rango: "Usuario",
     },
     {
       id_coordinador: 2,
@@ -86,15 +71,61 @@ function Infor() {
     message = <div>No hay usuarios registrados.</div>;
   }
 
+  const handleViewClick = (usuario) => {
+    Swal.fire({
+      title: "Datos de inicio de sesión",
+      html: `Usuario: <br>Contraseña: ********`,
+      icon: "info",
+    });
+  };
+
+  const handleEditClick = (usuario) => {
+    Swal.fire({
+      title: "Editar Usuario",
+      html:
+        `<input id="nombres" class="swal2-input" value="${usuario.nombres}">` +
+        `<input id="apellidoPaterno" class="swal2-input" value="${usuario.apellido_paterno}">` +
+        `<input id="apellidoMaterno" class="swal2-input" value="${usuario.apellido_materno}">` +
+        `<input id="telefono" class="swal2-input" value="${usuario.telefono}">`,
+      showCancelButton: true,
+      confirmButtonText: "Guardar",
+      showLoaderOnConfirm: true,
+      preConfirm: () => {
+        const nombres = Swal.getPopup().querySelector("#nombres").value;
+        const apellidoPaterno =
+          Swal.getPopup().querySelector("#apellidoPaterno").value;
+        const apellidoMaterno =
+          Swal.getPopup().querySelector("#apellidoMaterno").value;
+        const telefono = Swal.getPopup().querySelector("#telefono").value;
+
+        // Actualiza los datos en el estado
+        const newData = data.map((item) => {
+          if (item.id_coordinador === usuario.id_coordinador) {
+            return {
+              ...item,
+              nombres,
+              apellido_paterno: apellidoPaterno,
+              apellido_materno: apellidoMaterno,
+              telefono,
+            };
+          }
+          return item;
+        });
+
+        setData(newData);
+      },
+    });
+  };
+
   return (
     <>
       <section
-        className="container mb-5"
+        className="container m-5"
         style={{
           boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
           padding: "15px",
           borderRadius: "15px",
-          marginTop: "10%",
+          marginTop: "5%",
         }}
       >
         {" "}
@@ -118,15 +149,23 @@ function Infor() {
                   </td>
                   <td>{item.telefono}</td>
                   <td>{item.rango}</td>
-                  <td style={{display:"flex",justifyContent:"space-around"}}>
-                    <Button variant="success" >
-                      <FaEye />
+                  <td
+                    style={{ display: "flex", justifyContent: "space-around" }}
+                  >
+                    <Button
+                      variant="success"
+                      onClick={() => handleViewClick(item)}
+                    >
+                      <FaEye /> Ver
                     </Button>
-                    <Button variant="warning" >
-                      <HiPencilAlt />
+                    <Button
+                      variant="warning"
+                      onClick={() => handleEditClick(item)}
+                    >
+                      <HiPencilAlt /> Editar
                     </Button>
-                    <Button variant="danger" >
-                      <FaTrash />
+                    <Button variant="danger">
+                      <FaTrash /> Eliminar
                     </Button>
                   </td>
                 </tr>

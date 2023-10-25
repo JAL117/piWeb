@@ -1,15 +1,17 @@
 import { Outlet, useLocation } from "react-router-dom";
 import SideMenu from "../components/Principal/SideMenu";
 import Footer from "../components/Principal/Footer";
+import '../App.css'
 
 function Layout() {
   return (
-    <>
-      <SideMenu />
-         <div style={{ marginLeft:"10%", marginTop:"7%"}}>
-         <Outlet/></div>
-      <Footer />
-    </>
+    <div>
+      <SideMenu/>
+      <div style={{marginTop:"8%",marginLeft:"5%" , marginBottom:"15%"}}>
+        <Outlet/>
+      </div>
+      <Footer/>
+    </div>
   );
 }
 
