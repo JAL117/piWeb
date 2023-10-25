@@ -6,10 +6,10 @@ import PanelGrafica from '../components/Panel/PanelGrafica'
 function Panel() {
   return (
     <div className='panel_principal'>
-      <>
+      <div style={{display: 'flex'}}>
       <PanelVentas/>
       <PanelOrdenes/>
-      </>
+      </div>
       <PanelGrafica/>
     </div>
   )

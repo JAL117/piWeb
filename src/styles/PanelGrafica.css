@@ -1,0 +1,9 @@
+.panel-grafica {
+  width: 140vh;
+  height: 480px;
+  position: relative;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  background-color: rgba(0, 0, 0, 0.747);
+  color: rgb(247, 250, 250);
+}

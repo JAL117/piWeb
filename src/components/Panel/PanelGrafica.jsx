@@ -1,9 +1,10 @@
 import React from 'react'
+import "../../styles/PanelGrafica.css"
 import Grafica from './Grafica'
 
 function PanelGrafica() {
   return (
-    <div>PanelGrafica
+    <div className='panel-grafica'>
       <Grafica/>
     </div>
   )
