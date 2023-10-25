@@ -1,9 +1,12 @@
 import React from 'react'
+import Orden from '../components/Ordenes/Orden'
 
 function Ordenes() {
   return (
-    <div>Ordenes</div>
+    <div>
+      <Orden/>
+    </div>
   )
 }
 
-export default Ordenes
+export default Ordenes;

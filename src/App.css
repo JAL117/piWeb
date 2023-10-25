@@ -2,22 +2,20 @@
     background-color: #100b0bf7 !important;
 }
 
-.layout-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Establece la altura mínima de la vista */
-  }
-  
-  .content {
-    flex: 1; /* El contenido principal se expandirá para llenar el espacio disponible */
-    margin-left: 5%;
-    margin-top: 5%;
-  }
-  
-  /* Estilos para el footer */
-  Footer {
-    background-color: #333;
-    color: #fff;
-    padding: 10px;
-  }
-  
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    color: var(--bs-nav-pills-link-active-color);
+    background-color: #dc3545 !important;
+}
+
+.nav-link {
+    display: block;
+    padding: var(--bs-nav-link-padding-y) var(--bs-nav-link-padding-x);
+    font-size: var(--bs-nav-link-font-size);
+    font-weight: var(--bs-nav-link-font-weight);
+    color: #100b0b !important;
+    text-decoration: none;
+    background: 0 0;
+    border: 0;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+

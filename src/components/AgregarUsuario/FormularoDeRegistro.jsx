@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import '../../styles/Registro.css'
 import { BiSolidUser ,  } from "react-icons/bi";
 
 function RegistroForm() {
@@ -11,11 +10,11 @@ function RegistroForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes realizar alguna acción con los datos del formulario.
+   
   };
 
   return (
-    <div className='form_registro'>
+    <div className='bg-danger p-4 m-2' style={{borderRadius:"15px" , boxShadow:"0px 10px 8px 0px rgba(0, 0, 0, 0.25)" }}>
 
     <Form onSubmit={handleSubmit} className='text-white'>
         <h3>Registro de usuario <BiSolidUser/></h3>

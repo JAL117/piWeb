@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
-import '../../styles/Registro.css'
 import { BsFillHouseLockFill } from "react-icons/bs";
 
-function RegistroForm() {
+function InformacionUsuarios() {
   const [nombre, setNombre] = useState('');
   const [apellidos, setApellidos] = useState('');
   const [telefono, setTelefono] = useState('');
@@ -11,11 +10,11 @@ function RegistroForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Aquí puedes realizar alguna acción con los datos del formulario.
+   
   };
 
   return (
-    <div className='form_registro'>
+    <div className='bg-danger p-3 m-2' style={{borderRadius:"15px", boxShadow:"0px 10px 8px 0px rgba(0, 0, 0, 0.25)"}}>
 
     <Form onSubmit={handleSubmit} className='text-white'>
         <h3>Datos inicio de sesión <BsFillHouseLockFill/></h3>
@@ -60,4 +59,4 @@ function RegistroForm() {
   );
 }
 
-export default RegistroForm;
+export default InformacionUsuarios;

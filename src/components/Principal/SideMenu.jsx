@@ -17,7 +17,6 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { MdOutdoorGrill } from "react-icons/md";
-
 import { FaTrello, FaUserPlus, FaUsers, FaBars, FaUser } from "react-icons/fa";
 import { FaKitchenSet } from "react-icons/fa6";
 import { MdBorderColor,MdOutlineMenuBook } from "react-icons/md";
@@ -150,7 +149,7 @@ const opciones = [
       </AppBar>
 
       <Drawer variant="permanent" open={open} sx={{backgroundColor:"#100b0bf7 "}} >
-        <DrawerHeader style={{backgroundColor:"#100b0bf7" , color:"white"}}>
+        <DrawerHeader style={{  color:"white"}}>
           <IconButton onClick={handleDrawerClose} style={{color:"white"}}>
             {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
           </IconButton>
