@@ -18,7 +18,62 @@ function CardOrdenesCocina() {
           orden: "13",
           cantidad: "5",
           producto: "Tacos de pastor",
+          producto: 'Tacos de asada',
           total: "60",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
+        }, {
+          mesa: "3",
+          orden: "12",
+          cantidad: "3",
+          producto: "Tacos de pastor",
+          total: "36",
         },
       ];
   return (

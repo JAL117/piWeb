@@ -11,11 +11,11 @@ function Usuario(){
     },
   ];
 return(
-    <div>
-        <Row className="user-cards">
+    <div className="m-5" >
+        <Row className="user-cards" style={{marginLeft:'18%' , transform:"scale(1.5)"}}>
         {menuItems.map((item, index) => (
           <Col  xs={12} sm={6} md={4} lg={11}>
-            <Card style={{ margin: "20px", color: "rgb(255, 255, 255)"}} className="card-style" >
+            <Card style={{ marginLeft: "10px", color: "rgb(255, 255, 255)"}} className="card-style" >
               <Card.Body  className="user-card-body">
                 <Card.Title className="titulo">Usuario</Card.Title>
                 <Card.Text>Nombre: {item.nombre}</Card.Text>

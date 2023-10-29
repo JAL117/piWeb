@@ -3,7 +3,9 @@ import Usuario from "../components/Usuario/Usuario"
 
 function User() {
   return (
-    <div><Usuario></Usuario></div>
+    <div>
+      <Usuario/>
+      </div>
   )
 }
 

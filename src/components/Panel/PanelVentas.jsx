@@ -6,7 +6,7 @@ function PanelVentas() {
   return (
     <div>
         <div className='panel'>
-            <RiMoneyDollarCircleFill/>
+            <RiMoneyDollarCircleFill size={50}/>
             <h1>Ventas del  dia:</h1>
             <p>$120.00</p>
 

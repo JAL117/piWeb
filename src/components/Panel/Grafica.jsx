@@ -48,14 +48,14 @@ export default function Grafica() {
           label: "Ventas",
           data: scores,
           tension: 0.3,
-          borderColor: "#1ABC9C",
+          borderColor: "white",
           pointRadius: 8,
           backgroundColor: " rgb(56, 255, 255)",
-          color: "white",
+          color: "#ffff",
         },
       ],
       labels,
     };
   }, []);
-  return <Bar options={options} data={data} />;
+  return <Bar options={options} data={data}/>;
 }

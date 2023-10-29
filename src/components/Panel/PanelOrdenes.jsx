@@ -5,8 +5,9 @@ function PanelOrdenes() {
   return (
     <div>
       <div className="panel">
-        <RiEditBoxFill />
+        <RiEditBoxFill size={50}  />
         <h1>Ordenes del dia</h1>
+        <p>150</p>
       </div>
     </div>
   );
