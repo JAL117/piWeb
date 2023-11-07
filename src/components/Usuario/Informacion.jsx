@@ -1,25 +1,22 @@
 import React from 'react';
 import TarjetaDatos from './Usuario'; 
 
-function App() {
+function DatosUsuario() {
   const datos = {
-    nombre: 'Jose Saul Gomez Caballero',
-    direccion: 'Casa piwa',
-    telefono: '9685623495',
-    rol: 'Mesero',
+    nombre: 'Saul la piwa',
+    direccion: 'Una piña debajo del mar',
+    telefono: '911',
+    rol: 'Lanchero',
   };
 
   return (
-    <div>
-     
-      <TarjetaDatos
-        nombre={datos.nombre}
-        direccion={datos.direccion}
-        telefono={datos.telefono}
-        rol={datos.rol}
-      />
-    </div>
+    <TarjetaDatos
+      nombre={datos.nombre}
+      direccion={datos.direccion}
+      telefono={datos.telefono}
+      rol={datos.rol}
+    />
   );
 }
 
-export default App;
+export default DatosUsuario;

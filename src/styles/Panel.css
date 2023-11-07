@@ -1,16 +1,50 @@
 .panel {
-  width: 250px;
-  height: 250px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   border-radius: 15px;
   background: rgba(209, 35, 35, 0.5);
   box-shadow: 0px 10px 8px 0px rgba(0, 0, 0, 0.25);
-  padding: 20px;
+  padding: 30px;
   margin: 15px;
+  font-size: 25px;
+ 
 }
 
-.panel_principal{
-    display: flex;
+.panel-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (max-width: 767px) {
+  .panel {
+    width: 100%;
+    height: auto;
+  }
+
+  .panel-row {
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  }
+}
+
+@media (min-width: 768px) {
+  .panel {
+    width: 400px;
+    height: 100px;
+  }
+}
+
+.panel-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .panel-container {
+    justify-content: space-between;
+  }
 }

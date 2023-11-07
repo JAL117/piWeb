@@ -1,16 +1,16 @@
 import React from 'react'
-import PanelVentas from '../components/Panel/PanelVentas'
-import PanelOrdenes from '../components/Panel/PanelOrdenes'
 import PanelGrafica from '../components/Panel/PanelGrafica'
+import Ventas from '../components/Panel/Ventas'
 
 function Panel() {
   return (
-    <div className='panel_principal'>
+    <div style={{marginLeft:'10%'}}>
       <div style={{display: 'flex'}}>
-      <PanelVentas/>
-      <PanelOrdenes/>
+        <Ventas></Ventas>
       </div>
-      <PanelGrafica/>
+      <div>
+            <PanelGrafica/>
+      </div>
     </div>
   )
 }

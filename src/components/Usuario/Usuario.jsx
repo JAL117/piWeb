@@ -1,41 +1,32 @@
-import React from "react";
-import "../../styles/Usuario.css";
-import { Card, Row, Col } from "react-bootstrap";
+import React from 'react';
+import Card from 'react-bootstrap/Card';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
-function Usuario(){
-  const menuItems = [
-    {
-      nombre: "Jose Saul Gomez Caballero",
-      correo: "prueba123@gmail.com",
-      rol: "Mesero",
-    },
-  ];
-return(
-    <div className="m-5" >
-        <Row className="user-cards" style={{marginLeft:'18%' , transform:"scale(1.5)"}}>
-        {menuItems.map((item, index) => (
-          <Col  xs={12} sm={6} md={4} lg={11}>
-            <Card style={{ marginLeft: "10px", color: "rgb(255, 255, 255)"}} className="card-style" >
-              <Card.Body  className="user-card-body">
-                <Card.Title className="titulo">Usuario</Card.Title>
-                <Card.Text>Nombre: {item.nombre}</Card.Text>
-                <Card.Text>Correo: {item.correo}</Card.Text>
-                <Card.Text>Rol: {item.rol} </Card.Text>
-                <Row className="justify-content-center">
-                   <Col xs="auto">
-                   </Col>
-               
-                </Row>
-               
-              </Card.Body>
-            </Card>
+function TarjetaDatos({ nombre, direccion, telefono, rol }) {
+  return (
+    <Card className='bg-dark text-white rounded-4 p-4 m-5'>
+      <Card.Body>
+        <Card.Title className='display-4 mb-5'>Información Personal</Card.Title>
+        <Row className='mt-5' style={{fontSize:'30px'}}>
+          <Col md={6}>
+            <strong>Nombre:</strong> {nombre}
           </Col>
-          ))}
-      </Row>
-    </div>
-
-  )
-
+          <Col md={6}>
+            <strong>Dirección:</strong> {direccion}
+          </Col>
+        </Row>
+        <Row className='mb-5' style={{fontSize:'30px'}}>
+          <Col md={6}>
+            <strong>Teléfono:</strong> {telefono}
+          </Col>
+          <Col md={6}>
+            <strong>Rol:</strong> {rol}
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
+  );
 }
 
-export default Usuario;
+export default TarjetaDatos;
