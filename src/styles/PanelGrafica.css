@@ -1,9 +1,7 @@
 .panel-grafica {
-  width: 80%;
-  height: 480px; 
+  width: 80%; 
   position: relative;
   margin-bottom: 10px;
-  margin-top: 10px;
   background-color: rgba(0, 0, 0, 0.747);
   color: #ffff;
   border-radius: 15px;
