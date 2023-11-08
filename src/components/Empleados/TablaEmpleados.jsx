@@ -13,6 +13,7 @@ function Infor() {
       apellido_paterno: "Pérez",
       apellido_materno: "López",
       telefono: "1234567890",
+      direccion:"abajo de un carro",
       rango: "Admin",
     },
     {
@@ -21,12 +22,13 @@ function Infor() {
       apellido_paterno: "Gómez",
       apellido_materno: "Martínez",
       telefono: "9876543210",
+      direccion:"en una casa",
       rango: "Usuario",
     },
   ]);
 
   const [searchText, setSearchText] = useState("");
-  const [coordinadorSeleccionado, setCoordinadorSeleccionado] = useState(null);
+  
 
   const handleLiquidarCuentaClick = (id_coordinador) => {
     const newData = data.filter(
@@ -83,9 +85,10 @@ function Infor() {
     Swal.fire({
       title: "Editar Usuario",
       html:
-        `<input id="nombres" class="swal2-input" value="${usuario.nombres}">` +
+        `<input id="nombres" class="swal2-input" value="${usuario.nombres }">` +
         `<input id="apellidoPaterno" class="swal2-input" value="${usuario.apellido_paterno}">` +
         `<input id="apellidoMaterno" class="swal2-input" value="${usuario.apellido_materno}">` +
+        `<input id="direccion" class="swal2-input" value="${usuario.direccion}">`+
         `<input id="telefono" class="swal2-input" value="${usuario.telefono}">`,
       showCancelButton: true,
       confirmButtonText: "Guardar",
@@ -96,6 +99,7 @@ function Infor() {
           Swal.getPopup().querySelector("#apellidoPaterno").value;
         const apellidoMaterno =
           Swal.getPopup().querySelector("#apellidoMaterno").value;
+        const direcciones = Swal.getPopup().querySelector("#direccion").value;
         const telefono = Swal.getPopup().querySelector("#telefono").value;
 
         // Actualiza los datos en el estado
@@ -106,6 +110,7 @@ function Infor() {
               nombres,
               apellido_paterno: apellidoPaterno,
               apellido_materno: apellidoMaterno,
+              direccion: direcciones,
               telefono,
             };
           }
@@ -136,6 +141,7 @@ function Infor() {
               <tr>
                 <th>Nombre</th>
                 <th>Teléfono</th>
+                <th>Direccion</th>
                 <th>Rol</th>
                 <th>Acciones</th>
               </tr>
@@ -148,6 +154,7 @@ function Infor() {
                     {item.apellido_materno}
                   </td>
                   <td>{item.telefono}</td>
+                  <td>{item.direccion}</td>
                   <td>{item.rango}</td>
                   <td
                     style={{ display: "flex", justifyContent: "space-around" }}

@@ -1,63 +1,66 @@
-import React from "react";
-import Table from "react-bootstrap/Table";
-import { Card, Button, Row, Col } from "react-bootstrap";
-import "../../styles/Cocina.css"
-import { FaEdit } from "react-icons/fa";
+import React from 'react';
+import OrderCard from './Ordenes';
 
-function CardOrdenesCocina() {
-    const menuItems = [
-        {
-          mesa: "3",
-          orden: "12",
-          cantidad: "3",
-          producto: "Tacos de pastor",
-          total: "36",
-        },
-       
-      ];
+function OrdersList() {
+ 
+  const orders = [
+    {
+      numeroPedido: 1,
+      numeroMesa: 4,
+      productos: [
+        { nombre: 'Pizza', cantidad: 2, precio: 10 },
+        { nombre: 'Refresco', cantidad: 4, precio: 2 },
+      ],
+      notas: 'Sin salsa picante',
+      totalAPagar: 28,
+    },
+    {
+      numeroPedido: 2,
+      numeroMesa: 2,
+      productos: [
+        { nombre: 'Tlayuda de asada', cantidad: 1, precio: 8 },
+        { nombre: 'Papas fritas', cantidad: 1, precio: 4 },
+        { nombre: 'Refresco', cantidad: 2, precio: 2 },
+        { nombre: 'Hamburguesa', cantidad: 1, precio: 8 },
+        { nombre: 'Papas fritas', cantidad: 1, precio: 4 },
+        { nombre: 'Refresco', cantidad: 2, precio: 2 },
+      ],
+      notas: '',
+      totalAPagar: 16,
+    },   {
+      numeroPedido: 3,
+      numeroMesa: 2,
+      productos: [
+        { nombre: 'Hamburguesa', cantidad: 1, precio: 8 },
+        { nombre: 'Papas fritas', cantidad: 1, precio: 4 },
+        { nombre: 'Refresco', cantidad: 2, precio: 2 },
+      ],
+      notas: '',
+      totalAPagar: 16,
+    },   {
+      numeroPedido: 4,
+      numeroMesa: 2,
+      productos: [
+        { nombre: 'Hamburguesa', cantidad: 1, precio: 8 },
+        { nombre: 'Papas fritas', cantidad: 1, precio: 4 },
+        { nombre: 'Refresco', cantidad: 2, precio: 2 },
+      ],
+      notas: '',
+      totalAPagar: 16,
+    },
+   
+  ];
+
   return (
-    <Row>
-    {menuItems.map((item, index) => (
-    <Card style={{ width: '35rem' }} className="card">
-      <Card.Body>
-        <div className="head">
-        <Card.Title style={{fontSize: "25px"}}>Mesa# {item.mesa}</Card.Title>
-        <Card.Title style={{fontSize: "18px"}}>Orden# {item.orden}</Card.Title>
+    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-3 ms-1">
+      {orders.map((order, index) => (
+        <div className="col mb-1" key={index}>
+          <OrderCard order={order} />
         </div>
-        <Card.Subtitle className="mb-2 text-muted">___________________________________________________________________________</Card.Subtitle>
-        <Card.Text>
-        <Table striped bordered hover className="tabla">
-        <>
-        <thead>
-          <tr>
-            <th></th>
-            <th>Cantidad</th>
-            <th>Producto</th>
-            <th>Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>  
-            <td></td>
-            <td>{item.cantidad}</td>
-            <td>{item.producto}</td>
-            <td>{item.total}</td>
-          </tr>
-        </tbody>
-        </>
-      </Table>
-        </Card.Text>
-        <Card.Subtitle className="mb-2 text-muted">___________________________________________________________________________</Card.Subtitle>
-        <div className="botones">        
-        <Button variant="primary" className="boton"> <FaEdit size={25}/>&nbsp;&nbsp; Agregar comentario</Button>
-        <Button variant="primary" className="boton">Pagar</Button>
-        </div>
-      </Card.Body>
-    </Card>
-
-    ))}
-    </Row>
+      ))}
+    </div>
   );
 }
 
-export default CardOrdenesCocina;
+export default OrdersList;
+

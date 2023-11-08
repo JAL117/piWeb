@@ -65,13 +65,13 @@ function RegistroCompleto() {
   };
 
   return (
-    <div>
+    <div style={{marginTop:'10%'}}>
       {showAlert && (
         <Alert variant="danger" onClose={() => setShowAlert(false)} dismissible>
           Por favor completa todos los campos y verifica que las contraseñas coincidan.
         </Alert>
       )}
-      <Form onSubmit={handleSubmit} className="bg-danger p-4 text-white" style={{ borderRadius: "15px", boxShadow: "0px 10px 8px 0px rgba(0, 0, 0, 0.25)" , fontSize:'20px' }}>
+      <Form onSubmit={handleSubmit} className="p-4 text-white" style={{ borderRadius: "15px", boxShadow: "0px 10px 8px 0px rgba(0, 0, 0, 0.25)" , fontSize:'20px',backgroundColor:'rgba(209, 35, 35, .8)' }}>
         <Row>
           <Col md={6}>
             <h3>Datos personales <BiSolidUser /></h3>
@@ -163,7 +163,7 @@ function RegistroCompleto() {
           </Col>
         </Row>
 
-        <Button variant="primary" type="submit">
+        <Button variant="primary" type="submit" className='mt-4'>
           Registrarse
         </Button>
       </Form>
