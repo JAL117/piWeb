@@ -1,10 +1,10 @@
 import React from 'react'
-import Orden from '../components/Ordenes/Orden'
+import Pedidos from '../components/Pedidos/Pedidos'
 
 function Ordenes() {
   return (
     <div>
-      <Orden/>
+      <Pedidos />
     </div>
   )
 }

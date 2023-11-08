@@ -6,11 +6,9 @@ import LayoutInicial from './pages/LayoutInicial'
 import Panel from './pages/Panel'
 import User from './pages/User'
 import AgregarUsuario from './pages/AgregarUsuario'
-import CardCocina from './components/Cocina/Insumos';
-import CardOrdenesCocina from './components/Cocina/CardOrdenesCocina'
 import Empleados from './pages/Empleados'
 import Cocina from './pages/Cocina'
-import Ordenes from './pages/Ordenes'
+import Pedidos from './pages/Pedidos'
 import Login from './pages/Login'
 import MenuDital from './pages/MenuDital';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -41,21 +39,12 @@ const router = createBrowserRouter([
 
     },
     {
-      path:"cocina",
+      path:"ordenes",
       element:<Cocina/>,
-      children: [
-        {
-          index: true,
-          element: <CardOrdenesCocina/>
-        },{
-          path: "insumos",
-          element: <CardCocina/>
-        }
-      ]
     },
     {
-      path:"ordenes",
-      element:<Ordenes/>
+      path:"pedidos",
+      element:<Pedidos/>
 
     },
     {
