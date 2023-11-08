@@ -1,9 +1,9 @@
 import React from 'react'
-import Usuario from "../components/Usuario/Usuario"
+import Usuario from "../components/Usuario/Informacion"
 
 function User() {
   return (
-    <div>
+    <div className='m-5'>
       <Usuario/>
       </div>
   )

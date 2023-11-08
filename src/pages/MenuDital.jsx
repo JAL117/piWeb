@@ -1,12 +1,10 @@
 import React from 'react'
-import CardsMenu from '../components/MenuDigital/CardsMenu'
-import ComandaMenuDigital from '../components/MenuDigital/ComandaMenuDigital'
+import Menu from '../components/MenuDigital/Pedidos'
 
 function MenuDital() {
   return (
     <div>
-        <CardsMenu></CardsMenu>
-        <ComandaMenuDigital/>
+       <Menu/>
     </div>
   )
 }

@@ -118,8 +118,8 @@ const opciones = [
   { text: 'Panel', path: '/inicio/panel' },
   { text: 'Agregar usuario', path: '/inicio/agregarusuarios' },
   { text: 'Empleados', path: '/inicio/empleados' },
-  { text: 'Cocina', path: '/inicio/cocina' },
   { text: 'Ordenes', path: '/inicio/ordenes' },
+  { text: 'Pedidos', path: '/inicio/pedidos' },
   { text: 'Menu digital', path: '/inicio/menudigital' },
   { text: 'Salir', path: '/' },
 ];
