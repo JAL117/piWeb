@@ -93,6 +93,7 @@ function Infor() {
       showCancelButton: true,
       confirmButtonText: "Guardar",
       showLoaderOnConfirm: true,
+    
       preConfirm: () => {
         const nombres = Swal.getPopup().querySelector("#nombres").value;
         const apellidoPaterno =
@@ -125,12 +126,12 @@ function Infor() {
   return (
     <>
       <section
-        className="container m-5"
+        className="container"
         style={{
           boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
           padding: "15px",
           borderRadius: "15px",
-          marginTop: "5%",
+          marginTop: "8%",
         }}
       >
         {" "}
