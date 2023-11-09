@@ -160,7 +160,7 @@ const opciones = [
 
 
 
-        <List sx={{ backgroundColor: "#100b0bf7"  }}>
+        <List sx={{ backgroundColor: "#100b0bf7"  }} className='mt-4'>
   {opciones.map((opcion, index) => (
     <ListItem key={opcion.text} disablePadding sx={{ display: 'block', marginLeft:'0px'}} as={Link} to={opcion.path}>
       <ListItemButton
@@ -179,7 +179,7 @@ const opciones = [
           }}
         >
           <Link to={opcion.path} style={{ textDecoration: 'none' , backgroundColor: "#100b0bf7" , color:'white'}} variant="dark">
-          {index % 8 === 0 ? <FaUser /> : index % 8 === 1 ? <FaTrello /> : index % 8 === 2 ? <FaUserPlus/>: index % 8 === 3 ? <FaUsers/>: index % 8 === 4 ? <FaKitchenSet/>: index % 8 === 5 ? <MdBorderColor/>: index % 8 === 6 ? <MdOutlineMenuBook/>: index % 8 === 7 ? <ImExit/>:<FaUser/>}
+          {index % 8 === 0 ? <FaUser size={25} /> : index % 8 === 1 ? <FaTrello size={25} /> : index % 8 === 2 ? <FaUserPlus size={25}/>: index % 8 === 3 ? <FaUsers size={25}/>: index % 8 === 4 ? <FaKitchenSet size={25}/>: index % 8 === 5 ? <MdBorderColor size={25}/>: index % 8 === 6 ? <MdOutlineMenuBook size={25}/>: index % 8 === 7 ? <ImExit size={25} className='mt-5'/>:<FaUser/>}
           </Link>
         </ListItemIcon>
         <ListItemText primary={opcion.text} sx={{ opacity: open ? 1 : 0 }} style={{color:"white"}} />
