@@ -178,14 +178,14 @@ export default function MiniDrawer() {
             </IconButton>
           </DrawerHeader>
 
-          <List sx={{ backgroundColor: "#100b0bf7" }}>
+          <List sx={{ backgroundColor: "#100b0bf7" }} className="mt-4">
             {opciones.map((opcion, index) => (
               <ListItem
                 key={opcion.text}
                 disablePadding
                 sx={{ display: "block", marginLeft: "0px" }}
                 as={Link}
-                to={opcion.path === "Salir" ? handleExit : opcion.path}>
+                to={opcion.path}>
                 <ListItemButton
                   sx={{
                     minHeight: 48,
@@ -208,19 +208,19 @@ export default function MiniDrawer() {
                       }}
                       variant="dark">
                       {index % 8 === 0 ? (
-                        <FaUser />
+                        <FaUser size={25} />
                       ) : index % 8 === 1 ? (
-                        <FaTrello />
+                        <FaTrello size={25} />
                       ) : index % 8 === 2 ? (
-                        <FaUserPlus />
+                        <FaUserPlus size={25} />
                       ) : index % 8 === 3 ? (
-                        <FaUsers />
+                        <FaUsers size={25} />
                       ) : index % 8 === 4 ? (
-                        <FaKitchenSet />
+                        <FaKitchenSet size={25} />
                       ) : index % 8 === 5 ? (
-                        <MdBorderColor />
+                        <MdBorderColor size={25} />
                       ) : index % 8 === 6 ? (
-                        <MdOutlineMenuBook />
+                        <MdOutlineMenuBook size={25} />
                       ) : index % 8 === 7 ? (
                         <button
                           style={{
@@ -232,7 +232,7 @@ export default function MiniDrawer() {
                             border: "none",
                           }}
                           onClick={handleExit}>
-                          <ImExit />
+                          <ImExit size={25} className="mt-5" />{" "}
                         </button>
                       ) : (
                         <FaUser />
