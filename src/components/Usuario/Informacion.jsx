@@ -18,7 +18,6 @@ function DatosUsuario() {
   
   },[]);
 
-  
   return (
     <TarjetaDatos 
       nombre={resultado.nombre}

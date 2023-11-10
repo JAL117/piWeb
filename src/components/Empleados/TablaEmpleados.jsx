@@ -1,82 +1,30 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { FaTrash, FaEye } from "react-icons/fa";
 import { HiPencilAlt } from "react-icons/hi";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 function Infor() {
-  const [data, setData] = useState([
-    {
-      id_coordinador: 1,
-      nombres: "Juan",
-      apellido_paterno: "Pérez",
-      apellido_materno: "López",
-      telefono: "1234567890",
-      direccion:"abajo de un carro",
-      rango: "Admin",
-    },
-    {
-      id_coordinador: 2,
-      nombres: "María",
-      apellido_paterno: "Gómez",
-      apellido_materno: "Martínez",
-      telefono: "9876543210",
-      direccion:"en una casa",
-      rango: "Usuario",
-    },
-  ]);
+  const [datos, setData] = useState([]);
 
-  const [searchText, setSearchText] = useState("");
-  
-
-  const handleLiquidarCuentaClick = (id_coordinador) => {
-    const newData = data.filter(
-      (item) => item.id_coordinador !== id_coordinador
-    );
-    setData(newData);
-  };
-
-  const trimmedSearchText = searchText.trim();
-  const searchKeywords = trimmedSearchText.split(" ");
-
-  const removeDiacritics = (text) => {
-    return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-  };
-
-  const filteredData = data.filter((pago) => {
-    if (trimmedSearchText === "") {
-      return true;
-    }
-
-    return searchKeywords.every((keyword) => {
-      const lowercasedKeyword = removeDiacritics(keyword.toLowerCase());
-      const lowercasedNombres = removeDiacritics(pago.nombres.toLowerCase());
-      const lowercasedApellidoPaterno = removeDiacritics(
-        pago.apellido_paterno.toLowerCase()
-      );
-      const lowercasedApellidoMaterno = removeDiacritics(
-        pago.apellido_materno.toLowerCase()
-      );
-
-      return (
-        lowercasedNombres.includes(lowercasedKeyword) ||
-        lowercasedApellidoPaterno.includes(lowercasedKeyword) ||
-        lowercasedApellidoMaterno.includes(lowercasedKeyword)
-      );
-    });
-  });
-
+  useEffect(() => {
+    const tabla = async () => {
+      const response = await axios.get("http://localhost:3006/usuario");
+      setData(response.data);
+    };
+    tabla();
+  }, [datos]);
   let message = null;
-
-  if (filteredData.length === 0 && !searchText) {
+  if (datos.length === 0) {
     message = <div>No hay usuarios registrados.</div>;
   }
 
   const handleViewClick = (usuario) => {
     Swal.fire({
       title: "Datos de inicio de sesión",
-      html: `Usuario: <br>Contraseña: ********`,
+      html: `Usuario:${usuario.usuario} <br>Contraseña: ${usuario.contraseña}`,
       icon: "info",
     });
   };
@@ -85,41 +33,69 @@ function Infor() {
     Swal.fire({
       title: "Editar Usuario",
       html:
-        `<input id="nombres" class="swal2-input" value="${usuario.nombres }">` +
-        `<input id="apellidoPaterno" class="swal2-input" value="${usuario.apellido_paterno}">` +
-        `<input id="apellidoMaterno" class="swal2-input" value="${usuario.apellido_materno}">` +
-        `<input id="direccion" class="swal2-input" value="${usuario.direccion}">`+
+        `<input id="nombre" class="swal2-input" value="${usuario.nombre}">` +
+        `<input id="apellido" class="swal2-input" value="${usuario.apellido}">` +
+        `<input id="direccion" class="swal2-input" value="${usuario.direccion}">` +
         `<input id="telefono" class="swal2-input" value="${usuario.telefono}">`,
       showCancelButton: true,
       confirmButtonText: "Guardar",
       showLoaderOnConfirm: true,
-    
+
       preConfirm: () => {
-        const nombres = Swal.getPopup().querySelector("#nombres").value;
-        const apellidoPaterno =
-          Swal.getPopup().querySelector("#apellidoPaterno").value;
-        const apellidoMaterno =
-          Swal.getPopup().querySelector("#apellidoMaterno").value;
+        const nombre = Swal.getPopup().querySelector("#nombre").value;
+        const apellido = Swal.getPopup().querySelector("#apellido").value;
         const direcciones = Swal.getPopup().querySelector("#direccion").value;
         const telefono = Swal.getPopup().querySelector("#telefono").value;
 
-        // Actualiza los datos en el estado
-        const newData = data.map((item) => {
-          if (item.id_coordinador === usuario.id_coordinador) {
-            return {
-              ...item,
-              nombres,
-              apellido_paterno: apellidoPaterno,
-              apellido_materno: apellidoMaterno,
-              direccion: direcciones,
-              telefono,
-            };
-          }
-          return item;
-        });
-
-        setData(newData);
+        if (
+          nombre.length == 0 ||
+          apellido.length == 0 ||
+          direcciones.length == 0 ||
+          telefono.length == 0
+        ) {
+          Swal.fire({
+            title: "No pueden haber campos vacios",
+            icon: "warning",
+          });
+          return;
+        } else if (telefono.length <= 9) {
+          Swal.fire({
+            title: "El rango del campo telefono debe de ser mayor a 9 digitos",
+            icon: "warning",
+          });
+        } else {
+          datos.map((item) => {
+            if (item._id === usuario._id) {
+              axios.put(
+                `http://localhost:3006/usuario/usuario/${usuario._id}`,
+                {
+                  nombre: nombre,
+                  apellido: apellido,
+                  direccion: direcciones,
+                  telefono: telefono,
+                }
+              );
+            }
+          });
+        }
       },
+    });
+  };
+
+  const handleDeleteClick = (usuario) => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, borrar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:3006/usuario/${usuario._id}`);
+        Swal.fire("Borrado!", "Usuario eliminado correctamente.", "success");
+      }
     });
   };
 
@@ -132,8 +108,7 @@ function Infor() {
           padding: "15px",
           borderRadius: "15px",
           marginTop: "8%",
-        }}
-      >
+        }}>
         {" "}
         <h1 className="mb-5">Empleados</h1>
         <div className="table-responsive">
@@ -148,32 +123,30 @@ function Infor() {
               </tr>
             </thead>
             <tbody>
-              {filteredData.map((item) => (
-                <tr key={item.id_coordinador}>
+              {datos.map((item) => (
+                <tr key={item._id}>
                   <td>
-                    {item.nombres} {item.apellido_paterno}{" "}
-                    {item.apellido_materno}
+                    {item.nombre} {item.apellido}
                   </td>
                   <td>{item.telefono}</td>
                   <td>{item.direccion}</td>
-                  <td>{item.rango}</td>
+                  <td>{item.rol}</td>
                   <td
-                    style={{ display: "flex", justifyContent: "space-around" }}
-                  >
+                    style={{ display: "flex", justifyContent: "space-around" }}>
                     <Button
                       variant="success"
-                      onClick={() => handleViewClick(item)}
-                    >
-                      <FaEye /> Ver
+                      onClick={() => handleViewClick(item)}>
+                      <FaEye size={20} /> Ver
                     </Button>
                     <Button
                       variant="warning"
-                      onClick={() => handleEditClick(item)}
-                    >
-                      <HiPencilAlt /> Editar
+                      onClick={() => handleEditClick(item)}>
+                      <HiPencilAlt size={20} /> Editar
                     </Button>
-                    <Button variant="danger">
-                      <FaTrash /> Eliminar
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDeleteClick(item)}>
+                      <FaTrash size={20} /> Eliminar
                     </Button>
                   </td>
                 </tr>
