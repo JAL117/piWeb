@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container} from 'react-bootstrap';
-import Orden from '../components/Cocina/Sucursal';
+import Orden from '../components/Envios/Domicilio';
 
 function Cocina() {
   return (

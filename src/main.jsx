@@ -11,6 +11,7 @@ import Cocina from './pages/Cocina'
 import Pedidos from './pages/Pedidos'
 import Login from './pages/Login'
 import MenuDital from './pages/MenuDital';
+import Envios from './pages/Adomicilio'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
     {
       path:"ordenes",
       element:<Cocina/>,
+    },
+    {
+      path:"envios",
+      element:<Envios/>,
     },
     {
       path:"pedidos",

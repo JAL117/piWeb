@@ -70,12 +70,8 @@ function OrderSection() {
 
   return (
     <div className="p-3 rounded-3" style={{ backgroundColor: "rgba(209, 35, 35, 0.28)", fontSize: "20px" }}>
-      <h2>Orden #{numeroOrden}</h2>
+      <h2>Orden en linea</h2>
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="mesa">
-          <Form.Label>Número de Mesa</Form.Label>
-          <Form.Control type="text" value={mesa} onChange={handleMesaChange} />
-        </Form.Group>
         <Form.Group controlId="nota">
           <Form.Label>Nota</Form.Label>
           <Form.Control as="textarea" rows={3} value={nota} onChange={handleNotaChange} />

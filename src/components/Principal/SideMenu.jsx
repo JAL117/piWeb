@@ -24,6 +24,7 @@ import { ImExit } from "react-icons/im";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { MdDeliveryDining } from "react-icons/md";
 
 const drawerWidth = 240;
 
@@ -133,7 +134,8 @@ export default function MiniDrawer() {
     { text: "Panel", path: "/inicio/panel" },
     { text: "Agregar usuario", path: "/inicio/agregarusuarios" },
     { text: "Empleados", path: "/inicio/empleados" },
-    { text: "Ordenes", path: "/inicio/ordenes" },
+    { text: "Sucursal", path: "/inicio/ordenes" },
+    { text: "A domicilio", path: "/inicio/envios" },
     { text: "Pedidos", path: "/inicio/pedidos" },
     { text: "Menu digital", path: "/inicio/menudigital" },
     { text: "Salir" },
@@ -145,7 +147,8 @@ export default function MiniDrawer() {
         <AppBar
           position="fixed"
           open={open}
-          sx={{ backgroundColor: "#100b0bf7 " }}>
+          sx={{ backgroundColor: "#100b0bf7 " }}
+        >
           <Toolbar style={{ backgroundColor: "#100b0bf7" }}>
             <IconButton
               color="inherit"
@@ -155,7 +158,8 @@ export default function MiniDrawer() {
               sx={{
                 marginRight: 5,
                 ...(open && { display: "none" }),
-              }}>
+              }}
+            >
               <MenuIcon />
             </IconButton>
             <Typography variant="h6" noWrap component="div">
@@ -167,7 +171,8 @@ export default function MiniDrawer() {
         <Drawer
           variant="permanent"
           open={open}
-          sx={{ backgroundColor: "#100b0bf7 " }}>
+          sx={{ backgroundColor: "#100b0bf7 " }}
+        >
           <DrawerHeader style={{ color: "white" }}>
             <IconButton onClick={handleDrawerClose} style={{ color: "white" }}>
               {theme.direction === "rtl" ? (
@@ -185,20 +190,23 @@ export default function MiniDrawer() {
                 disablePadding
                 sx={{ display: "block", marginLeft: "0px" }}
                 as={Link}
-                to={opcion.path}>
+                to={opcion.path}
+              >
                 <ListItemButton
                   sx={{
                     minHeight: 48,
                     justifyContent: open ? "initial" : "center",
                     px: 2.5,
-                  }}>
+                  }}
+                >
                   <ListItemIcon
                     sx={{
                       minWidth: 0,
                       mr: open ? 3 : "auto",
                       justifyContent: "center",
                       color: "white",
-                    }}>
+                    }}
+                  >
                     <Link
                       to={opcion.path}
                       style={{
@@ -206,22 +214,25 @@ export default function MiniDrawer() {
                         backgroundColor: "#100b0bf7",
                         color: "white",
                       }}
-                      variant="dark">
-                      {index % 8 === 0 ? (
+                      variant="dark"
+                    >
+                      {index % 9 === 0 ? (
                         <FaUser size={25} />
-                      ) : index % 8 === 1 ? (
+                      ) : index % 9 === 1 ? (
                         <FaTrello size={25} />
-                      ) : index % 8 === 2 ? (
+                      ) : index % 9 === 2 ? (
                         <FaUserPlus size={25} />
-                      ) : index % 8 === 3 ? (
+                      ) : index % 9 === 3 ? (
                         <FaUsers size={25} />
-                      ) : index % 8 === 4 ? (
+                      ) : index % 9 === 4 ? (
                         <FaKitchenSet size={25} />
-                      ) : index % 8 === 5 ? (
+                      ) : index % 9 === 5 ? (
+                        <MdDeliveryDining size={25} />
+                      ) : index % 9 === 6 ? (
                         <MdBorderColor size={25} />
-                      ) : index % 8 === 6 ? (
+                      ) : index % 9 === 7 ? (
                         <MdOutlineMenuBook size={25} />
-                      ) : index % 8 === 7 ? (
+                      ) : index % 9 === 8 ? (
                         <button
                           style={{
                             marginTop: "-8px",
@@ -231,7 +242,8 @@ export default function MiniDrawer() {
                             color: "white",
                             border: "none",
                           }}
-                          onClick={handleExit}>
+                          onClick={handleExit}
+                        >
                           <ImExit size={25} className="mt-5" />{" "}
                         </button>
                       ) : (
