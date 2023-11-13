@@ -138,7 +138,7 @@ export default function MiniDrawer() {
     { text: "A domicilio", path: "/inicio/envios" },
     { text: "Pedidos", path: "/inicio/pedidos" },
     { text: "Menu digital", path: "/inicio/menudigital" },
-    { text: "Salir" },
+    { text: "" },
   ];
   return (
     <>
