@@ -4,7 +4,7 @@ import Ventas from '../components/Panel/Ventas'
 
 function Panel() {
   return (
-    <div style={{marginLeft:'10%'}}>
+    <div style={{marginLeft:'15%'}}>
       <div style={{display: 'flex'}}>
         <Ventas></Ventas>
       </div>

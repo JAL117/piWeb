@@ -1,6 +1,5 @@
 import React from "react";
 import { BsClipboard2CheckFill } from "react-icons/bs";
-import { FaAddressCard } from "react-icons/fa";
 
 function OrderCard({ order }) {
   if (!order) {
@@ -12,7 +11,7 @@ function OrderCard({ order }) {
   return (
     <div
       className="card text-center"
-      style={{ backgroundColor: "rgba(0, 128, 0, 0.2)" }}
+      style={{ backgroundColor: "rgba(209, 35, 35, 0.2)" }}
     >
       <div className="card-body">
         <h5 className="card-title">Orden #{numeroPedido}</h5>
@@ -23,14 +22,9 @@ function OrderCard({ order }) {
           value={getProductosText(order)}
           readOnly
         />
-        <p className="card-text">Notas: {notas}</p>
-        <p className="card-text">Total a pagar: ${totalAPagar}</p>
+        <p className="card-text mt-2">Notas: {notas}</p>
       </div>
       <div className="card-footer d-flex justify-content-center">
-        <button className="btn btn-success  mx-1">
-          <FaAddressCard size={25} />
-        </button>
-
         <button className="btn btn-danger mx-1">
           <BsClipboard2CheckFill size={25} />
         </button>

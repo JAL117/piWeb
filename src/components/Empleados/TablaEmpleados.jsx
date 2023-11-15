@@ -131,11 +131,9 @@ function Infor() {
           boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
           padding: "15px",
           borderRadius: "15px",
-          marginTop: "8%",
         }}
       >
-        {" "}
-        <h1 className="mb-5">Empleados</h1>
+        <h1 className="mb-5 mt-2">Empleados</h1>
         <div className="table-responsive">
           <Table striped bordered>
             <thead>

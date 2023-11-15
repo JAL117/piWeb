@@ -87,7 +87,7 @@ function RegistroCompleto() {
   };
 
   return (
-    <div style={{ marginTop: "8%" , backgroundColor:'#ebeaeaf7' }} className="p-4 rounded-4">
+    <div style={{ backgroundColor:'#ebeaeaf7' }} className="p-4 rounded-4 ms-5">
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={6}>
@@ -217,10 +217,14 @@ function RegistroCompleto() {
             </Form.Group>
           </Col>
         </Row>
-
-        <Button variant="primary" type="submit" className="mt-4">
-          Registrarse
-        </Button>
+        <Row>
+          <Col md={12} className="text-center">
+            <Button variant="dark" type="submit" className="mt-4" size="lg">
+              Registrar
+            </Button>
+          </Col>
+        </Row>
+     
       </Form>
     </div>
   );

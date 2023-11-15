@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import Swal from 'sweetalert2';
+import Swal from "sweetalert2";
 
 function OrderSection() {
   const [mesa, setMesa] = useState("");
@@ -24,35 +24,30 @@ function OrderSection() {
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    // Validación de campos
     if (!mesa || !pedidos.length) {
       Swal.fire({
-        icon: 'error',
-        title: 'Campos incompletos',
-        text: 'Por favor, complete todos los campos antes de enviar el pedido.',
+        icon: "error",
+        title: "Campos incompletos",
+        text: "Por favor, complete todos los campos antes de enviar el pedido.",
       });
       return;
     }
 
-    // Envío del pedido
     Swal.fire({
-      icon: 'success',
-      title: 'Pedido enviado',
-      text: 'El pedido ha sido enviado correctamente.',
+      icon: "success",
+      title: "Pedido enviado",
+      text: "El pedido ha sido enviado correctamente.",
     });
 
-    // Incremento del número de orden
     setNumeroOrden(numeroOrden + 1);
-
-    // Reinicio de los valores en el estado
     setMesa("");
     setPedidos([]);
     setNota("");
   };
 
   return (
-    <div className="p-3 rounded-3" style={{backgroundColor:'rgba(209, 35, 35, 0.28)' , fontSize:'20px'}}>
-      <h2>Orden #{numeroOrden}</h2>
+    <div>
+      <h2 style={{ marginTop: "20px" }}>Orden #{numeroOrden}</h2>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="mesa">
           <Form.Label>Número de Mesa</Form.Label>
@@ -67,16 +62,18 @@ function OrderSection() {
             onChange={handleNotaChange}
           />
         </Form.Group>
-        <h4>Pedidos:</h4>
-        <Form.Group controlId="pedidos">
-          <Form.Control
-            as="textarea"
-            rows={3}
-            value={pedidos.map((pedido) => pedido.nombre).join("\n")}
-            disabled
-          />
-        </Form.Group>
-        <Button variant="danger" type="submit" className="mt-3">
+        <div>
+          {pedidos.length > 0 ? (
+            <ul>
+              {pedidos.map((pedido, index) => (
+                <li key={index}>{pedido}</li>
+              ))}
+            </ul>
+          ) : (
+            <p>No hay pedidos agregados.</p>
+          )}
+        </div>
+        <Button variant="primary" type="submit">
           Enviar Pedido
         </Button>
       </Form>

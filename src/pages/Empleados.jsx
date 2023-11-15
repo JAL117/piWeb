@@ -1,11 +1,12 @@
 import React from 'react'
 import TablaEmpleados from '../components/Empleados/TablaEmpleados'
+import Animaciones from '../components/utils/Animaciones'
 
 function Empleados() {
   return (
-    <div className='mt-5'>
+    <Animaciones className='mt-5'>
      <TablaEmpleados/>
-    </div>
+    </Animaciones>
   )
 }
 
