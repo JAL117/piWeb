@@ -1,16 +1,17 @@
 import { Outlet, useLocation } from "react-router-dom";
-import SideMenu from "../components/Principal/SideMenu";
+import SideMenu from "../components/Principal/Navbar";
+import Animaciones from "../components/utils/Animaciones";
 import '../App.css'
 
 function Layout() {
   return (
-    <div>
+    <Animaciones>
       <SideMenu/>
-      <div style={{marginTop:"6%",marginLeft:"5%"}}>
+      <div className="mt-3">
         <Outlet/>
       </div>
    
-    </div>
+    </Animaciones>
   );
 }
 

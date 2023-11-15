@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Navbar from "./NavPedidos";
 import CardList from "./CardsList";
-import OrderSection from "./SecciondeOrden";
 import Animaciones from "../utils/Animaciones";
+import { Button, Row } from "react-bootstrap";
 
-function pedidos() {
+function App() {
   const alimentos = [
     {
       id: 11,
@@ -80,22 +80,28 @@ function pedidos() {
 
   return (
     <Animaciones>
-       <div>
+         <div >
       <Navbar onCategoriaSeleccionada={handleCategoriaSeleccionada}  />
       <div className="container">
         <div className="row">
           <div className="col-md-8">
             <CardList alimentos={alimentos} categoriaActual={categoriaActual} />
           </div>
-          <div className="col-md-4">
-            <OrderSection />
+          <div className="col-md-4 mt-2">
+            <Row className="mb-4">
+               <Button size="lg">Agregar Categoria</Button>
+            </Row>
+           <Row>
+             <Button size="lg">Agregar platillo</Button>
+           </Row>
+           
           </div>
         </div>
       </div>
     </div>
     </Animaciones>
-   
+ 
   );
 }
 
-export default pedidos;
+export default App;

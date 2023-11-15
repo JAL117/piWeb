@@ -1,5 +1,5 @@
 import React from 'react';
-import OrderCard from './OrdenesSucursal';
+import OrderCard from './CardsSucursal';
 
 function OrdersList() {
   const orders = [
@@ -12,7 +12,7 @@ function OrdersList() {
       ],
       notas: 'Sin salsa picante',
       totalAPagar: 28,
-      aDomicilio: false, // No es a domicilio
+      
     },
     {
       numeroPedido: 1,
@@ -23,7 +23,7 @@ function OrdersList() {
       ],
       notas: 'Sin salsa picante',
       totalAPagar: 28,
-      aDomicilio: false, // No es a domicilio
+  
     },   {
       numeroPedido: 1,
       numeroMesa: 4,
@@ -33,7 +33,7 @@ function OrdersList() {
       ],
       notas: 'Sin salsa picante',
       totalAPagar: 28,
-      aDomicilio: false, // No es a domicilio
+
     },   {
       numeroPedido: 1,
       numeroMesa: 4,
@@ -43,14 +43,14 @@ function OrdersList() {
       ],
       notas: 'Sin salsa picante',
       totalAPagar: 28,
-      aDomicilio: false, // No es a domicilio
+
     },
   ];
 
   return (  
      <>
      <h1>Sucursal</h1>
-    <div className="row row-cols-1 row-cols-sm-2 row-cols-md-1 row-cols-lg-4">
+    <div className="row  row-cols-lg-2">
     
       {orders.map((order, index) => (
         <div className="col mb-1" key={index}>
