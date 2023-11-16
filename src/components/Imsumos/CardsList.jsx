@@ -4,6 +4,7 @@ import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { BsFillCartCheckFill } from "react-icons/bs";
+import Image from "react-bootstrap/Image";
 
 function CardList({ alimentos, categoriaActual }) {
   const alimentosFiltrados =
@@ -12,22 +13,29 @@ function CardList({ alimentos, categoriaActual }) {
       : alimentos;
 
   return (
-    <Row xs={1} md={2} lg={3} className="g-4">
+    <Row className="g-2 p-2">
       {alimentosFiltrados.length > 0 ? (
         alimentosFiltrados.map((alimento) => (
-          <Col key={alimento.id}>
-            <Card style={{backgroundColor:'rgba(209, 35, 35, 0.1)'}}>
-              <Card.Body>
-                <Card.Title style={{textAlign:'center'}}>{alimento.nombre}</Card.Title>
-                <div className="card-footer">
-                  <button className="btn btn-primary">Editar</button>
-                  <button className="btn btn-success m-1">Eliminar</button>
+          <Col key={alimento.id} xs={12} sm={6} md={4} lg={4}>
+            <Card style={{ backgroundColor: "rgba(209, 35, 35, 0.1)" }}>
+              {alimento.imagen && (
+                <Card.Img variant="top" src={alimento.imagen} />
+              )}
+              <Card.Body className="d-flex justify-content-around">
+                <div>
+                  <Card.Title>{alimento.nombre}</Card.Title>
                 </div>
               </Card.Body>
+              <div className="card-footer">
+                <button className="btn btn-primary ms-3">Editar</button>
+                <button className="btn btn-success m-1">Eliminar</button>
+              </div>
             </Card>
           </Col>
         ))
-     ) : null}
+      ) : (
+        <h3>No hay platillos registrados.</h3>
+      )}
     </Row>
   );
 }

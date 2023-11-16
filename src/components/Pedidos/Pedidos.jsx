@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Navbar from "./NavPedidos";
 import CardList from "./CardsList";
-import OrderSection from "./SecciondeOrden";
+import OrderSection from "./Comanda";
 import Animaciones from "../utils/Animaciones";
 
 function pedidos() {
@@ -70,9 +70,15 @@ function pedidos() {
       imagenUrl: "url-de-la-imagen",
       categoria: "bebidas",
     },
+    {
+      id: 2,
+      nombre: "Tacos de pollo",
+      imagenUrl: `../src/img/Login.png`,
+      categoria: "tortas",
+    },
   ];
 
-  const [categoriaActual, setCategoriaActual] = useState("talyudas");
+  const [categoriaActual, setCategoriaActual] = useState("tlayudas");
 
   const handleCategoriaSeleccionada = (categoria) => {
     setCategoriaActual(categoria);

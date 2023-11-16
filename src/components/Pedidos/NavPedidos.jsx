@@ -1,34 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "react-bootstrap/Nav";
 
 function Navbar({ onCategoriaSeleccionada }) {
+  const categorias = [
+    { id: "tlayudas", nombre: "Tlayudas" },
+    { id: "tacos", nombre: "Tacos" },
+    { id: "bebidas", nombre: "Bebidas" },
+    { id: "tortas", nombre: "Tortas" },
+  ];
+
+  const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
+    categorias[0].id
+  );
+
+  const handleCategoriaSeleccionada = (categoria) => {
+    setCategoriaSeleccionada(categoria);
+    onCategoriaSeleccionada(categoria);
+  };
+
   return (
-    <div style={{ fontSize: "20px", marginTop: "20px" }}>
-      <Nav variant="tabs" defaultActiveKey="tlayudas">
-        <Nav.Item>
-          <Nav.Link
-            eventKey="tlayudas"
-            onClick={() => onCategoriaSeleccionada("tlayudas")}
-          >
-            Tlayudas
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            eventKey="tacos"
-            onClick={() => onCategoriaSeleccionada("tacos")}
-          >
-            Tacos
-          </Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link
-            eventKey="bebidas"
-            onClick={() => onCategoriaSeleccionada("bebidas")}
-          >
-            Bebidas
-          </Nav.Link>
-        </Nav.Item>
+    <div style={{ fontSize: "20px" }}>
+      <Nav variant="tabs" defaultActiveKey={categoriaSeleccionada}>
+        {categorias.map((categoria) => (
+          <Nav.Item key={categoria.id}>
+            <Nav.Link
+              eventKey={categoria.id}
+              onClick={() => handleCategoriaSeleccionada(categoria.id)}
+            >
+              {categoria.nombre}
+            </Nav.Link>
+          </Nav.Item>
+        ))}
       </Nav>
     </div>
   );
