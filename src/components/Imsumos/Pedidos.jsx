@@ -72,7 +72,7 @@ function App() {
     },
   ];
 
-  const [categoriaActual, setCategoriaActual] = useState("talyudas");
+  const [categoriaActual, setCategoriaActual] = useState("tlayudas");
 
   const handleCategoriaSeleccionada = (categoria) => {
     setCategoriaActual(categoria);
@@ -89,10 +89,10 @@ function App() {
           </div>
           <div className="col-md-4 mt-2">
             <Row className="mb-4">
-               <Button size="lg">Agregar Categoria</Button>
+               <Button size="lg" variant="success">Agregar Categoria</Button>
             </Row>
            <Row>
-             <Button size="lg">Agregar platillo</Button>
+             <Button size="lg" variant="success">Agregar platillo</Button>
            </Row>
            
           </div>
