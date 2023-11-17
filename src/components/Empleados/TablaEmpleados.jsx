@@ -126,7 +126,7 @@ function Infor() {
   return (
     <>
       <section
-        className="container"
+        className="container mt-3"
         style={{
           boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
           padding: "15px",

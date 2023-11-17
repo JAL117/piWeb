@@ -11,7 +11,7 @@ function OrderCard({ order }) {
   const { numeroPedido, numeroMesa, notas, totalAPagar} = order;
 
   return (
-    <div className="card text-center" style={{backgroundColor:'rgba(209, 35, 35, 0.2)' }}>
+    <div className="card text-center" style={{backgroundColor:'rgba(209, 35, 35, 0.2)',  boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)" }}>
       <div className="card-body">
         <h5 className="card-title">Orden #{numeroPedido}</h5>
         <p className="card-text">Número de mesa: {numeroMesa}</p>
@@ -23,8 +23,8 @@ function OrderCard({ order }) {
       <div className="card-footer d-flex justify-content-center">
         <button className="btn btn-primary"><MdEditSquare size={25}/></button>
         <button className="btn btn-success mx-1"><GiReceiveMoney size={25} /></button>
-        <button className="btn btn-danger mx-1"><BsClipboard2CheckFill size={25} /></button>
-        <button className="btn btn-warning mx-1"><MdDeleteForever  size={25}/></button>
+        <button className="btn btn-success mx-1"><BsClipboard2CheckFill size={25} /></button>
+        <button className="btn btn-danger mx-1"><MdDeleteForever  size={25}/></button>
       </div>
     </div>
   );

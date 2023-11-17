@@ -3,9 +3,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { BsFillCartCheckFill } from "react-icons/bs";
-import Image from "react-bootstrap/Image";
-
+import { MdDeleteForever } from "react-icons/md";
+import { RiMoneyDollarCircleFill } from "react-icons/ri";
 function CardList({ alimentos, categoriaActual }) {
   const alimentosFiltrados =
     categoriaActual !== "todos"
@@ -13,7 +12,7 @@ function CardList({ alimentos, categoriaActual }) {
       : alimentos;
 
   return (
-    <Row className="g-2 p-2">
+    <Row className="g-2 p-2 mt-2">
       {alimentosFiltrados.length > 0 ? (
         alimentosFiltrados.map((alimento) => (
           <Col key={alimento.id} xs={12} sm={6} md={4} lg={4}>
@@ -27,8 +26,8 @@ function CardList({ alimentos, categoriaActual }) {
                 </div>
               </Card.Body>
               <div className="card-footer">
-                <button className="btn btn-primary ms-3">Editar</button>
-                <button className="btn btn-success m-1">Eliminar</button>
+                <Button  variant="success" className=" ms-5"><RiMoneyDollarCircleFill size={25} /></Button>
+                <Button className="btn btn-danger m-1"><MdDeleteForever size={25} /> </Button>
               </div>
             </Card>
           </Col>

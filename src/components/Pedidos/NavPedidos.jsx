@@ -19,13 +19,18 @@ function Navbar({ onCategoriaSeleccionada }) {
   };
 
   return (
-    <div style={{ fontSize: "20px" }}>
-      <Nav variant="tabs" defaultActiveKey={categoriaSeleccionada}>
+    <div style={{ fontSize: "20px" , fontWeight:'450' }}>
+      <Nav variant="tabs" defaultActiveKey={categoriaSeleccionada} className="ms-2">
         {categorias.map((categoria) => (
           <Nav.Item key={categoria.id}>
             <Nav.Link
               eventKey={categoria.id}
               onClick={() => handleCategoriaSeleccionada(categoria.id)}
+              style={{
+                color:
+                  categoria.id === categoriaSeleccionada ? "red" : "black", 
+              }}
+              className="ms-2"
             >
               {categoria.nombre}
             </Nav.Link>

@@ -87,7 +87,7 @@ function RegistroCompleto() {
   };
 
   return (
-    <div style={{ backgroundColor:'#ebeaeaf7' }} className="p-4 rounded-4 ms-5">
+    <div style={{ backgroundColor:'#CECECE' ,  boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)" }} className="p-4 rounded-4 ms-5">
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col md={6}>

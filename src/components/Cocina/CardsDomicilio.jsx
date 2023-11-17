@@ -11,7 +11,7 @@ function OrderCard({ order }) {
   return (
     <div
       className="card text-center"
-      style={{ backgroundColor: "rgba(0, 128, 0, 0.2)" }}
+      style={{ backgroundColor: "rgba(0, 128, 0, 0.2)",  boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)" }}
     >
       <div className="card-body">
         <h5 className="card-title">Orden #{numeroPedido}</h5>
