@@ -10,7 +10,6 @@ import Empleados from "./pages/Empleados";
 import Cocina from "./pages/Cocina";
 import Pedidos from "./pages/Pedidos";
 import Login from "./pages/Login";
-
 import Envios from "./pages/Adomicilio";
 import Imsumos from './pages/Imsumos'
 import "bootstrap/dist/css/bootstrap.min.css";
