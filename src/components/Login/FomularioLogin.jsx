@@ -21,6 +21,7 @@ function Login() {
         ) {
           localStorage.setItem("Usuario", JSON.stringify(result.data));
           navegar("/inicio/cocina");
+          window.location.reload();
         } else {
           Swal.fire({
             icon: "error",
