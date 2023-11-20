@@ -5,9 +5,8 @@ import Swal from "sweetalert2";
 
 function Navbar({ categorias, onCategoriaSeleccionada, onEliminarCategoria }) {
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
-    categorias[0].id
+    "Tlayuda"
   );
-
   const handleCategoriaSeleccionada = (categoria) => {
     setCategoriaSeleccionada(categoria);
     onCategoriaSeleccionada(categoria);
@@ -33,17 +32,17 @@ function Navbar({ categorias, onCategoriaSeleccionada, onEliminarCategoria }) {
   return (
     <div style={{ fontSize: "20px", fontWeight: "450" }}>
       <Nav variant="tabs" defaultActiveKey={categoriaSeleccionada} className="ms-2">
-        {categorias.map((categoria) => (
-          <Nav.Item key={categoria.id}>
+        {categorias.map((categoria, index) => (
+          <Nav.Item key={index}>
             <Nav.Link
-              eventKey={categoria.id}
-              onClick={() => handleCategoriaSeleccionada(categoria.id)}
+              eventKey={categoria}
+              onClick={() => handleCategoriaSeleccionada(categoria)}
               style={{
-                color: categoria.id === categoriaSeleccionada ? "red" : "black",
+                color: categoria === categoriaSeleccionada ? "red" : "black",
               }}
               className="ms-2"
             >
-              {categoria.nombre}
+              {categoria}
               <button
                 className="btn btn-danger btn-sm ms-4"
                 onClick={() => confirmarEliminarCategoria(categoria)}

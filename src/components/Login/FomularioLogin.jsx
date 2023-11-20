@@ -20,7 +20,7 @@ function Login() {
           result.data.message !== "Usuario no encontrado"
         ) {
           localStorage.setItem("Usuario", JSON.stringify(result.data));
-          navegar("/inicio/usuario");
+          navegar("/inicio/cocina");
         } else {
           Swal.fire({
             icon: "error",

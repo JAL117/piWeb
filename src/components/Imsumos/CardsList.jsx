@@ -5,7 +5,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { MdDeleteForever } from "react-icons/md";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
-function CardList({ alimentos, categoriaActual }) {
+function CardList({ alimentos, categoriaActual, eliminarPlatillo }) {
   const alimentosFiltrados =
     categoriaActual !== "todos"
       ? alimentos.filter((alimento) => alimento.categoria === categoriaActual)
@@ -15,7 +15,7 @@ function CardList({ alimentos, categoriaActual }) {
     <Row className="g-2 p-2 mt-2">
       {alimentosFiltrados.length > 0 ? (
         alimentosFiltrados.map((alimento) => (
-          <Col key={alimento.id} xs={12} sm={6} md={4} lg={4}>
+          <Col key={alimento._id} xs={12} sm={6} md={4} lg={4}>
             <Card style={{ backgroundColor: "rgba(209, 35, 35, 0.1)" }}>
               {alimento.imagen && (
                 <Card.Img variant="top" src={alimento.imagen} />
@@ -26,8 +26,15 @@ function CardList({ alimentos, categoriaActual }) {
                 </div>
               </Card.Body>
               <div className="card-footer">
-                <Button  variant="success" className=" ms-5"><RiMoneyDollarCircleFill size={25} /></Button>
-                <Button className="btn btn-danger m-1"><MdDeleteForever size={25} /> </Button>
+                <Button variant="success" className=" ms-5">
+                  <RiMoneyDollarCircleFill size={25} />
+                </Button>
+                <Button
+                  className="btn btn-danger m-1"
+                  //onClick={eliminarPlatillo(alimento._id)}
+                >
+                  <MdDeleteForever size={25} />{" "}
+                </Button>
               </div>
             </Card>
           </Col>

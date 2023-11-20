@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Navbar, Nav, Offcanvas, Form } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { MdOutdoorGrill } from "react-icons/md";
@@ -11,40 +11,92 @@ import { BiSolidFoodMenu } from "react-icons/bi";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { MdFoodBank } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
-const handleExit = (opc) => {
-  console.log(opc);
-  Swal.fire({
-    title: "¿Esta seguro de Salir?",
-    text: "Seleccione una opcion",
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "Salir",
-  })
-    .then((result) => {
-      if (result.isConfirmed) {
-        localStorage.removeItem("Usuario");
-        navegar("/");
-      } else {
-        navegar("/inicio/ordenes");
-      }
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
 const NavbarOffcanvas = () => {
+  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showOffcanvas, setShowOffcanvas] = useState(false);
+  const navegar = useNavigate();
 
   const handleToggleOffcanvas = () => {
     setShowOffcanvas(!showOffcanvas);
   };
 
+  const usuario = JSON.parse(localStorage.getItem("Usuario"));
+  const handleExit = (opc) => {
+    Swal.fire({
+      title: "¿Esta seguro de Salir?",
+      text: "Seleccione una opcion",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Salir",
+    })
+      .then((result) => {
+        if (result.isConfirmed) {
+          localStorage.removeItem("Usuario");
+          navegar("/");
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  };
   const [showUserOffcanvas, setShowUserOffcanvas] = useState(false);
   const handleToggleUserOffcanvas = () => {
     setShowUserOffcanvas(!showUserOffcanvas);
+  };
+  const validarPassword = (e) => {
+    e.preventDefault();
+    axios
+      .get(`http://localhost:3006/usuario/pass/${usuario.usuario}&${password}`)
+      .then((result) => {
+        if (password === result.data.contraseña) {
+          if (newPassword === confirmPassword) {
+            axios
+              .put("http://localhost:3006/usuario/usuarioPass", {
+                password: password,
+                passwordNew: newPassword,
+                usuario: usuario.usuario,
+              })
+              .then((result) => {
+                Swal.fire({
+                  icon: "success",
+                  title: `${result.data.msg}`,
+                  showConfirmButton: true,
+                });
+                setPassword("")
+                setNewPassword("")
+                setConfirmPassword("")
+                setShowUserOffcanvas(false);
+              })
+              .catch((err) => {
+                Swal.fire({
+                  icon: "success",
+                  title: `${err.message}`,
+                  showConfirmButton: false,
+                });
+              });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "La nueva contraseña no coincide con la de corfimación",
+            });
+          }
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "La contraseña actual no coincide",
+          });
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
   };
   return (
     <>
@@ -54,8 +106,7 @@ const NavbarOffcanvas = () => {
         style={{
           backgroundColor: "#100b0bf7",
           boxShadow: "0px 10px 8px 0px rgba(0, 0, 0, 0.25)",
-        }}
-      >
+        }}>
         <Navbar.Brand className="ms-4">
           ARDON <MdOutdoorGrill size={35} />
         </Navbar.Brand>
@@ -67,8 +118,7 @@ const NavbarOffcanvas = () => {
                 variant="outline-light"
                 as={Link}
                 to="/inicio/cocina"
-                style={{ border: "none" }}
-              >
+                style={{ border: "none" }}>
                 <FaKitchenSet size={35} />
                 <div className="mt-1">Cocina</div>
               </Button>
@@ -78,8 +128,7 @@ const NavbarOffcanvas = () => {
                 variant="outline-light"
                 as={Link}
                 to="/inicio/ordenes"
-                style={{ border: "none" }}
-              >
+                style={{ border: "none" }}>
                 <FaShop size={35} />
                 <div className="mt-1">Ordenes</div>
               </Button>
@@ -89,8 +138,7 @@ const NavbarOffcanvas = () => {
                 variant="outline-light"
                 as={Link}
                 to="/inicio/envios"
-                style={{ border: "none" }}
-              >
+                style={{ border: "none" }}>
                 <MdDeliveryDining size={35} />
                 <div className="mt-1">Envios</div>
               </Button>
@@ -100,35 +148,29 @@ const NavbarOffcanvas = () => {
                 variant="outline-light"
                 as={Link}
                 to="/inicio/pedidos"
-                style={{ border: "none" }}
-              >
+                style={{ border: "none" }}>
                 <BsFillClipboard2CheckFill size={35} />
                 <div className="mt-1">Pedidos</div>
               </Button>
             </Nav.Link>
-           
-           
           </Nav>
           <div className="ms-3 mt-2">
             <Button
               variant="outline-light"
               onClick={handleToggleUserOffcanvas}
-              style={{ border: "none" }}
-            >
+              style={{ border: "none" }}>
               <FaUser size={25} />
             </Button>
             <Button
               variant="outline-light ms-2"
               onClick={handleToggleOffcanvas}
-              style={{ border: "none" }}
-            >
+              style={{ border: "none" }}>
               <FaUsersCog size={25} />
             </Button>
             <Button
               variant="outline-light ms-2"
               onClick={handleExit}
-              style={{ border: "none" }}
-            >
+              style={{ border: "none" }}>
               <ImExit size={25} />
             </Button>
           </div>
@@ -143,8 +185,7 @@ const NavbarOffcanvas = () => {
         style={{
           backgroundColor: "#100b0bf7",
           boxShadow: "0px 10px 8px 0px rgba(0, 0, 0, 0.25)",
-        }}
-      >
+        }}>
         <Offcanvas.Header closeButton closeButtonVariant="light">
           <Offcanvas.Title>
             <h3>Opciones administrador</h3>
@@ -159,8 +200,7 @@ const NavbarOffcanvas = () => {
                   to="/inicio/panel"
                   className="ms-3"
                   size="lg"
-                  variant="outline-light"
-                >
+                  variant="outline-light">
                   <FaUsersCog /> Panel
                 </Button>
               </li>
@@ -171,8 +211,7 @@ const NavbarOffcanvas = () => {
                   to="/inicio/empleados"
                   className="ms-3"
                   size="lg"
-                  variant="outline-light"
-                >
+                  variant="outline-light">
                   <FaUsersCog /> Empleados
                 </Button>
               </li>
@@ -183,8 +222,7 @@ const NavbarOffcanvas = () => {
                   to="/inicio/agregarusuarios"
                   className="ms-3"
                   size="lg"
-                  variant="outline-light"
-                >
+                  variant="outline-light">
                   <FaUsersCog /> Agregar Usuarios
                 </Button>
               </li>
@@ -194,9 +232,8 @@ const NavbarOffcanvas = () => {
                   to="/inicio/actualizar-menu"
                   className="ms-3"
                   size="lg"
-                  variant="outline-light"
-                >
-                  <MdFoodBank/> Actualizar Menu
+                  variant="outline-light">
+                  <MdFoodBank /> Actualizar Menu
                 </Button>
               </li>
             </ul>
@@ -211,39 +248,46 @@ const NavbarOffcanvas = () => {
         style={{
           backgroundColor: "#100b0bf7",
           boxShadow: "0px 10px 8px 0px rgba(0, 0, 0, 0.25)",
-        }}
-      >
-        <Offcanvas.Header closeButton >
+        }}>
+        <Offcanvas.Header closeButton>
           <Offcanvas.Title>
             <h4>Nombre de usuario:</h4>
-            {/* No olvides poner el nombre de usuario aqui */}
+            {usuario.usuario}
           </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <Form className="p-3">
-       
+          <Form className="p-3" onSubmit={validarPassword} method="post">
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Contraseña actual</Form.Label>
               <Form.Control
+                required
                 type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Ingrese su contraseña actual"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Nueva contraseña</Form.Label>
               <Form.Control
+                required
                 type="password"
+                value={newPassword}
+                onChange={(e) => setNewPassword(e.target.value)}
                 placeholder="Ingrese su nueva contraseña"
               />
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Confirmar contraseña</Form.Label>
               <Form.Control
+                required
                 type="password"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="Confirmar contraseña"
               />
             </Form.Group>
-            <Button className="ms-2" variant="outline-success">
+            <Button type="submit" className="ms-2" variant="outline-success">
               Modificar
             </Button>
           </Form>
