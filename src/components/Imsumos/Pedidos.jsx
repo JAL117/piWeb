@@ -1,32 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "./NavPedidos";
 import CardList from "./CardsList";
 import Animaciones from "../utils/Animaciones";
 import { Button, Row } from "react-bootstrap";
 import { MdAssignmentAdd, MdDinnerDining } from "react-icons/md";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 function App() {
-  const alimentos = [
-    {
-      id: 11,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
-    },
-    // Resto de datos de alimentos
-  ];
+  let bandera = true
+  const [productos, setProductos] = useState([]);
+  const [categorias, setCategorias] = useState([]);
+  useEffect(() => {
+    const products = async () => {
+      try {
+        await axios.get("http://localhost:3006/producto").then((result) => {
+          setProductos(result.data);
+        });
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    products();
+  }, [productos]);
 
-  const categorias = [
-    { id: "tlayudas", nombre: "Tlayudas" },
-    { id: "tacos", nombre: "Tacos" },
-    { id: "bebidas", nombre: "Bebidas" },
-    { id: "tortas", nombre: "Tortas" },
-  ];
+  useEffect(() => {
+    const nuevasCategorias = new Set(categorias);
 
-  const [categoriaActual, setCategoriaActual] = useState("tlayudas");
+    productos.forEach((producto) => {
+      nuevasCategorias.add(producto.categoria);
+    });
+    setCategorias(Array.from(nuevasCategorias));
+  }, [productos]);
 
+  const [categoriaActual, setCategoriaActual] = useState("Tlayuda");
   const handleCategoriaSeleccionada = (categoria) => {
+    setCategoriaActual("");
     setCategoriaActual(categoria);
   };
 
@@ -39,7 +48,7 @@ function App() {
       confirmButtonText: "Agregar",
       cancelButtonText: "Cancelar",
       showLoaderOnConfirm: true,
-      inputPlaceholder:"Nombre de la categoría",
+      inputPlaceholder: "Nombre de la categoría",
       preConfirm: (nombreCategoria) => {
         // Aquí puedes realizar la lógica para agregar la categoría
         return new Promise((resolve) => {
@@ -56,41 +65,85 @@ function App() {
       }
     });
   };
+  const handleEliminarCategoria = (categoria) => {
+    // lógica para eliminar la categoría
+  };
 
   const handleAgregarPlatillo = () => {
     Swal.fire({
       title: "Agregar Platillo",
       html:
-        '<Label>Nombre del platillo<Label/><input id="nombre" class="swal2-input" placeholder="Nombre del platillo">' +
-        '<Label>Precio del platillo<Label/><input id="precio" class="swal2-input" placeholder="Precio">',
+        '<label>Nombre del platillo</label><input id="nombre" class="swal2-input" placeholder="Nombre del platillo">' +
+        `<label>Precio del platillo</label><input type="number" min=${1} id="precio" class="swal2-input" placeholder="Precio"> ` +
+        '<label>Descripción del platillo</label><input id="descripcion" class="swal2-input" placeholder="Descripción del platillo">' +
+        '<label for="categoria">Selecciona una categoria:</label> <br />' +
+        '<select id="categoria" name="categoria" className="swal2-select">' +
+        categorias
+          .map(
+            (categoria, index) =>
+              `<option key=${index} value=${categoria}>${categoria}</option>`
+          )
+          .join("") +
+        "</select>",
       showCancelButton: true,
       confirmButtonText: "Agregar",
       cancelButtonText: "Cancelar",
       preConfirm: () => {
         const nombre = document.getElementById("nombre").value;
         const precio = document.getElementById("precio").value;
+        const descripcion = document.getElementById("descripcion").value;
+        const categoria = document.getElementById("categoria").value;
 
-        if (!nombre || !precio) {
-          Swal.showValidationMessage("Por favor, ingresa el nombre y el precio");
+        if (!nombre || !precio || !descripcion) {
+          Swal.showValidationMessage(
+            "Por favor, ingresa el nombre, el precio y la descripcion"
+          );
           return false;
         }
-
-        return { nombre, precio };
+        if (precio < 1) {
+          Swal.showValidationMessage("Por favor, ingrese un precio valido");
+          return false;
+        }
+        return { nombre, precio, categoria, descripcion };
       },
       allowOutsideClick: () => !Swal.isLoading(),
-    }).then((result) => {
+    }).then(async (result) => {
       if (result.isConfirmed) {
         const platillo = result.value;
-        // Aquí puedes realizar la lógica para agregar el platillo
-
-        Swal.fire("¡Platillo agregado!", "", "success");
+        try {
+          await axios
+            .post("http://localhost:3006/producto/productos", {
+              nombre: platillo.nombre,
+              precio: platillo.precio,
+              descripcion: platillo.descripcion,
+              categoria: platillo.categoria,
+            })
+            .then(() => {
+              Swal.fire("¡Platillo agregado!", "", "success");
+              console.log(productos);
+            });
+        } catch (error) {
+          console.log(error.message);
+          Swal.showValidationMessage(error.message);
+        }
       }
     });
   };
-
-  const handleEliminarCategoria = (categoria) => {
-    // lógica para eliminar la categoría
-  };
+  const eliminarPlatillo =  (id) => {
+    Swal.fire({
+      title: "¿Está seguro que desea eliminar el platillo?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, eliminar",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire("¡Platillo eliminado!", "", "success");
+      }
+    });
+  }
 
   return (
     <Animaciones>
@@ -103,16 +156,20 @@ function App() {
         <div className="container">
           <div className="row">
             <div className="col-md-8">
-              <CardList alimentos={alimentos} categoriaActual={categoriaActual} />
+              <CardList
+                alimentos={productos}
+                categoriaActual={categoriaActual}
+                eliminarPlatillo={eliminarPlatillo}
+              />
             </div>
+
             <div className="col-md-4 mt-2">
               <Row className="mb-4">
                 <Button
                   size="lg"
                   variant="success"
                   onClick={handleAgregarCategoria}
-                  className="mt-3"
-                >
+                  className="mt-3">
                   Categoría <MdAssignmentAdd size={35} />
                 </Button>
               </Row>
@@ -120,8 +177,7 @@ function App() {
                 <Button
                   size="lg"
                   variant="success"
-                  onClick={handleAgregarPlatillo}
-                >
+                  onClick={handleAgregarPlatillo}>
                   Platillo <MdDinnerDining size={35} />
                 </Button>
               </Row>

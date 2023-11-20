@@ -1,34 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
 import { FaTrash, FaEye } from "react-icons/fa";
 import { HiPencilAlt } from "react-icons/hi";
 import Swal from "sweetalert2";
+import axios from "axios";
 
 function Infor() {
-  const [data, setData] = useState([
-    {
-      id_coordinador: 1,
-      nombres: "Juan",
-      apellido_paterno: "Pérez",
-      apellido_materno: "López",
-      telefono: "1234567890",
-      direccion:"abajo de un carro",
-      rango: "Admin",
-    },
-    {
-      id_coordinador: 2,
-      nombres: "María",
-      apellido_paterno: "Gómez",
-      apellido_materno: "Martínez",
-      telefono: "9876543210",
-      direccion:"en una casa",
-      rango: "Usuario",
-    },
-  ]);
+  const [data, setData] = useState([]);
 
   const [searchText, setSearchText] = useState("");
-  
+
+  useEffect(() => {
+    const tabla = async () => {
+      try {
+        const response = await axios.get("http://localhost:3006/usuario");
+        setData(response.data);
+      } catch (error) {
+        console.error("Error al obtener los datos:", error);
+      }
+    };
+    tabla();
+  }, [data]);
 
   const handleLiquidarCuentaClick = (id_coordinador) => {
     const newData = data.filter(
@@ -75,9 +68,40 @@ function Infor() {
 
   const handleViewClick = (usuario) => {
     Swal.fire({
-      title: "Datos de inicio de sesión",
-      html: `Usuario: <br>Contraseña: ********`,
-      icon: "info",
+      title: "Ingrese la contraseña de administrador",
+      input: "password",
+      inputAttributes: {
+        autocapitalize: "off",
+      },
+      showCancelButton: true,
+      confirmButtonText: "Aceptar",
+      showLoaderOnConfirm: true,
+      allowOutsideClick: () => !Swal.isLoading(),
+    }).then((result) => {
+      const user = JSON.parse(localStorage.getItem("Usuario"));
+      axios
+        .get(
+          `http://localhost:3006/usuario/pass/${user.usuario}&${result.value}`
+        )
+        .then((result) => {
+          if (result.data.message) {
+             Swal.fire({
+               icon: "error",
+               title: "Contraseña incorrecta",
+             });
+          }else{
+           Swal.fire({
+             title: "Datos de inicio de sesión",
+             html: `Usuario: ${usuario.usuario} <br>Contraseña: ${usuario.contraseña}`,
+             icon: "info",
+           });
+          }
+        }).catch( (err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Error",
+          });
+        });
     });
   };
 
@@ -85,41 +109,78 @@ function Infor() {
     Swal.fire({
       title: "Editar Usuario",
       html:
-        `<input id="nombres" class="swal2-input" value="${usuario.nombres }">` +
-        `<input id="apellidoPaterno" class="swal2-input" value="${usuario.apellido_paterno}">` +
-        `<input id="apellidoMaterno" class="swal2-input" value="${usuario.apellido_materno}">` +
-        `<input id="direccion" class="swal2-input" value="${usuario.direccion}">`+
-        `<input id="telefono" class="swal2-input" value="${usuario.telefono}">`,
+        `<label for="nombre" class="swal2-label">
+        Nombre<input id="nombre" class="swal2-input" value="${usuario.nombre}">
+        </label>` +
+        `<label for="apellido" class="swal2-label">
+        Apellidos<input id="apellido" class="swal2-input" value="${usuario.apellido}">
+        </label>` +
+        `<label for="direccion" class="swal2-label">
+        Direccion<input id="direccion" class="swal2-input" value="${usuario.direccion}">
+        </label>` +
+        `<label for="telefono" class="swal2-label">
+        Telefono<input id="telefono" type="tel" pattern="^\d{10}$" class="swal2-input" value="${usuario.telefono}">
+        </label>`,
       showCancelButton: true,
       confirmButtonText: "Guardar",
       showLoaderOnConfirm: true,
-    
+
       preConfirm: () => {
-        const nombres = Swal.getPopup().querySelector("#nombres").value;
-        const apellidoPaterno =
-          Swal.getPopup().querySelector("#apellidoPaterno").value;
-        const apellidoMaterno =
-          Swal.getPopup().querySelector("#apellidoMaterno").value;
+        const nombre = Swal.getPopup().querySelector("#nombre").value;
+        const apellido = Swal.getPopup().querySelector("#apellido").value;
         const direcciones = Swal.getPopup().querySelector("#direccion").value;
         const telefono = Swal.getPopup().querySelector("#telefono").value;
-
+        const regex = /^\d{10}$/;
+        if (
+          nombre.length == 0 ||
+          apellido.length == 0 ||
+          direcciones.length == 0 ||
+          telefono.length == 0
+        ) {
+          Swal.fire({
+            title: "No pueden haber campos vacios",
+            icon: "warning",
+          });
+          return;
+        } else if (telefono.length != 10) {
+          Swal.fire({
+            title: "El rango del campo telefono debe de ser igual a 10 digitos",
+            icon: "warning",
+          });
+        } else if (!regex.test(telefono)) {
+          Swal.fire({
+            title: "Valores inavlidos para el campo telefono ",
+            icon: "warning",
+          });
+        }
         // Actualiza los datos en el estado
-        const newData = data.map((item) => {
-          if (item.id_coordinador === usuario.id_coordinador) {
-            return {
-              ...item,
-              nombres,
-              apellido_paterno: apellidoPaterno,
-              apellido_materno: apellidoMaterno,
+        data.map((item) => {
+          if (item._id === usuario._id) {
+            axios.put(`http://localhost:3006/usuario/usuario/${usuario._id}`, {
+              nombre: nombre,
+              apellido: apellido,
               direccion: direcciones,
-              telefono,
-            };
+              telefono: telefono,
+            });
           }
-          return item;
         });
-
-        setData(newData);
       },
+    });
+  };
+  const handleDeleteClick = (usuario) => {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "¡No podrás revertir esto!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Si, borrar!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios.delete(`http://localhost:3006/usuario/${usuario._id}`);
+        Swal.fire("Borrado!", "Usuario eliminado correctamente.", "success");
+      }
     });
   };
 
@@ -131,8 +192,7 @@ function Infor() {
           boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
           padding: "15px",
           borderRadius: "15px",
-        }}
-      >
+        }}>
         <h1 className="mb-5 mt-2">Empleados</h1>
         <div className="table-responsive">
           <Table striped bordered>
@@ -147,30 +207,28 @@ function Infor() {
             </thead>
             <tbody>
               {filteredData.map((item) => (
-                <tr key={item.id_coordinador}>
+                <tr key={item._id}>
                   <td>
-                    {item.nombres} {item.apellido_paterno}{" "}
-                    {item.apellido_materno}
+                    {item.nombre} {item.apellido}{" "}
                   </td>
                   <td>{item.telefono}</td>
                   <td>{item.direccion}</td>
-                  <td>{item.rango}</td>
+                  <td>{item.rol}</td>
                   <td
-                    style={{ display: "flex", justifyContent: "space-around" }}
-                  >
+                    style={{ display: "flex", justifyContent: "space-around" }}>
                     <Button
                       variant="success"
-                      onClick={() => handleViewClick(item)}
-                    >
+                      onClick={() => handleViewClick(item)}>
                       <FaEye /> Ver
                     </Button>
                     <Button
                       variant="warning"
-                      onClick={() => handleEditClick(item)}
-                    >
+                      onClick={() => handleEditClick(item)}>
                       <HiPencilAlt /> Editar
                     </Button>
-                    <Button variant="danger">
+                    <Button
+                      variant="danger"
+                      onClick={() => handleDeleteClick(item)}>
                       <FaTrash /> Eliminar
                     </Button>
                   </td>
