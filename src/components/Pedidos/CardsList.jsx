@@ -7,14 +7,17 @@ import { BsFillCartCheckFill } from "react-icons/bs";
 import Animaciones from "../utils/Animaciones";
 import Swal from "sweetalert2";
 
-function CardList({ alimentos, categoriaActual }) {
+function CardList({ alimentos, categoriaActual, onEnviarPedido }) {
+
   const alimentosFiltrados =
     categoriaActual !== "todos"
-      ? alimentos.filter((alimento) => alimento.categoria === categoriaActual)
+      ? alimentos[0].filter((alimento) => alimento.categoria === categoriaActual)
       : alimentos;
 
   const [cantidad, setCantidad] = useState(0);
-
+  const [total, setTotal] = useState([]);
+  const [pedidos, setPedido] = useState([]);
+  
   const handleEnviar = (alimento) => {
     Swal.fire({
       title: "Ingrese la cantidad",
@@ -39,17 +42,19 @@ function CardList({ alimentos, categoriaActual }) {
           );
         } else {
           setCantidad(cantidad);
+          onEnviarPedido(alimento.nombre, cantidad);
           Swal.fire(
-            "Cantidad enviada",
+            "Cantidad enviada", 
             `Cantidad: ${cantidad}`,
             "success"
           );
-          // Aquí puedes realizar el envio del dato michi
+          setTotal(total+ (cantidad*alimento.precio));
+          setPedido([...pedidos, alimento])
         }
       }
     });
-  };
 
+  };
   return (
     <Row className="g-2 p-2 mt-2">
       {alimentosFiltrados.length > 0 ? (
@@ -64,7 +69,7 @@ function CardList({ alimentos, categoriaActual }) {
               >
                 <Card.Body className="d-flex justify-content-around">
                   <div>
-                    <Card.Title>{alimento.nombre}{alimento.precio}</Card.Title>
+                    <Card.Title>{alimento.nombre}&nbsp; ${alimento.precio}</Card.Title>
                   </div>
                   <Button
                     variant="success"

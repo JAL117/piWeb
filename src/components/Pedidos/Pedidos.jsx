@@ -1,108 +1,61 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Navbar from "./NavPedidos";
 import CardList from "./CardsList";
 import OrderSection from "./Comanda";
 import Animaciones from "../utils/Animaciones";
+import axios from "axios";
 
-function pedidos() {
-  const alimentos = [
-    {
-      id: 11,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayuda",
-      precio: '50'
-    },
-    {
-      id: 12,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayuda",
-    },
-    {
-      id: 13,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
-    },   {
-      id: 14,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
-    },
-    {
-      id: 15,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
-    },
-    {
-      id: 16,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
-    },   {
-      id: 17,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
-    },
-    {
-      id: 18,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
-    },
-    {
-      id: 19,
-      nombre: "Talyuda de pollo",
-      imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
-    },
-    {
-      id: 2,
-      nombre: "Tacos de pollo",
-      imagenUrl: `../src/img/Login.png`,
-      categoria: "tacos",
-    },
-    {
-      id: 3,
-      nombre: "Coca-Cola 600 ml",
-      imagenUrl: "url-de-la-imagen",
-      categoria: "bebidas",
-    },
-    {
-      id: 2,
-      nombre: "Tacos de pollo",
-      imagenUrl: `../src/img/Login.png`,
-      categoria: "tortas",
-    },
-  ];
+function Pedidos() {
+  const [productos, setProductos] = useState([]);
 
-  const [categoriaActual, setCategoriaActual] = useState("tlayudas");
+  useEffect(() => {
+    const cards = async () => {
+      try {
+        const response = await axios.get("http://localhost:3006/producto");
+        setProductos(response.data);
+      } catch (error) {
+        console.log("Error obteniendo los datos: ", error);
+      }
+    };
+    cards();
+    console.log("prra");
+  }, []);
+
+  const alimentos = [productos];
+  const [categoriaActual, setCategoriaActual] = useState("Tlayuda");
+  const [pedidos, setPedidos] = useState([]);
+  const [cantidadTotal, setCantidadTotal] = useState(0);
 
   const handleCategoriaSeleccionada = (categoria) => {
     setCategoriaActual(categoria);
   };
 
+  const agregarPedido = (nombrePedido, cantidad) => {
+    const nuevoPedido = { nombre: nombrePedido, cantidad: cantidad };
+    setPedidos([...pedidos, nuevoPedido]);
+    setCantidadTotal(cantidadTotal + cantidad);
+  };
   return (
     <Animaciones>
-       <div>
-      <Navbar onCategoriaSeleccionada={handleCategoriaSeleccionada}  />
-      <div className="container">
-        <div className="row">
-          <div className="col-md-8">
-            <CardList alimentos={alimentos} categoriaActual={categoriaActual} />
-          </div>
-          <div className="col-md-4">
-            <OrderSection />
+      <div>
+        <Navbar onCategoriaSeleccionada={handleCategoriaSeleccionada} />
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8">
+              <CardList
+                alimentos={alimentos}
+                categoriaActual={categoriaActual}
+                onEnviarPedido={agregarPedido}
+              />
+            </div>
+            <div className="col-md-4">
+              <OrderSection pedidos={pedidos} cantidadTotal={cantidadTotal} />
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </Animaciones>
-   
   );
 }
 
-export default pedidos;
+export default Pedidos;
