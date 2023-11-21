@@ -10,13 +10,13 @@ function pedidos() {
       id: 11,
       nombre: "Talyuda de pollo",
       imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
+      categoria: "tlayuda",
     },
     {
       id: 12,
       nombre: "Talyuda de pollo",
       imagenUrl: "../src/img/Login.png",
-      categoria: "tlayudas",
+      categoria: "tlayuda",
     },
     {
       id: 13,

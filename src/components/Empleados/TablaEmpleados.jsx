@@ -219,17 +219,18 @@ function Infor() {
                     <Button
                       variant="success"
                       onClick={() => handleViewClick(item)}>
-                      <FaEye /> Ver
+                      <FaEye  size={25}/>
+                 
                     </Button>
                     <Button
                       variant="warning"
                       onClick={() => handleEditClick(item)}>
-                      <HiPencilAlt /> Editar
+                      <HiPencilAlt size={25} /> 
                     </Button>
                     <Button
                       variant="danger"
                       onClick={() => handleDeleteClick(item)}>
-                      <FaTrash /> Eliminar
+                      <FaTrash size={25} />
                     </Button>
                   </td>
                 </tr>
