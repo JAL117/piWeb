@@ -11,6 +11,7 @@ function pedidos() {
       nombre: "Talyuda de pollo",
       imagenUrl: "../src/img/Login.png",
       categoria: "tlayuda",
+      precio: '50'
     },
     {
       id: 12,

@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
-import img1 from "../../img/Login.png";
+import img1 from "../../img/LogGood.jpg";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { MdOutdoorGrill } from "react-icons/md";
+
 
 function Login() {
   const [user, setUser] = useState("");
@@ -46,7 +48,7 @@ function Login() {
         </Col>
         <Col md={6} className="d-flex align-items-center">
           <div className="w-75 mx-auto">
-            <h2 className="text-center mb-4">Bienvenido</h2>
+            <h2 className="text-center mb-4">Bienvenido <MdOutdoorGrill size={60}/></h2>
             <Form onSubmit={iniciarSecion}>
               <Form.Group controlId="formUsuario">
                 <Form.Label>Usuario</Form.Label>
