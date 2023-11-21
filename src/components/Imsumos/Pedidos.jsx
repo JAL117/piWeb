@@ -8,30 +8,36 @@ import Swal from "sweetalert2";
 import axios from "axios";
 
 function App() {
-  let bandera = true
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
+  const [categorias2, setCategorias2] = useState([]);
+  const [id, setId] = useState("");
+
+  const products = async () => {
+    try {
+      const result = await axios.get("http://localhost:3006/producto");
+      setProductos([...result.data]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  const categorys = async () => {
+    try {
+      const result = await axios.get("http://localhost:3006/categoria");
+      console.log(result.data[0]._id);
+      setId(result.data[0]._id);
+      setCategorias([...result.data[0].nombre]);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
   useEffect(() => {
-    const products = async () => {
-      try {
-        await axios.get("http://localhost:3006/producto").then((result) => {
-          setProductos(result.data);
-        });
-      } catch (error) {
-        console.log(error.message);
-      }
-    };
     products();
-  }, [productos]);
+  }, []);
 
   useEffect(() => {
-    const nuevasCategorias = new Set(categorias);
-
-    productos.forEach((producto) => {
-      nuevasCategorias.add(producto.categoria);
-    });
-    setCategorias(Array.from(nuevasCategorias));
-  }, [productos]);
+    categorys();
+  }, []);
 
   const [categoriaActual, setCategoriaActual] = useState("Tlayuda");
   const handleCategoriaSeleccionada = (categoria) => {
@@ -49,14 +55,24 @@ function App() {
       cancelButtonText: "Cancelar",
       showLoaderOnConfirm: true,
       inputPlaceholder: "Nombre de la categoría",
-      preConfirm: (nombreCategoria) => {
-        // Aquí puedes realizar la lógica para agregar la categoría
-        return new Promise((resolve) => {
-          // Simulando una petición asincrónica
-          setTimeout(() => {
-            resolve();
-          }, 1000);
-        });
+      preConfirm: async (nombreCategoria) => {
+        categorias.push(nombreCategoria);
+        await axios
+          .put(`http://localhost:3006/categoria/${id}`, {
+            categoria: categorias,
+          })
+          .then(() => {
+            categorys();
+            return new Promise((resolve) => {
+              setTimeout(() => {
+                resolve();
+              }, 1000);
+            });
+          })
+          .catch((err) => {
+            console.log(err);
+            Swal.showValidationMessage(err.message);
+          });
       },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
@@ -65,71 +81,81 @@ function App() {
       }
     });
   };
-  const handleEliminarCategoria = (categoria) => {
-    // lógica para eliminar la categoría
+  const handleEliminarCategoria = async (cate) => {
+    console.log(cate);
+    await axios
+      .delete(`http://localhost:3006/categoria/${id}&${cate}`, {
+        cate: cate,
+      })
+      .then((res) => {
+        console.log(res.data);
+        categorys();
+        Swal.fire("¡Platillo eliminado!", "", "success");
+      })
+      .catch((err) => {
+        Swal.showValidationMessage(err.message);
+      });
   };
 
-  const handleAgregarPlatillo = () => {
-    Swal.fire({
-      title: "Agregar Platillo",
-      html:
-        '<label>Nombre del platillo</label><input id="nombre" class="swal2-input" placeholder="Nombre del platillo">' +
-        `<label>Precio del platillo</label><input type="number" min=${1} id="precio" class="swal2-input" placeholder="Precio"> ` +
-        '<label>Descripción del platillo</label><input id="descripcion" class="swal2-input" placeholder="Descripción del platillo">' +
-        '<label for="categoria">Selecciona una categoria:</label> <br />' +
-        '<select id="categoria" name="categoria" className="swal2-select">' +
-        categorias
-          .map(
-            (categoria, index) =>
-              `<option key=${index} value=${categoria}>${categoria}</option>`
-          )
-          .join("") +
-        "</select>",
-      showCancelButton: true,
-      confirmButtonText: "Agregar",
-      cancelButtonText: "Cancelar",
-      preConfirm: () => {
-        const nombre = document.getElementById("nombre").value;
-        const precio = document.getElementById("precio").value;
-        const descripcion = document.getElementById("descripcion").value;
-        const categoria = document.getElementById("categoria").value;
+  const handleAgregarPlatillo = async () => {
+    try {
+      const result = await Swal.fire({
+        title: "Agregar Platillo",
+        html:
+          '<label>Nombre del platillo</label><input id="nombre" class="swal2-input" placeholder="Nombre del platillo">' +
+          `<label>Precio del platillo</label><input type="number" min=${1} id="precio" class="swal2-input" placeholder="Precio"> ` +
+          '<label for="categoria">Selecciona una categoria:</label> <br />' +
+          '<select id="categoria" name="categoria" className="swal2-select">' +
+          categorias
+            .map(
+              (categoria, index) =>
+                `<option key=${index} value=${categoria}>${categoria}</option>`
+            )
+            .join("") +
+          "</select>",
+        showCancelButton: true,
+        confirmButtonText: "Agregar",
+        cancelButtonText: "Cancelar",
+        preConfirm: () => {
+          const nombre = document.getElementById("nombre").value;
+          const precio = document.getElementById("precio").value;
+          const categoria = document.getElementById("categoria").value;
 
-        if (!nombre || !precio || !descripcion) {
-          Swal.showValidationMessage(
-            "Por favor, ingresa el nombre, el precio y la descripcion"
-          );
-          return false;
-        }
-        if (precio < 1) {
-          Swal.showValidationMessage("Por favor, ingrese un precio valido");
-          return false;
-        }
-        return { nombre, precio, categoria, descripcion };
-      },
-      allowOutsideClick: () => !Swal.isLoading(),
-    }).then(async (result) => {
+          if (!nombre || !precio) {
+            Swal.showValidationMessage(
+              "Por favor, ingresa el nombre y el precio"
+            );
+            return false;
+          }
+          if (precio < 1) {
+            Swal.showValidationMessage("Por favor, ingrese un precio válido");
+            return false;
+          }
+          return { nombre, precio, categoria };
+        },
+        allowOutsideClick: () => !Swal.isLoading(),
+      });
+
       if (result.isConfirmed) {
         const platillo = result.value;
-        try {
-          await axios
-            .post("http://localhost:3006/producto/productos", {
-              nombre: platillo.nombre,
-              precio: platillo.precio,
-              descripcion: platillo.descripcion,
-              categoria: platillo.categoria,
-            })
-            .then(() => {
-              Swal.fire("¡Platillo agregado!", "", "success");
-              console.log(productos);
-            });
-        } catch (error) {
-          console.log(error.message);
-          Swal.showValidationMessage(error.message);
-        }
+        await axios
+          .post("http://localhost:3006/producto/productos", {
+            nombre: platillo.nombre,
+            precio: platillo.precio,
+            categoria: platillo.categoria,
+          })
+          .then(() => {
+            products();
+            Swal.fire("¡Platillo agregado!", "", "success");
+          });
       }
-    });
+    } catch (error) {
+      console.log(error.message);
+      Swal.showValidationMessage(error.message);
+    }
   };
-  const eliminarPlatillo =  (id) => {
+
+  const eliminarPlatillo = (id) => {
     Swal.fire({
       title: "¿Está seguro que desea eliminar el platillo?",
       icon: "warning",
@@ -140,11 +166,60 @@ function App() {
       cancelButtonText: "Cancelar",
     }).then((result) => {
       if (result.isConfirmed) {
-        Swal.fire("¡Platillo eliminado!", "", "success");
+        axios
+          .delete(`http://localhost:3006/producto/producto/${id}`)
+          .then(() => {
+            products();
+            Swal.fire("¡Platillo eliminado!", "", "success");
+          })
+          .catch((err) => {
+            console.log(err.message);
+            Swal.showValidationMessage(err.message);
+          });
       }
     });
-  }
-
+  };
+  const modificarPrecio = (id) => {
+    Swal.fire({
+      title: "Modificar el precio",
+      icon: "warning",
+      html:
+        "<label>Ingrese el nuevo precio</label>" +
+        '<br /><br /><input id=precio type="number" placeholder="precio"> ',
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sí, modificar",
+      cancelButtonText: "Cancelar",
+      preConfirm: () => {
+        const precio = document.getElementById("precio").value;
+        if (!precio) {
+          Swal.showValidationMessage("Por favor, ingrese un precio válido");
+          return false;
+        }
+        if (precio < 1) {
+          Swal.showValidationMessage("Por favor, ingrese un precio válido");
+          return false;
+        }
+        return { precio };
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .put(`http://localhost:3006/producto/productos/${id}`, {
+            precio: result.value.precio,
+          })
+          .then(() => {
+            products();
+            Swal.fire("¡Precio modificado!", "", "success");
+          })
+          .catch((err) => {
+            console.log(err.message);
+            Swal.showValidationMessage(err.message);
+          });
+      }
+    });
+  };
   return (
     <Animaciones>
       <div>
@@ -160,6 +235,7 @@ function App() {
                 alimentos={productos}
                 categoriaActual={categoriaActual}
                 eliminarPlatillo={eliminarPlatillo}
+                modificarPrecio={modificarPrecio}
               />
             </div>
 

@@ -5,7 +5,12 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { MdDeleteForever } from "react-icons/md";
 import { RiMoneyDollarCircleFill } from "react-icons/ri";
-function CardList({ alimentos, categoriaActual, eliminarPlatillo }) {
+function CardList({
+  alimentos,
+  categoriaActual,
+  eliminarPlatillo,
+  modificarPrecio,
+}) {
   const alimentosFiltrados =
     categoriaActual !== "todos"
       ? alimentos.filter((alimento) => alimento.categoria === categoriaActual)
@@ -23,16 +28,21 @@ function CardList({ alimentos, categoriaActual, eliminarPlatillo }) {
               <Card.Body className="d-flex justify-content-around">
                 <div>
                   <Card.Title>{alimento.nombre}</Card.Title>
+                  <Card.Subtitle className="mb-2 text-muted">
+                    Precio: ${alimento.precio}
+                  </Card.Subtitle>
                 </div>
               </Card.Body>
               <div className="card-footer">
-                <Button variant="success" className=" ms-5">
+                <Button
+                  variant="success"
+                  className=" ms-5"
+                  onClick={() => modificarPrecio(alimento._id)}>
                   <RiMoneyDollarCircleFill size={25} />
                 </Button>
                 <Button
                   className="btn btn-danger m-1"
-                  //onClick={eliminarPlatillo(alimento._id)}
-                >
+                  onClick={() => eliminarPlatillo(alimento._id)}>
                   <MdDeleteForever size={25} />{" "}
                 </Button>
               </div>

@@ -15,7 +15,7 @@ function Navbar({ categorias, onCategoriaSeleccionada, onEliminarCategoria }) {
   const confirmarEliminarCategoria = (categoria) => {
     Swal.fire({
       title: "Eliminar categoría",
-      text: "¿Estás seguro de que deseas eliminar esta categoría?",
+      text: "¿Estás seguro de que deseas eliminar esta categoría? se eliminaran los productos de esta categoria tambien",
       icon: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
