@@ -3,10 +3,10 @@ import Nav from "react-bootstrap/Nav";
 
 function Navbar({ onCategoriaSeleccionada }) {
   const categorias = [
-    { id: "tlayudas", nombre: "Tlayudas" },
-    { id: "tacos", nombre: "Tacos" },
-    { id: "bebidas", nombre: "Bebidas" },
-    { id: "tortas", nombre: "Tortas" },
+    { id: "Tlayuda", nombre: "Tlayudas" },
+    { id: "Taco", nombre: "Tacos" },
+    { id: "Bebida", nombre: "Bebidas" },
+    { id: "Torta", nombre: "Tortas" },
   ];
 
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(

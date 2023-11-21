@@ -115,7 +115,7 @@ const NavbarOffcanvas = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav" className="justify-content-around">
-          <Nav className="mr-auto ms-2">
+          <Nav className="mr-auto ms-2 justify-content-around">
             <Nav.Link className="ms-5">
               {(rol == 'Cocinero' || rol== 'Administrador') && (
               <>
