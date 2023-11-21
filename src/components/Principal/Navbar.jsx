@@ -7,12 +7,14 @@ import { FaShop, FaKitchenSet } from "react-icons/fa6";
 import { ImExit } from "react-icons/im";
 import { MdDeliveryDining } from "react-icons/md";
 import { BsFillClipboard2CheckFill } from "react-icons/bs";
-import { BiSolidFoodMenu } from "react-icons/bi";
 import Swal from "sweetalert2";
 import { Link } from "react-router-dom";
 import { MdFoodBank } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+
+const usuario = JSON.parse(localStorage.getItem("Usuario"));
+const rol = usuario?.rol;
 
 const NavbarOffcanvas = () => {
   const [password, setPassword] = useState("");
@@ -100,6 +102,7 @@ const NavbarOffcanvas = () => {
   };
   return (
     <>
+    
       <Navbar
         expand="lg"
         variant="dark"
@@ -112,9 +115,11 @@ const NavbarOffcanvas = () => {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbar-nav" />
         <Navbar.Collapse id="navbar-nav" className="justify-content-around">
-          <Nav className="mr-auto ms-2">
+          <Nav className="mr-auto ms-5 justify-content-around">
             <Nav.Link className="ms-5">
-              <Button
+              {(rol == 'Cocinero' || rol== 'Administrador') && (
+              <>
+                <Button
                 variant="outline-light"
                 as={Link}
                 to="/inicio/cocina"
@@ -122,9 +127,13 @@ const NavbarOffcanvas = () => {
                 <FaKitchenSet size={35} />
                 <div className="mt-1">Cocina</div>
               </Button>
+              </>)}
+            
             </Nav.Link>
             <Nav.Link className="ms-5">
-              <Button
+              {(rol == 'Mesero'|| rol== 'Administrador') && (
+              <>
+               <Button
                 variant="outline-light"
                 as={Link}
                 to="/inicio/ordenes"
@@ -132,9 +141,13 @@ const NavbarOffcanvas = () => {
                 <FaShop size={35} />
                 <div className="mt-1">Ordenes</div>
               </Button>
+              </>)}
+             
             </Nav.Link>
             <Nav.Link className="ms-5">
-              <Button
+              {(rol == 'Envios' || rol== 'Administrador') && (
+              <>
+                 <Button
                 variant="outline-light"
                 as={Link}
                 to="/inicio/envios"
@@ -142,9 +155,13 @@ const NavbarOffcanvas = () => {
                 <MdDeliveryDining size={35} />
                 <div className="mt-1">Envios</div>
               </Button>
+              </>)}
+           
             </Nav.Link>
             <Nav.Link className="ms-5">
-              <Button
+              {(rol == 'Envios' || rol=='Mesero'|| rol== 'Administrador') &&  (
+              <>
+                <Button
                 variant="outline-light"
                 as={Link}
                 to="/inicio/pedidos"
@@ -152,6 +169,8 @@ const NavbarOffcanvas = () => {
                 <BsFillClipboard2CheckFill size={35} />
                 <div className="mt-1">Pedidos</div>
               </Button>
+              </>)}
+            
             </Nav.Link>
           </Nav>
           <div className="ms-3 mt-2">
@@ -161,21 +180,36 @@ const NavbarOffcanvas = () => {
               style={{ border: "none" }}>
               <FaUser size={25} />
             </Button>
-            <Button
+            {rol == "Administrador" && (
+              <>
+                 <Button
               variant="outline-light ms-2"
               onClick={handleToggleOffcanvas}
               style={{ border: "none" }}>
               <FaUsersCog size={25} />
             </Button>
+              </> )}
+         
             <Button
               variant="outline-light ms-2"
               onClick={handleExit}
               style={{ border: "none" }}>
               <ImExit size={25} />
+            
             </Button>
           </div>
         </Navbar.Collapse>
       </Navbar>
+
+
+
+
+
+
+
+
+
+
 
       <Offcanvas
         show={showOffcanvas}
