@@ -50,12 +50,12 @@ export default function Grafica() {
           tension: 0.3,
           borderColor: "white",
           pointRadius: 8,
-          backgroundColor: " rgb(56, 255, 255)",
+          backgroundColor: "darkgreen",
           color: "#ffff",
-        },
+         },
       ],
       labels,
     };
   }, []);
-  return <Bar options={options} data={data}/>;
+  return <Bar options={options} data={data}  style={{ width: "100%" , marginTop:"25%"}}/>;
 }

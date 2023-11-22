@@ -1,13 +1,21 @@
-import React from 'react'
-import "../../styles/PanelGrafica.css"
-import Grafica from './Grafica'
+import React from "react";
+import GraficaBarras from "./GraficaBarras";
+import GraficaPastel from "./GraficaPastel";
+import { Row, Col } from "react-bootstrap";
 
 function PanelGrafica() {
   return (
-    <div className='panel-grafica'>
-      <Grafica/>
+    <div>
+      <Row className="panel-grafica">
+        <Col xs={12} md={6}>
+          <GraficaBarras/>
+        </Col>
+        <Col xs={12} md={6}>
+          <GraficaPastel />
+        </Col>
+      </Row>
     </div>
-  )
+  );
 }
 
-export default PanelGrafica
+export default PanelGrafica;

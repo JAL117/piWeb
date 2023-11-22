@@ -3,6 +3,11 @@ import React, { useEffect, useState } from "react";
 import { Button, Col, Container, Form } from "react-bootstrap";
 import { BsFillSendFill } from "react-icons/bs";
 import Swal from "sweetalert2";
+import { GrMap } from "react-icons/gr";
+import { MdDriveFileRenameOutline } from "react-icons/md";
+import { MdTableBar } from "react-icons/md";
+import { MdEditSquare } from "react-icons/md";
+import { MdFoodBank } from "react-icons/md";
 
 const Comanda = (pedidos) => {
   const [tipoEntrega, setTipoEntrega] = useState("sucursal");
@@ -66,17 +71,17 @@ const Comanda = (pedidos) => {
           total: total,
           envio: envio,
           direccion: direccion,
-          cliente: "juan",
+          cliente: referencia,
           productos: pedidos.pedidos,
           nota: notas,
         })
         .then((data) => {
           pedidos.pedidos.splice(0, pedidos.pedidos.length);
-          setDireccion("")
-          setNotas("")
-          setTotal("")
-          setNumeroMesa(0)
-          setReferencia("")
+          setDireccion("");
+          setNotas("");
+          setTotal("");
+          setNumeroMesa(0);
+          setReferencia("");
           Swal.fire("Pedido enviado con exito", "Enviado");
           console.log(data.data);
         })
@@ -91,7 +96,8 @@ const Comanda = (pedidos) => {
       <div className="d-flex justify-content-end mt-1">
         <div
           className="p-3 rounded-3"
-          style={{ backgroundColor: "rgba(209, 35, 35, 0.2)", width: "400px" }}>
+          style={{ backgroundColor: "rgba(209, 35, 35, 0.2)", width: "400px" }}
+        >
           <h4 className="text-center">Comanda</h4>
           <Form className="m-2" onSubmit={handleEnviarPedido}>
             <Form.Group controlId="numeroPedido"></Form.Group>
@@ -100,15 +106,16 @@ const Comanda = (pedidos) => {
               <Form.Control
                 as="select"
                 value={tipoEntrega}
-                onChange={handleTipoEntregaChange}>
+                onChange={handleTipoEntregaChange}
+              >
                 <option value="sucursal">Sucursal</option>
                 <option value="domicilio">Domicilio</option>
               </Form.Control>
             </Form.Group>
 
             {tipoEntrega === "sucursal" && (
-              <Form.Group controlId="numeroMesa">
-                <Form.Label>Número de Mesa:</Form.Label>
+              <Form.Group controlId="numeroMesa" className="mt-2">
+                <Form.Label><MdTableBar/> Número de Mesa:</Form.Label>
                 <Form.Control
                   type="number"
                   min={1}
@@ -121,18 +128,8 @@ const Comanda = (pedidos) => {
             )}
             {tipoEntrega === "domicilio" && (
               <>
-                <Form.Group controlId="direccion">
-                  <Form.Label>Dirección:</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    value={direccion}
-                    onChange={handleDireccionChange}
-                  />
-                </Form.Group>
-
-                <Form.Group controlId="referencia">
-                  <Form.Label>Referencia:</Form.Label>
+                <Form.Group controlId="referencia" className="mt-2">
+                  <Form.Label><MdDriveFileRenameOutline/> Nombre de Cliente:</Form.Label>
                   <Form.Control
                     type="text"
                     value={referencia}
@@ -140,11 +137,20 @@ const Comanda = (pedidos) => {
                     onChange={handleReferenciaChange}
                   />
                 </Form.Group>
+                <Form.Group controlId="direccion">
+                  <Form.Label><GrMap/> Dirección: </Form.Label>
+                  <Form.Control
+                    required
+                    type="text"
+                    value={direccion}
+                    onChange={handleDireccionChange}
+                  />
+                </Form.Group>
               </>
             )}
 
             <Form.Group controlId="notas">
-              <Form.Label>Notas:</Form.Label>
+              <Form.Label><MdEditSquare/> Notas:</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
@@ -153,7 +159,7 @@ const Comanda = (pedidos) => {
               />
             </Form.Group>
             <Form.Group controlId="pedido">
-              <Form.Label>Pedido:</Form.Label>
+              <Form.Label><MdFoodBank/> Pedido:</Form.Label>
               <div
                 style={{
                   color: "black",
@@ -161,7 +167,8 @@ const Comanda = (pedidos) => {
                   height: "100px",
                   backgroundColor: "white",
                   overflow: "auto",
-                }}>
+                }}
+              >
                 {pedidos.pedidos.length > 0 ? (
                   pedidos.pedidos.map((pedido, i) => (
                     <>
@@ -190,7 +197,8 @@ const Comanda = (pedidos) => {
                 flexWrap: "nowrap",
                 justifyContent: "center",
                 alignItems: "flex-end",
-              }}>
+              }}
+            >
               <Button type="submit" variant="success" className="mt-4">
                 <BsFillSendFill size={20} /> Enviar Pedido
               </Button>
@@ -203,8 +211,9 @@ const Comanda = (pedidos) => {
                   borderRadius: "5px",
                   color: "white",
                   textAlign: "center",
-                  padding: "10px",
-                }}>
+                  padding: "5px",
+                }}
+              >
                 Total: ${total}
               </span>
             </div>
