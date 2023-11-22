@@ -208,7 +208,6 @@ function Infor() {
             </thead>
             <tbody>
               {filteredData.map((item) => (
-<<<<<<< HEAD
                 <>
                   {item.rol !== "Administrador" ? (
                     <tr key={item._id}>
@@ -226,7 +225,7 @@ function Infor() {
                         <Button
                           variant="success"
                           onClick={() => handleViewClick(item)}>
-                          <FaEye size={25} />
+                          <RiLockPasswordLine size={25} />
                         </Button>
                         <Button
                           variant="warning"
@@ -242,35 +241,6 @@ function Infor() {
                     </tr>
                   ) : null}
                 </>
-=======
-                <tr key={item._id}>
-                  <td>
-                    {item.nombre} {item.apellido}{" "}
-                  </td>
-                  <td>{item.telefono}</td>
-                  <td>{item.direccion}</td>
-                  <td>{item.rol}</td>
-                  <td
-                    style={{ display: "flex", justifyContent: "space-around" }}>
-                    <Button
-                      variant="success"
-                      onClick={() => handleViewClick(item)}>
-                      <RiLockPasswordLine  size={25}/>
-                 
-                    </Button>
-                    <Button
-                      variant="primary"
-                      onClick={() => handleEditClick(item)}>
-                      <HiPencilAlt size={25} /> 
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleDeleteClick(item)}>
-                      <FaTrash size={25} />
-                    </Button>
-                  </td>
-                </tr>
->>>>>>> a32da4c0a82f2c32c7d3398ba62b51906e5585d7
               ))}
             </tbody>
             {message}
