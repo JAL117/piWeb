@@ -52,12 +52,7 @@ function Navbar({ onCategoriaSeleccionada, onEliminarCategoria}) {
               className="ms-2"
             >
               {categoria.nombre}
-              <button
-                className="btn btn-danger btn-sm ms-4"
-                onClick={() => confirmarEliminarCategoria(categoria)}
-              >
-                <BsTrash size={20} />
-              </button>
+            
             </Nav.Link>
           </Nav.Item>
         ))}

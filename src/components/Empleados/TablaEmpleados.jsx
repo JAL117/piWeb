@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import { FaTrash, FaEye } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { HiPencilAlt } from "react-icons/hi";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 function Infor() {
   const [data, setData] = useState([]);
@@ -219,11 +220,11 @@ function Infor() {
                     <Button
                       variant="success"
                       onClick={() => handleViewClick(item)}>
-                      <FaEye  size={25}/>
+                      <RiLockPasswordLine  size={25}/>
                  
                     </Button>
                     <Button
-                      variant="warning"
+                      variant="primary"
                       onClick={() => handleEditClick(item)}>
                       <HiPencilAlt size={25} /> 
                     </Button>
