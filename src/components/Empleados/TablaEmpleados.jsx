@@ -207,33 +207,39 @@ function Infor() {
             </thead>
             <tbody>
               {filteredData.map((item) => (
-                <tr key={item._id}>
-                  <td>
-                    {item.nombre} {item.apellido}{" "}
-                  </td>
-                  <td>{item.telefono}</td>
-                  <td>{item.direccion}</td>
-                  <td>{item.rol}</td>
-                  <td
-                    style={{ display: "flex", justifyContent: "space-around" }}>
-                    <Button
-                      variant="success"
-                      onClick={() => handleViewClick(item)}>
-                      <FaEye  size={25}/>
-                 
-                    </Button>
-                    <Button
-                      variant="warning"
-                      onClick={() => handleEditClick(item)}>
-                      <HiPencilAlt size={25} /> 
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleDeleteClick(item)}>
-                      <FaTrash size={25} />
-                    </Button>
-                  </td>
-                </tr>
+                <>
+                  {item.rol !== "Administrador" ? (
+                    <tr key={item._id}>
+                      <td>
+                        {item.nombre} {item.apellido}{" "}
+                      </td>
+                      <td>{item.telefono}</td>
+                      <td>{item.direccion}</td>
+                      <td>{item.rol}</td>
+                      <td
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-around",
+                        }}>
+                        <Button
+                          variant="success"
+                          onClick={() => handleViewClick(item)}>
+                          <FaEye size={25} />
+                        </Button>
+                        <Button
+                          variant="warning"
+                          onClick={() => handleEditClick(item)}>
+                          <HiPencilAlt size={25} />
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleDeleteClick(item)}>
+                          <FaTrash size={25} />
+                        </Button>
+                      </td>
+                    </tr>
+                  ) : null}
+                </>
               ))}
             </tbody>
             {message}

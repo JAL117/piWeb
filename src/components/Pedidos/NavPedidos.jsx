@@ -1,63 +1,47 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Nav from "react-bootstrap/Nav";
-import { BsTrash } from "react-icons/bs";
+import axios from "axios";
 import Swal from "sweetalert2";
 
-function Navbar({ onCategoriaSeleccionada, onEliminarCategoria}) {
-  const categorias = [
-    { id: "Tlayuda", nombre: "Tlayudas" },
-    { id: "Taco", nombre: "Tacos" },
-    { id: "Refresco", nombre: "Bebidas" },
-    { id: "Torta", nombre: "Tortas" },
-  ];
-
+function Navbar({ onCategoriaSeleccionada }) {
+  const [categorias, setCategorias] = useState([]);
+ const categorys = async () => {
+   try {
+     const result = await axios.get("http://localhost:3006/categoria");
+     setCategorias([...result.data[0].nombre]);
+   } catch (error) {
+     console.log(error.message);
+   }
+ };
+  useEffect(() => {
+    categorys();
+    console.log(categorias);
+  }, []);
+  //console.log(categorias);
   const [categoriaSeleccionada, setCategoriaSeleccionada] = useState(
-    categorias[0].id
+    categorias[0]
   );
-
-  const confirmarEliminarCategoria = (categoria) => {
-    Swal.fire({
-      title: "Eliminar categoría",
-      text: "¿Estás seguro de que deseas eliminar esta categoría?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Sí, eliminar",
-      cancelButtonText: "Cancelar",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        onEliminarCategoria(categoria);
-      }
-    });
-  };
-
   const handleCategoriaSeleccionada = (categoria) => {
     setCategoriaSeleccionada(categoria);
     onCategoriaSeleccionada(categoria);
   };
 
   return (
-    <div style={{ fontSize: "20px" , fontWeight:'450' }}>
-      <Nav variant="tabs" defaultActiveKey={categoriaSeleccionada} className="ms-2">
-        {categorias.map((categoria) => (
-          <Nav.Item key={categoria.id}>
+    <div style={{ fontSize: "20px", fontWeight: "450" }}>
+      <Nav
+        variant="tabs"
+        defaultActiveKey={categoriaSeleccionada}
+        className="ms-2">
+        {categorias.map((categoria, i) => (
+          <Nav.Item key={i}>
             <Nav.Link
-              eventKey={categoria.id}
-              onClick={() => handleCategoriaSeleccionada(categoria.id)}
+              eventKey={i}
+              onClick={() => handleCategoriaSeleccionada(categoria)}
               style={{
-                color:
-                  categoria.id === categoriaSeleccionada ? "red" : "black", 
+                color: categoria === categoriaSeleccionada ? "red" : "black",
               }}
-              className="ms-2"
-            >
-              {categoria.nombre}
-              <button
-                className="btn btn-danger btn-sm ms-4"
-                onClick={() => confirmarEliminarCategoria(categoria)}
-              >
-                <BsTrash size={20} />
-              </button>
+              className="ms-2">
+              {categoria}
             </Nav.Link>
           </Nav.Item>
         ))}

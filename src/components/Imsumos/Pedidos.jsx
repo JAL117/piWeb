@@ -10,7 +10,6 @@ import axios from "axios";
 function App() {
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
-  const [categorias2, setCategorias2] = useState([]);
   const [id, setId] = useState("");
 
   const products = async () => {
@@ -24,7 +23,6 @@ function App() {
   const categorys = async () => {
     try {
       const result = await axios.get("http://localhost:3006/categoria");
-      console.log(result.data[0]._id);
       setId(result.data[0]._id);
       setCategorias([...result.data[0].nombre]);
     } catch (error) {
@@ -90,6 +88,8 @@ function App() {
       .then((res) => {
         console.log(res.data);
         categorys();
+        products();
+        handleCategoriaSeleccionada(categorias[0]);
         Swal.fire("¡Platillo eliminado!", "", "success");
       })
       .catch((err) => {
