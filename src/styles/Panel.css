@@ -48,3 +48,9 @@
     justify-content: space-between;
   }
 }
+
+#categoria{
+  border-color: darkgray;
+  border-radius: 5px;
+  margin-top: 3%;
+}
