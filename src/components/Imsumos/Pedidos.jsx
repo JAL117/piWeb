@@ -54,7 +54,13 @@ function App() {
       showLoaderOnConfirm: true,
       inputPlaceholder: "Nombre de la categoría",
       preConfirm: async (nombreCategoria) => {
-        categorias.push(nombreCategoria);
+        const preConfirmado = nombreCategoria.toUpperCase();
+        const categoriasUpperCase = categorias.map((categoriaMayus) => categoriaMayus.toUpperCase());
+        if (categoriasUpperCase.includes(preConfirmado)) {
+          Swal.fire("¡Categoría ya existente!", "", "error");
+          return false;
+        } else {
+             categorias.push(nombreCategoria);
         await axios
           .put(`http://localhost:3006/categoria/${id}`, {
             categoria: categorias,
@@ -71,7 +77,9 @@ function App() {
             console.log(err);
             Swal.showValidationMessage(err.message);
           });
-      },
+      
+        }
+     },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
