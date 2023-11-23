@@ -13,7 +13,7 @@ import Login from "./pages/Login";
 import Envios from "./pages/Adomicilio";
 import Imsumos from "./pages/Imsumos";
 import "bootstrap/dist/css/bootstrap.min.css";
-import Inicio from "./pages/Inicio";
+import Principal from "./pages/Inicio";
 
 function App() {
 
@@ -33,6 +33,7 @@ function App() {
             <Route path="pedidos" element={<Pedidos />} />
             <Route path="cocina" element={<Cocina />} />
             <Route path="actualizar-menu" element={<Imsumos />} />
+            <Route path="principal" element={<Principal />} />
           </Route>
         </Routes>
       </Router>
