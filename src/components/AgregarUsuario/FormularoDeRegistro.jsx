@@ -111,8 +111,9 @@ function RegistroCompleto() {
   return (
     <div
       style={{
-        backgroundColor: "#CECECE",
-        boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
+        backgroundColor: "rgba(209, 35, 35, 0.1)",
+        boxShadow: "0px 0px 15px 2px rgba(0, 0, 0, 0.1)",
+        border: "1px",
       }}
       className="p-4 rounded-4 ms-5">
       <Form onSubmit={handleSubmit}>
@@ -222,7 +223,7 @@ function RegistroCompleto() {
         </Row>
         <Row>
           <Col md={12} className="text-center">
-            <Button variant="dark" type="submit" className="mt-4" size="lg">
+            <Button variant="success" type="submit" className="mt-4" size="lg">
               Registrar
             </Button>
           </Col>
