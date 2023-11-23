@@ -1,65 +1,34 @@
-import React from 'react';
-import OrderCard from './OrdenesDomicilio';
+import React, { useState, useEffect } from "react";
+import OrderCard from "./OrdenesDomicilio";
+import axios from "axios";
 
 function OrdersList() {
-  const orders = [
-    {
-      numeroPedido: 1,
-      numeroMesa: 4,
-      productos: [
-        { nombre: 'Taco', cantidad: 2, precio: 10 },
-        { nombre: 'Refresco', cantidad: 4, precio: 2 },
-      ],
-      notas: 'Sin salsa picante',
-      totalAPagar: 28,
-      aDomicilio: true,
-    },
-    {
-      numeroPedido: 1,
-      numeroMesa: 4,
-      productos: [
-        { nombre: 'Taco', cantidad: 2, precio: 10 },
-        { nombre: 'Refresco', cantidad: 4, precio: 2 },
-      ],
-      notas: 'Sin salsa picante',
-      totalAPagar: 28,
-      aDomicilio: true, 
-    },   {
-      numeroPedido: 1,
-      numeroMesa: 4,
-      productos: [
-        { nombre: 'Pizza', cantidad: 2, precio: 10 },
-        { nombre: 'Refresco', cantidad: 4, precio: 2 },
-      ],
-      notas: 'Sin salsa picante',
-      totalAPagar: 28,
-      aDomicilio: true, 
-    },   {
-      numeroPedido: 1,
-      numeroMesa: 4,
-      productos: [
-        { nombre: 'Pizza', cantidad: 2, precio: 10 },
-        { nombre: 'Refresco', cantidad: 4, precio: 2 },
-      ],
-      notas: 'Sin salsa picante',
-      totalAPagar: 28,
-      aDomicilio: true, 
-    },
-  ];
+  const [ordenes, setOrdenes] = useState([]);
 
-  return (  
-     <>
-     <h1>A domicilio</h1>
-    <div className="row row-cols-lg-3">
-    
-      {orders.map((order, index) => (
-        <div className="col mb-1" key={index}>
-          <OrderCard order={order} />
-        </div>
-      ))}
-    </div>
-     </>
-    
+  const pedidos = async () =>{
+    await axios.get("http://localhost:3006/pedidos/envios").then((data) =>{
+      setOrdenes(data.data)
+    }).catch((error) =>{
+      console.log(error);
+    })
+  } 
+  useEffect(() =>{
+    pedidos()
+  },[])
+
+
+  return (
+    <>
+      <h1>A domicilio</h1>
+      <div className="row row-cols-lg-3">
+        {ordenes.map((order, index) => (
+          <div className="col mb-1" key={index}>
+            <OrderCard order={order} index={index} pedidos={pedidos} />
+         
+          </div>
+        ))}
+      </div>
+    </>
   );
 }
 

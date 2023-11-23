@@ -7,6 +7,9 @@ import axios from "axios";
 
 function Pedidos() {
   const [productos, setProductos] = useState([]);
+  const alimentos = [productos];
+  const [categoriaActual, setCategoriaActual] = useState("Tlayuda");
+  const [pedidos, setPedidos] = useState([]);
 
   useEffect(() => {
     const cards = async () => {
@@ -18,23 +21,16 @@ function Pedidos() {
       }
     };
     cards();
-    console.log("prra");
   }, []);
-
-  const alimentos = [productos];
-  const [categoriaActual, setCategoriaActual] = useState("Tlayuda");
-  const [pedidos, setPedidos] = useState([]);
-  const [cantidadTotal, setCantidadTotal] = useState(0);
 
   const handleCategoriaSeleccionada = (categoria) => {
     setCategoriaActual(categoria);
   };
 
-  const agregarPedido = (nombrePedido, cantidad) => {
-    const nuevoPedido = { nombre: nombrePedido, cantidad: cantidad };
-    setPedidos([...pedidos, nuevoPedido]);
-    setCantidadTotal(cantidadTotal + cantidad);
+  const agregarPedido = (pedido) => {
+    setPedidos(pedido);
   };
+ // console.log(pedidos);
   return (
     <Animaciones>
       <div>
@@ -49,7 +45,7 @@ function Pedidos() {
               />
             </div>
             <div className="col-md-4">
-              <OrderSection pedidos={pedidos} cantidadTotal={cantidadTotal} />
+              <OrderSection pedidos={pedidos} />
             </div>
           </div>
         </div>

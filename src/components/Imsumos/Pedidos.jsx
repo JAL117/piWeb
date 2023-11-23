@@ -10,7 +10,6 @@ import axios from "axios";
 function App() {
   const [productos, setProductos] = useState([]);
   const [categorias, setCategorias] = useState([]);
-  const [categorias2, setCategorias2] = useState([]);
   const [id, setId] = useState("");
 
   const products = async () => {
@@ -24,7 +23,6 @@ function App() {
   const categorys = async () => {
     try {
       const result = await axios.get("http://localhost:3006/categoria");
-      console.log(result.data[0]._id);
       setId(result.data[0]._id);
       setCategorias([...result.data[0].nombre]);
     } catch (error) {
@@ -56,7 +54,13 @@ function App() {
       showLoaderOnConfirm: true,
       inputPlaceholder: "Nombre de la categoría",
       preConfirm: async (nombreCategoria) => {
-        categorias.push(nombreCategoria);
+        const preConfirmado = nombreCategoria.toUpperCase();
+        const categoriasUpperCase = categorias.map((categoriaMayus) => categoriaMayus.toUpperCase());
+        if (categoriasUpperCase.includes(preConfirmado)) {
+          Swal.fire("¡Categoría ya existente!", "", "error");
+          return false;
+        } else {
+             categorias.push(nombreCategoria);
         await axios
           .put(`http://localhost:3006/categoria/${id}`, {
             categoria: categorias,
@@ -73,7 +77,9 @@ function App() {
             console.log(err);
             Swal.showValidationMessage(err.message);
           });
-      },
+      
+        }
+     },
       allowOutsideClick: () => !Swal.isLoading(),
     }).then((result) => {
       if (result.isConfirmed) {
@@ -90,6 +96,8 @@ function App() {
       .then((res) => {
         console.log(res.data);
         categorys();
+        products();
+        handleCategoriaSeleccionada(categorias[0]);
         Swal.fire("¡Platillo eliminado!", "", "success");
       })
       .catch((err) => {

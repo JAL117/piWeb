@@ -4,11 +4,11 @@ import "../../styles/Panel.css";
 
 function Panel({ icon, title, value }) {
   return (
-    <div className="panel">
-      <Row className="panel-row">
+    <Row className="panel">
+      <Col className="panel-row">
           <p>{icon}&nbsp;{title}:&nbsp;{value}</p>
-      </Row>
-    </div>
+      </Col>
+    </Row>
   );
 }
 

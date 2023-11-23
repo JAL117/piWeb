@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 import Button from "react-bootstrap/Button";
-import { FaTrash, FaEye } from "react-icons/fa";
+import { FaTrash } from "react-icons/fa";
 import { HiPencilAlt } from "react-icons/hi";
 import Swal from "sweetalert2";
 import axios from "axios";
+import { RiLockPasswordLine } from "react-icons/ri";
 
 function Infor() {
   const [data, setData] = useState([]);
@@ -207,33 +208,39 @@ function Infor() {
             </thead>
             <tbody>
               {filteredData.map((item) => (
-                <tr key={item._id}>
-                  <td>
-                    {item.nombre} {item.apellido}{" "}
-                  </td>
-                  <td>{item.telefono}</td>
-                  <td>{item.direccion}</td>
-                  <td>{item.rol}</td>
-                  <td
-                    style={{ display: "flex", justifyContent: "space-around" }}>
-                    <Button
-                      variant="success"
-                      onClick={() => handleViewClick(item)}>
-                      <FaEye  size={25}/>
-                 
-                    </Button>
-                    <Button
-                      variant="warning"
-                      onClick={() => handleEditClick(item)}>
-                      <HiPencilAlt size={25} /> 
-                    </Button>
-                    <Button
-                      variant="danger"
-                      onClick={() => handleDeleteClick(item)}>
-                      <FaTrash size={25} />
-                    </Button>
-                  </td>
-                </tr>
+                <>
+                  {item.rol !== "Administrador" ? (
+                    <tr key={item._id}>
+                      <td>
+                        {item.nombre} {item.apellido}{" "}
+                      </td>
+                      <td>{item.telefono}</td>
+                      <td>{item.direccion}</td>
+                      <td>{item.rol}</td>
+                      <td
+                        style={{
+                          display: "flex",
+                          justifyContent: "space-around",
+                        }}>
+                        <Button
+                          variant="success"
+                          onClick={() => handleViewClick(item)} className="ms-1">
+                          <RiLockPasswordLine size={25} />
+                        </Button>
+                        <Button
+                          variant="warning"
+                          onClick={() => handleEditClick(item)} className="ms-1">
+                          <HiPencilAlt size={25} />
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => handleDeleteClick(item)} className="ms-1">
+                          <FaTrash size={25} />
+                        </Button>
+                      </td>
+                    </tr>
+                  ) : null}
+                </>
               ))}
             </tbody>
             {message}

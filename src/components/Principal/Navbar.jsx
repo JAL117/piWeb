@@ -131,7 +131,7 @@ const NavbarOffcanvas = () => {
             
             </Nav.Link>
             <Nav.Link className="ms-5">
-              {(rol == 'Mesero'|| rol== 'Administrador') && (
+              {(rol == 'mesero'|| rol== 'Administrador') && (
               <>
                <Button
                 variant="outline-light"
@@ -159,7 +159,7 @@ const NavbarOffcanvas = () => {
            
             </Nav.Link>
             <Nav.Link className="ms-5">
-              {(rol == 'Envios' || rol=='Mesero'|| rol== 'Administrador') &&  (
+              {(rol == 'Envios' || rol=='mesero'|| rol== 'Administrador') &&  (
               <>
                 <Button
                 variant="outline-light"
