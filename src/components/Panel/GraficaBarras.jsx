@@ -83,7 +83,7 @@ export default function Grafica() {
     <Bar
       options={options}
       data={data}
-      style={{ width: "100%", marginTop: "25%" }}
+      style={{ width: "80%", marginTop: "25%" , height: "50%" }}
     />
   );
 }
