@@ -13,6 +13,7 @@ import Login from "./pages/Login";
 import Envios from "./pages/Adomicilio";
 import Imsumos from './pages/Imsumos'
 import "bootstrap/dist/css/bootstrap.min.css";
+import Inicio from "./pages/Inicio";
 
 const router = createBrowserRouter([
   {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
       {
         path: "actualizar-menu",
         element: <Imsumos />,
+      },
+      {
+        path: "principal",
+        element: <Inicio />,
       },
     ],
   },

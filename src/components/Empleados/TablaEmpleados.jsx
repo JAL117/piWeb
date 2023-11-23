@@ -224,17 +224,17 @@ function Infor() {
                         }}>
                         <Button
                           variant="success"
-                          onClick={() => handleViewClick(item)}>
+                          onClick={() => handleViewClick(item)} className="ms-1">
                           <RiLockPasswordLine size={25} />
                         </Button>
                         <Button
                           variant="warning"
-                          onClick={() => handleEditClick(item)}>
+                          onClick={() => handleEditClick(item)} className="ms-1">
                           <HiPencilAlt size={25} />
                         </Button>
                         <Button
                           variant="danger"
-                          onClick={() => handleDeleteClick(item)}>
+                          onClick={() => handleDeleteClick(item)} className="ms-1">
                           <FaTrash size={25} />
                         </Button>
                       </td>

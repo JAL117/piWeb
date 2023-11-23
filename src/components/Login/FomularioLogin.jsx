@@ -22,7 +22,7 @@ function Login() {
           result.data.message !== "Usuario no encontrado"
         ) {
           localStorage.setItem("Usuario", JSON.stringify(result.data));
-          navegar("/inicio/cocina");
+          navegar("/inicio/principal");
           window.location.reload();
         } else {
           Swal.fire({
