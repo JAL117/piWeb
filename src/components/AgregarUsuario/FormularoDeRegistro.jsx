@@ -212,9 +212,9 @@ function RegistroCompleto() {
                 value={rol}
                 onChange={(e) => setRol(e.target.value)}>
                 <option value="">Selecciona un rol</option>
-                <option value="mesero">Mesera/o</option>
-                <option value="cocinero">Cocinera/o</option>
-                <option value="envios">Envios</option>
+                <option value="Mesero">Mesero</option>
+                <option value="Cocinero">Cocinero</option>
+                <option value="Envios">Envios</option>
               </Form.Control>
               <div className="text-danger"> {errorMessages.rol}</div>
             </Form.Group>

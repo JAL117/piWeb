@@ -10,7 +10,7 @@ import { MdOutdoorGrill } from "react-icons/md";
 function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
-  const navegar = useNavigate();
+  const navigate = useNavigate();
 
   const iniciarSecion = (e) => {
     e.preventDefault();
@@ -22,7 +22,7 @@ function Login() {
           result.data.message !== "Usuario no encontrado"
         ) {
           localStorage.setItem("Usuario", JSON.stringify(result.data));
-          navegar("/inicio/cocina");
+          navigate("/inicio/principal");
           window.location.reload();
         } else {
           Swal.fire({
