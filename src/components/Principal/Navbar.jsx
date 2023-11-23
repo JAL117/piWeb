@@ -158,7 +158,7 @@ const NavbarOffcanvas = () => {
                     style={{ border: "none" }}
                   >
                     <MdDeliveryDining size={35} />
-                    <div className="mt-1">Envios</div>
+                    <div className="mt-1">Envíos</div>
                   </Button>
                 </>
               )}

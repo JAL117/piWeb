@@ -35,14 +35,14 @@ function MyComponent() {
         <Col xs={12} md={6}>
           <Panel
             icon={<RiEditBoxFill size={50} />}
-            title="Ordenes del dia"
+            title="Ordenes del día"
             value={totalOrdenes}
           />
         </Col>
         <Col xs={12} md={6}>
           <Panel
             icon={<RiMoneyDollarCircleFill size={50} />}
-            title="Ventas del dia"
+            title="Ventas del día"
             value={"$" + totalVenta}
           />
         </Col>

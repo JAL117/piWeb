@@ -38,7 +38,7 @@ function OrderCard({ order, index, pedidos }) {
     if (cocina === false) {
       Swal.fire({
         title: "Permiso denegado",
-        text: "No puedes confirmar algo que aun no esta echo",
+        text: "El pedido aún no se ha realizado en cocina",
         icon: "error",
       });
     } else {
