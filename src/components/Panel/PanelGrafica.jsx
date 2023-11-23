@@ -10,7 +10,7 @@ function PanelGrafica() {
         <Col xs={12} md={6}>
           <GraficaBarras/>
         </Col>
-        <Col xs={12} md={6}>
+        <Col xs={10} md={5}>
           <GraficaPastel />
         </Col>
       </Row>

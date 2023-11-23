@@ -70,12 +70,14 @@ function CardList({ alimentos, categoriaActual, onEnviarPedido }) {
               producto: alimento.nombre,
               precio: alimento.precio,
               cantidad: cantidad,
+              categoria: categoriaActual
             };
             setPedido([...pedidos, ord]);
           }
         }
       }
     });
+    console.log(pedidos);
     onEnviarPedido(pedidos);
   };
   return (
