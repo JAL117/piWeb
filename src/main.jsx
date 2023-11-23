@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./pages/Layout";
 import LayoutInicial from "./pages/LayoutInicial";
 import Panel from "./pages/Panel";
@@ -11,67 +11,33 @@ import Cocina from "./pages/Cocina";
 import Pedidos from "./pages/Pedidos";
 import Login from "./pages/Login";
 import Envios from "./pages/Adomicilio";
-import Imsumos from './pages/Imsumos'
+import Imsumos from "./pages/Imsumos";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Inicio from "./pages/Inicio";
 
-const router = createBrowserRouter([
-  {
-    path: "/inicio",
-    element: <Layout />,
-    children: [
-      {
-        path: "panel",
-        element: <Panel />,
-      },
-      {
-        path: "agregarusuarios",
-        element: <AgregarUsuario />,
-      },
-      {
-        path: "empleados",
-        element: <Empleados />,
-      },
-      {
-        path: "ordenes",
-        element: <Ordenes />,
-      },
-      {
-        path: "envios",
-        element: <Envios />,
-      },
-      {
-        path: "pedidos",
-        element: <Pedidos />,
-      },
-      {
-        path: "cocina",
-        element: <Cocina />,
-      },
-      {
-        path: "actualizar-menu",
-        element: <Imsumos />,
-      },
-      {
-        path: "principal",
-        element: <Inicio />,
-      },
-    ],
-  },
-  {
-    path: "/",
-    element: <LayoutInicial />,
-    children: [
-      {
-        index: true,
-        element: <Login />,
-      },
-    ],
-  },
-]);
+function App() {
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+  return (
+    <React.StrictMode>
+      <Router>
+        <Routes>
+          <Route path="/" element={<LayoutInicial />}>
+            <Route index element={<Login />} />
+          </Route>
+          <Route path="/inicio" element={localStorage.getItem("Usuario") ? <Layout /> : <Navigate to="/" />}>
+            <Route path="panel" element={<Panel />} />
+            <Route path="agregarusuarios" element={<AgregarUsuario />} />
+            <Route path="empleados" element={<Empleados />} />
+            <Route path="ordenes" element={<Ordenes />} />
+            <Route path="envios" element={<Envios />} />
+            <Route path="pedidos" element={<Pedidos />} />
+            <Route path="cocina" element={<Cocina />} />
+            <Route path="actualizar-menu" element={<Imsumos />} />
+          </Route>
+        </Routes>
+      </Router>
+    </React.StrictMode>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
