@@ -57,7 +57,7 @@ const Comanda = (pedidos) => {
 
   const handleEnviarPedido = async (event) => {
     event.preventDefault();
-    let envio = tipoEntrega === "sucursal" ? true : false;
+    let envio = tipoEntrega === "sucursal" ? false : true;
     if (pedidos.pedidos.length <= 0) {
       Swal.fire({
         title: "Sin pedidos",
@@ -74,6 +74,8 @@ const Comanda = (pedidos) => {
           cliente: referencia,
           productos: pedidos.pedidos,
           nota: notas,
+          estatus:"pendiente",
+          cocina:false
         })
         .then((data) => {
           pedidos.pedidos.splice(0, pedidos.pedidos.length);
