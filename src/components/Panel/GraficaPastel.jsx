@@ -46,6 +46,7 @@ const data = {
   ],
 };
 
+
 function GraficaPastel() {
   const [productos, setProductos] = useState([]);
   const [productos2, setProductos2] = useState([]);
@@ -61,24 +62,23 @@ function GraficaPastel() {
     }
   };
 
- const contarCategorias = () => {
-   const arreglo = productos.flatMap((objeto) => objeto.productos);
-   setProductos2(arreglo);
+  const contarCategorias = () => {
+    const arreglo = productos.flatMap((objeto) => objeto.productos);
+    setProductos2(arreglo);
 
-   const categoriasUnicas = Array.from(
-     new Set(arreglo.map((alimento) => alimento.categoria))
-   );
-   setCategorias(categoriasUnicas);
+    const categoriasUnicas = Array.from(
+      new Set(arreglo.map((alimento) => alimento.categoria))
+    );
+    setCategorias(categoriasUnicas);
 
-   const nuevosValores = categoriasUnicas.map((categoria) =>
-     arreglo
-       .filter((alimento) => alimento.categoria === categoria)
-       .reduce((total, alimento) => total + alimento.cantidad, 0)
-   );
+    const nuevosValores = categoriasUnicas.map((categoria) =>
+      arreglo
+        .filter((alimento) => alimento.categoria === categoria)
+        .reduce((total, alimento) => total + alimento.cantidad, 0)
+    );
 
-   setValores(nuevosValores);
- };
-
+    setValores(nuevosValores);
+  };
 
   useEffect(() => {
     obtenerDatos();
@@ -89,7 +89,7 @@ function GraficaPastel() {
       contarCategorias();
     }
   }, [productos]);
-console.log(productos, productos2);
+
   const data = {
     labels: categorias,
     datasets: [
@@ -99,6 +99,19 @@ console.log(productos, productos2);
         hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
       },
     ],
+  };
+
+  const options = {
+    tooltips: {
+      callbacks: {
+        label: function (tooltipItem, data) {
+          const categoria = data.labels[tooltipItem.index];
+          const valor =
+            data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+          return `${categoria}: ${valor}`;
+        },
+      },
+    },
   };
 
   return (
