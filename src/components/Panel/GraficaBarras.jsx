@@ -42,6 +42,11 @@ export default function Grafica() {
   const [labels, setLabels] = useState([]);
   const [scores, setScores] = useState([]);
 
+  const formatDate = (fecha) => {
+    const date = new Date(fecha);
+    return date.toLocaleDateString();
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -63,7 +68,9 @@ export default function Grafica() {
           return { fecha, sumaValores };
         });
 
-        const newLabels = resultados.map((resultado) => resultado.fecha);
+        const newLabels = resultados.map((resultado) =>
+          formatDate(resultado.fecha)
+        );
         const newScores = resultados.map((resultado) => resultado.sumaValores);
 
         setLabels(newLabels);
