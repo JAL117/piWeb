@@ -42,11 +42,6 @@ export default function Grafica() {
   const [labels, setLabels] = useState([]);
   const [scores, setScores] = useState([]);
 
-  const formatDate = (fecha) => {
-    const date = new Date(fecha);
-    return date.toLocaleDateString();
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -68,9 +63,7 @@ export default function Grafica() {
           return { fecha, sumaValores };
         });
 
-        const newLabels = resultados.map((resultado) =>
-          formatDate(resultado.fecha)
-        );
+        const newLabels = resultados.map((resultado) => resultado.fecha);
         const newScores = resultados.map((resultado) => resultado.sumaValores);
 
         setLabels(newLabels);
@@ -84,6 +77,12 @@ export default function Grafica() {
   }, []);
 
   const data = useMemo(() => {
+    //por si quieres ponerle multiples colores a las barras usa este arreglo de colores
+     /*  const colors = [
+        "rgba(255, 99, 132, 0.8)",
+        "rgba(54, 162, 235, 0.8)",
+        "rgba(255, 206, 86, 0.8)",
+      ]; */
     return {
       datasets: [
         {
@@ -92,7 +91,7 @@ export default function Grafica() {
           tension: 0.3,
           borderColor: "white",
           pointRadius: 8,
-          backgroundColor: "darkgreen",
+          backgroundColor: "darkgreen",//<----Aqui pon el arreglo
           color: "#ffff",
         },
       ],
