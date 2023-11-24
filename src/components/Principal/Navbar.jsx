@@ -88,7 +88,7 @@ const NavbarOffcanvas = () => {
           } else {
             Swal.fire({
               icon: "error",
-              title: "La nueva contraseña no coincide con la de corfimación",
+              title: "La nueva contraseña no coincide con la de confirmación",
             });
           }
         } else {
