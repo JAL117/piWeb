@@ -1,15 +1,19 @@
 import React from "react";
 
 import GraficaPastel from "./GraficaPastel";
+import Grafica from "./GraficaBarras";
 import { Row, Col } from "react-bootstrap";
 
 function PanelGrafica() {
   return (
     <div>
-      <Row className="panel-grafica" style={{width:'40%', marginLeft:"25%"}}>
-           <h2 className="ms-5">Productos más vendidos</h2>
+      <Row className="panel-grafica">
+        <Col xs={12} md={6}>
+          <Grafica />
+        </Col>
+        <Col xs={10} md={5}>
           <GraficaPastel />
-     
+        </Col>
       </Row>
     </div>
   );
