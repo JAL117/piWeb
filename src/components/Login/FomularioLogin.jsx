@@ -1,16 +1,28 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Container, Row, Col, Form, Button } from "react-bootstrap";
 import img1 from "../../img/LogGood.jpg";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
 import { MdOutdoorGrill } from "react-icons/md";
+import io from 'socket.io-client'
 
+const socket = io("http://localhost:3006");
 
 function Login() {
   const [user, setUser] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
+
+  useEffect(() => {
+    socket.on('usuarioConectado', () => {
+      Swal.fire({
+        icon: "success",
+        title: "Nuevo usuario conectado",
+        text: "¡Se ha conectado un nuevo usuario!",
+      });
+    });
+  }, []);
 
   const iniciarSecion = (e) => {
     e.preventDefault();
@@ -22,6 +34,7 @@ function Login() {
           result.data.message !== "Usuario no encontrado"
         ) {
           localStorage.setItem("Usuario", JSON.stringify(result.data));
+          socket.emit('usuarioConectado'); // Emitir evento al iniciar sesión
           navigate("/inicio/principal");
           window.location.reload();
         } else {

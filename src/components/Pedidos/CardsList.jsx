@@ -46,7 +46,7 @@ function CardList({ alimentos, categoriaActual, onEnviarPedido }) {
       reverseButtons: true,
       allowOutsideClick: false,
     }).then((result) => {
-      if (result.isConfirmed) {
+      if (result.isConfirmed && result.value>0) {
         const cantidad = result.value;
         if (isNaN(cantidad) || cantidad < 0 || cantidad > 50) {
         Swal.showValidationMessage(

@@ -91,7 +91,7 @@ export default function Grafica() {
           tension: 0.3,
           borderColor: "white",
           pointRadius: 8,
-          backgroundColor: "darkgreen",//<----Aqui pon el arreglo
+          backgroundColor: "rgba(144, 238, 144, 0.9)",//<----Aqui pon el arreglo
           color: "#ffff",
         },
       ],

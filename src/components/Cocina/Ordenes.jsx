@@ -31,7 +31,7 @@ function Ordenes() {
   }, []);
 
   return (
-    <div className="p-3">
+    <div className="p-5">
       <div className="row">
         <div className="col-md-6">
           <Sucursal ordenes={ordenesLocales} pedidos={pedidos} />
