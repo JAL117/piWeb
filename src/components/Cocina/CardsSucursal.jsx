@@ -48,7 +48,7 @@ function OrderCard({ order, index, pedidos }) {
             },
           });
           pedidos();
-          socket.emit('pedidoEnviado');
+          socket.emit('message');
         });
     } catch (error) {
       console.log(error);
