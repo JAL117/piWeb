@@ -3,7 +3,9 @@ import { BsClipboard2CheckFill } from "react-icons/bs";
 import Swal from "sweetalert2";
 import axios from "axios";
 import "animate.css";
+import io from "socket.io-client"
 
+const socket = io("http://localhost:3006");
 function OrderCard({ order, index, pedidos }) {
   if (!order) {
     return null;
@@ -46,6 +48,7 @@ function OrderCard({ order, index, pedidos }) {
             },
           });
           pedidos();
+          socket.emit('pedidoEnviado');
         });
     } catch (error) {
       console.log(error);
