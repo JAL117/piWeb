@@ -12,6 +12,7 @@ import {
 } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 ChartJS.register(
   CategoryScale,
@@ -45,7 +46,7 @@ export default function Grafica() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get("http://localhost:3006/pedidos/fecha");
+        const response = await axios.get(apiUrl+"pedidos/fecha");
         setDatos(response.data.pedidos);
 
         const grupos = response.data.pedidos.reduce((acc, objeto) => {

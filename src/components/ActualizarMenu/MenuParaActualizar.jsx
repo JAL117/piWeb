@@ -6,6 +6,7 @@ import { Button, Row } from "react-bootstrap";
 import { MdAssignmentAdd, MdDinnerDining } from "react-icons/md";
 import Swal from "sweetalert2";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function App() {
   const [productos, setProductos] = useState([]);
@@ -14,7 +15,7 @@ function App() {
 
   const products = async () => {
     try {
-      const result = await axios.get("http://localhost:3006/producto");
+      const result = await axios.get(apiUrl+"producto");
       setProductos([...result.data]);
     } catch (error) {
       console.log(error.message);
@@ -22,7 +23,7 @@ function App() {
   };
   const categorys = async () => {
     try {
-      const result = await axios.get("http://localhost:3006/categoria");
+      const result = await axios.get(apiUrl+"categoria");
       setId(result.data[0]._id);
       setCategorias([...result.data[0].nombre]);
     } catch (error) {
@@ -62,7 +63,7 @@ function App() {
         } else {
              categorias.push(nombreCategoria);
         await axios
-          .put(`http://localhost:3006/categoria/${id}`, {
+          .put(apiUrl+`categoria/${id}`, {
             categoria: categorias,
           })
           .then(() => {
@@ -90,7 +91,7 @@ function App() {
   const handleEliminarCategoria = async (cate) => {
     console.log(cate);
     await axios
-      .delete(`http://localhost:3006/categoria/${id}&${cate}`, {
+      .delete(apiUrl+`categoria/${id}&${cate}`, {
         cate: cate,
       })
       .then((res) => {
@@ -147,7 +148,7 @@ function App() {
       if (result.isConfirmed) {
         const platillo = result.value;
         await axios
-          .post("http://localhost:3006/producto/productos", {
+          .post(apiUrl+"producto/productos", {
             nombre: platillo.nombre,
             precio: platillo.precio,
             categoria: platillo.categoria,
@@ -175,7 +176,7 @@ function App() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3006/producto/producto/${id}`)
+          .delete(apiUrl+`producto/producto/${id}`)
           .then(() => {
             products();
             Swal.fire("¡Platillo eliminado!", "", "success");
@@ -214,7 +215,7 @@ function App() {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .put(`http://localhost:3006/producto/productos/${id}`, {
+          .put(apiUrl+`producto/productos/${id}`, {
             precio: result.value.precio,
           })
           .then(() => {

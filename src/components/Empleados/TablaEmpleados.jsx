@@ -6,6 +6,7 @@ import { HiPencilAlt } from "react-icons/hi";
 import Swal from "sweetalert2";
 import axios from "axios";
 import { RiLockPasswordLine } from "react-icons/ri";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Infor() {
   const [data, setData] = useState([]);
@@ -15,7 +16,7 @@ function Infor() {
   useEffect(() => {
     const tabla = async () => {
       try {
-        const response = await axios.get("http://localhost:3006/usuario");
+        const response = await axios.get(apiUrl+"usuario");
         setData(response.data);
       } catch (error) {
         console.error("Error al obtener los datos:", error);
@@ -82,7 +83,7 @@ function Infor() {
       const user = JSON.parse(localStorage.getItem("Usuario"));
       axios
         .get(
-          `http://localhost:3006/usuario/pass/${user.usuario}&${result.value}`
+          apiUrl+`usuario/pass/${user.usuario}&${result.value}`
         )
         .then((result) => {
           if (result.data.message) {
@@ -157,7 +158,7 @@ function Infor() {
         // Actualiza los datos en el estado
         data.map((item) => {
           if (item._id === usuario._id) {
-            axios.put(`http://localhost:3006/usuario/usuario/${usuario._id}`, {
+            axios.put(apiUrl+`usuario/usuario/${usuario._id}`, {
               nombre: nombre,
               apellido: apellido,
               direccion: direcciones,
@@ -179,7 +180,7 @@ function Infor() {
       confirmButtonText: "Si, borrar!",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`http://localhost:3006/usuario/${usuario._id}`);
+        axios.delete(apiUrl+`usuario/${usuario._id}`);
         Swal.fire("Borrado!", "Usuario eliminado correctamente.", "success");
       }
     });

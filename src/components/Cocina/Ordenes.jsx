@@ -3,6 +3,7 @@ import Sucursal from "./SeccionSucursal";
 import Domicilio from "./SeccionDomicilio";
 import axios from "axios";
 import "animate.css";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Ordenes() {
   const [ordenesLocales, setOrdenesLocales] = useState([]);
@@ -10,7 +11,7 @@ function Ordenes() {
 
   const pedidos = async () => {
     await axios
-      .get("http://localhost:3006/pedidos/cocina")
+      .get(apiUrl+"pedidos/cocina")
       .then((data) => {
         const ordenesConEnvio = data.data.filter(
           (pedido) => pedido.envio === true

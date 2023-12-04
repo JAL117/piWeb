@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import { MdHelp } from "react-icons/md";
 import PdfFile from "../../utils/πWeb.pdf";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const usuario = JSON.parse(localStorage.getItem("Usuario"));
 const rol = usuario?.rol;
@@ -57,12 +58,12 @@ const NavbarOffcanvas = () => {
   const validarPassword = (e) => {
     e.preventDefault();
     axios
-      .get(`http://localhost:3006/usuario/pass/${usuario.usuario}&${password}`)
+      .get(apiUrl+`usuario/pass/${usuario.usuario}&${password}`)
       .then((result) => {
         if (password === result.data.contraseña) {
           if (newPassword === confirmPassword) {
             axios
-              .put("http://localhost:3006/usuario/usuarioPass", {
+              .put(apiUrl+"usuario/usuarioPass", {
                 password: password,
                 passwordNew: newPassword,
                 usuario: usuario.usuario,

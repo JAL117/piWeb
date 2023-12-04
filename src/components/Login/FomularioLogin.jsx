@@ -8,6 +8,7 @@ import { MdOutdoorGrill } from "react-icons/md";
 import io from 'socket.io-client'
 
 const socket = io("http://localhost:3006");
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Login() {
   const [user, setUser] = useState("");
@@ -27,7 +28,7 @@ function Login() {
   const iniciarSecion = (e) => {
     e.preventDefault();
     axios
-      .get(`http://localhost:3006/usuario/${user}&${password}`)
+      .get(apiUrl+`usuario/${user}&${password}`)
       .then((result) => {
         if (
           result.data.value !== undefined ||

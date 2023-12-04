@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Form, Button, Row, Col, Alert } from "react-bootstrap";
 import { BiSolidUser } from "react-icons/bi";
 import { BsFillHouseLockFill } from "react-icons/bs";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function RegistroCompleto() {
   const [nombre, setNombre] = useState("");
@@ -67,7 +68,7 @@ function RegistroCompleto() {
 
     try {
       const registro = await axios.post(
-        "http://localhost:3006/usuario/usuario",
+        apiUrl+"usuario/usuario",
         {
           nombre,
           apellido,

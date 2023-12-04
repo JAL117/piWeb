@@ -3,6 +3,7 @@ import OrderCard from "./CardOrdenesSucursal";
 import axios from "axios";
 import io from "socket.io-client";
 import Swal from "sweetalert2";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const socket = io("http://localhost:3006");
 
@@ -11,7 +12,7 @@ function OrdersList() {
 
   const pedidos = async () => {
     try {
-      const response = await axios.get("http://localhost:3006/pedidos/local");
+      const response = await axios.get(apiUrl+"pedidos/local");
       setOrdenes(response.data);
     } catch (error) {
       console.log(error);

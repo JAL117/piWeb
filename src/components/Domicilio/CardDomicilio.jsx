@@ -5,6 +5,7 @@ import { FaAddressCard } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 import "animate.css";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function OrderCard({ order, index, pedidos }) {
   if (!order) {
@@ -44,7 +45,7 @@ function OrderCard({ order, index, pedidos }) {
     } else {
       try {
         await axios
-          .put("http://localhost:3006/pedidos/estatus", {
+          .put(apiUrl+"pedidos/estatus", {
             estatus: "realizado",
             id: _id,
           })
@@ -77,7 +78,7 @@ function OrderCard({ order, index, pedidos }) {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3006/pedidos/eliminar/${_id}`)
+          .delete(apiUrl+`pedidos/eliminar/${_id}`)
           .then(() => {
             Swal.fire(
               "Borrado!",
