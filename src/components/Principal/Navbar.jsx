@@ -171,7 +171,7 @@ const NavbarOffcanvas = () => {
                   <Button
                     variant="outline-light"
                     as={Link}
-                    to="/inicio/pedidos"
+                    to="/inicio/realizarPedido"
                     style={{ border: "none" }}
                   >
                     <BsFillClipboard2CheckFill size={35} />

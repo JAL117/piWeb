@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./NavPedidos";
-import CardList from "./CardsList";
+import Navbar from "./NavbarMenu";
+import CardList from "./Cards";
 import OrderSection from "./Comanda";
 import Animaciones from "../utils/Animaciones";
 import axios from "axios";

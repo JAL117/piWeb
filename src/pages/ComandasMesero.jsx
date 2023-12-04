@@ -1,16 +1,17 @@
 import React from 'react';
 import { Container} from 'react-bootstrap';
-import Orden from '../components/Domicilio/Domicilio';
+import Orden from '../components/Sucursal/MapeoCards';
 import Animaciones from '../components/utils/Animaciones';
 
 function Cocina() {
   return (
     <Animaciones>
-       <Container>
+
+      <Container>
      <Orden/>
     </Container>
     </Animaciones>
-   
+    
   );
 }
 

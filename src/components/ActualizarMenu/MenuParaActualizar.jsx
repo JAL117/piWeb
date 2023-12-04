@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Navbar from "./NavPedidos";
-import CardList from "./CardsList";
+import Navbar from "./NavbarMenu";
+import CardList from "./Cards";
 import Animaciones from "../utils/Animaciones";
 import { Button, Row } from "react-bootstrap";
 import { MdAssignmentAdd, MdDinnerDining } from "react-icons/md";

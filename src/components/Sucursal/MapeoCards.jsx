@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import OrderCard from "./OrdenesSucursal";
+import OrderCard from "./CardOrdenesSucursal";
 import axios from "axios";
 import io from "socket.io-client";
 import Swal from "sweetalert2";

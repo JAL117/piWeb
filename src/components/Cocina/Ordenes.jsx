@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import Sucursal from "./Sucursal";
-import Domicilio from "./Domicilio";
+import Sucursal from "./SeccionSucursal";
+import Domicilio from "./SeccionDomicilio";
 import axios from "axios";
 import "animate.css";
 
