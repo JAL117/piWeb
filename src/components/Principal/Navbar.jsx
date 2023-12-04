@@ -88,7 +88,7 @@ const NavbarOffcanvas = () => {
           } else {
             Swal.fire({
               icon: "error",
-              title: "La nueva contraseña no coincide con la de corfimación",
+              title: "La nueva contraseña no coincide con la de confirmación",
             });
           }
         } else {
@@ -134,7 +134,7 @@ const NavbarOffcanvas = () => {
               )}
             </Nav.Link>
             <Nav.Link className="ms-5">
-              {(rol == "mesero" || rol == "Administrador") && (
+              {(rol == "Mesero" || rol == "Administrador") && (
                 <>
                   <Button
                     variant="outline-light"
@@ -158,14 +158,14 @@ const NavbarOffcanvas = () => {
                     style={{ border: "none" }}
                   >
                     <MdDeliveryDining size={35} />
-                    <div className="mt-1">Envios</div>
+                    <div className="mt-1">Envíos</div>
                   </Button>
                 </>
               )}
             </Nav.Link>
             <Nav.Link className="ms-5">
               {(rol == "Envios" ||
-                rol == "mesero" ||
+                rol == "Mesero" ||
                 rol == "Administrador") && (
                 <>
                   <Button

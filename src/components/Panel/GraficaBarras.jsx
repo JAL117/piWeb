@@ -23,7 +23,6 @@ ChartJS.register(
   Legend,
   Filler
 );
-
 const options = {
   responsive: true,
   fill: true,
@@ -33,23 +32,42 @@ const options = {
     },
     title: {
       display: true,
-      text: "Ventas del dia",
+      text: "Ventas de la semana",
     },
   },
 };
 
-const labels = ["Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado"];
-const scores = [968.0, 1155.0, 1210.0, 1386.0, 2600.0, 1222.0];
-
-
 export default function Grafica() {
   const [datos, setDatos] = useState([]);
+  const [labels, setLabels] = useState([]);
+  const [scores, setScores] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get("http://localhost:3006/pedidos/fecha");
-        setDatos(response.data);
+        setDatos(response.data.pedidos);
+
+        const grupos = response.data.pedidos.reduce((acc, objeto) => {
+          const fecha = objeto.fecha.split("T")[0];
+          acc[fecha] = acc[fecha] || [];
+          acc[fecha].push(objeto);
+          return acc;
+        }, {});
+
+        const resultados = Object.entries(grupos).map(([fecha, objetos]) => {
+          const sumaValores = objetos.reduce(
+            (suma, objeto) => suma + objeto.total,
+            0
+          );
+          return { fecha, sumaValores };
+        });
+
+        const newLabels = resultados.map((resultado) => resultado.fecha);
+        const newScores = resultados.map((resultado) => resultado.sumaValores);
+
+        setLabels(newLabels);
+        setScores(newScores);
       } catch (error) {
         console.error("Error al obtener datos:", error);
       }
@@ -59,6 +77,12 @@ export default function Grafica() {
   }, []);
 
   const data = useMemo(() => {
+    //por si quieres ponerle multiples colores a las barras usa este arreglo de colores
+     /*  const colors = [
+        "rgba(255, 99, 132, 0.8)",
+        "rgba(54, 162, 235, 0.8)",
+        "rgba(255, 206, 86, 0.8)",
+      ]; */
     return {
       datasets: [
         {
@@ -67,7 +91,7 @@ export default function Grafica() {
           tension: 0.3,
           borderColor: "white",
           pointRadius: 8,
-          backgroundColor: "darkgreen",
+          backgroundColor: "rgba(144, 238, 144, 0.9)",//<----Aqui pon el arreglo
           color: "#ffff",
         },
       ],
@@ -75,15 +99,11 @@ export default function Grafica() {
     };
   }, [scores, labels]);
 
-  const options = {
-    // opciones de la gráfica, si es necesario
-  };
-
   return (
     <Bar
       options={options}
       data={data}
-      style={{ width: "80%", marginTop: "25%" , height: "50%" }}
+      style={{ width: "80%", marginTop: "25%", height: "50%" }}
     />
   );
 }

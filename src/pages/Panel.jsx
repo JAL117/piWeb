@@ -1,18 +1,21 @@
 import React from 'react'
 import PanelGrafica from '../components/Panel/PanelGrafica'
 import Ventas from '../components/Panel/Ventas'
-import { Row } from 'react-bootstrap'
+import TablaHistorial from '../components/Panel/TablaDeHistorial'
 
 function Panel() {
   return (
-    <Row className='ms-5'>
-      <div className='mt-2 ms-5'>
+    <div className='p-5'>
+      <div>
         <Ventas/>
       </div>
       <div className='p-2 mt-5'>
             <PanelGrafica/>
       </div>
-    </Row>
+      <div className='me-5'>
+        <TablaHistorial/>
+      </div>
+    </div>
   )
 }
 

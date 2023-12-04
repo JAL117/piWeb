@@ -30,19 +30,21 @@ function MyComponent() {
   }, [ped]);
 
   return (
-    <div className="panel-container ms-5">
-      <Row>
-        <Col xs={12} md={6}>
+    <div className="panel-container ms-2">
+      <Row className="justify-content-center">
+    
+        <h1 className="text-center mb-2">Ventas del dia</h1>
+        <Col xs={10} md={5}>
           <Panel
             icon={<RiEditBoxFill size={50} />}
-            title="Ordenes del dia"
+            title="Ordenes"
             value={totalOrdenes}
           />
         </Col>
-        <Col xs={12} md={6}>
+        <Col xs={10} md={5}>
           <Panel
             icon={<RiMoneyDollarCircleFill size={50} />}
-            title="Ventas del dia"
+            title="Ventas"
             value={"$" + totalVenta}
           />
         </Col>

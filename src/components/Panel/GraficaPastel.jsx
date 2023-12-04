@@ -95,8 +95,8 @@ function GraficaPastel() {
     datasets: [
       {
         data: valores,
-        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
+        backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","green",'blue',"red"],
+        hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56","green",'blue',"red"],
       },
     ],
   };

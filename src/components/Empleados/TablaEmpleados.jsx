@@ -201,7 +201,7 @@ function Infor() {
               <tr>
                 <th>Nombre</th>
                 <th>Teléfono</th>
-                <th>Direccion</th>
+                <th>Dirección</th>
                 <th>Rol</th>
                 <th>Acciones</th>
               </tr>

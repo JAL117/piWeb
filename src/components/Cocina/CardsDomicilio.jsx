@@ -3,18 +3,20 @@ import { BsClipboard2CheckFill } from "react-icons/bs";
 import axios from "axios";
 import Swal from "sweetalert2";
 import "animate.css";
+import io from "socket.io-client"
 
+const socket = io("http://localhost:3006");
 function OrderCard({ order, index, pedidos }) {
   if (!order) {
     return null;
   }
 
   const { _id, fecha, nota, productos } = order;
-   
   const formatDate = (fecha) => {
     const date = new Date(fecha);
     return date.toLocaleDateString();
   };
+
   const confirmarEntrega = async () => {
     try {
       await axios
@@ -46,6 +48,7 @@ function OrderCard({ order, index, pedidos }) {
             },
           });
           pedidos();
+          socket.emit('message', "domicilio");
         });
     } catch (error) {
       console.log(error);
