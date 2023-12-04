@@ -19,12 +19,12 @@ function OrdersList() {
   } 
   useEffect(() =>{
     pedidos()
-    socket.on("pedidoEnviado", () => {
+    socket.on("domicilioEnviado", () => {
       console.log("pedido Enviado");
       const lastOrder = ordenes[ordenes.length - 1];
       if (lastOrder) {
         Swal.fire({
-          title: "Pedido realizado en cocina",
+          title: "Pedido finalizado en cocina",
           icon: "success",
         });
       }
