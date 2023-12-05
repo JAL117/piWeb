@@ -25,7 +25,7 @@ function Ordenes() {
         console.log(error);
       });
   };
-  console.log(ordenesEnvio, ordenesLocales);
+
   useEffect(() => {
     pedidos();
   }, []);
