@@ -5,7 +5,7 @@ import io from "socket.io-client";
 import Swal from "sweetalert2";
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const socket = io("http://localhost:3006");
+const socket = io(apiUrl);
 
 function OrdersList() {
   const [ordenes, setOrdenes] = useState([]);

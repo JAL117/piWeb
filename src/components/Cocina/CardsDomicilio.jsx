@@ -6,7 +6,7 @@ import "animate.css";
 import io from "socket.io-client"
 const apiUrl = import.meta.env.VITE_API_URL;
 
-const socket = io("http://localhost:3006");
+const socket = io(apiUrl);
 function OrderCard({ order, index, pedidos }) {
   if (!order) {
     return null;

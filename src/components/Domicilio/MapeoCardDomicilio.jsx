@@ -3,15 +3,15 @@ import OrderCard from "./CardDomicilio";
 import axios from "axios";
 import io from "socket.io-client";
 import Swal from "sweetalert2";
-
-const socket = io("http://localhost:3006");
 const apiUrl = import.meta.env.VITE_API_URL;
+const socket = io(apiUrl);
+
 
 function OrdersList() {
   const [ordenes, setOrdenes] = useState([]);
 
   const pedidos = async () =>{
-    await axios.get(apiUrl+'/pedidos/envios').then((data) =>{
+    await axios.get(apiUrl+'pedidos/envios').then((data) =>{
       setOrdenes(data.data)
     }).catch((error) =>{
       console.log(error);

@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import io from "socket.io-client";
 import { IoMdChatboxes, IoMdSend } from "react-icons/io";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Messages = () => {
   const [boton, setBoton] = useState(false);
   const [mensages, setMensajes] = useState([]);
   const [mensage, setMensaje] = useState("");
   const user = JSON.parse(localStorage.getItem("Usuario"));
-  const socket = io("http://localhost:3006");
+  const socket = io(apiUrl);
 
   const displayBtn = () => {
     if (boton === true) {

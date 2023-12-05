@@ -10,13 +10,11 @@ function OrderCard({ order, index, pedidos }) {
   if (!order) {
     return null;
   }
-console.log(order);
   const { _id, total, mesa, fecha, nota, productos, cocina } = order;
   const formatDate = (fecha) => {
     const date = new Date(fecha);
     return date.toLocaleDateString();
   };
-      console.log(cocina);
   const confirmarEntrega = async () => {
 
     if (cocina === false) {
