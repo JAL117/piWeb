@@ -50,3 +50,9 @@ li {
   background-color: rgb(50, 66, 66);
   margin-left: 10rem;
 }
+.hora{
+  font-size: 8pt;
+  position: relative;
+  margin-top: 29px;
+  float: inline-end;
+}

@@ -24,6 +24,7 @@ const Messages = () => {
     socket.emit("mensaje", {
       mensaje: mensage,
       usuario: usuario.usuario,
+      fecha:obtenerHoraActual()
     });
     setMensaje("")
   };
@@ -37,6 +38,16 @@ const Messages = () => {
   }, []);
 
   const estado = (mensaje) => setMensajes((state) => [...state, mensaje]);
+
+   const obtenerHoraActual = () => {
+     const ahora = new Date();
+     const horas = ahora.getHours();
+     const minutos = ahora.getMinutes();
+     const horaFormateada = String(horas).padStart(2, "0");
+     const minutosFormateados = String(minutos).padStart(2, "0");
+     const horaActual = `${horaFormateada}:${minutosFormateados}`;
+     return horaActual
+   };
 
   return (
     <div className="box">
@@ -66,8 +77,10 @@ const Messages = () => {
                     className={
                       user.usuario === mens.usuario ? "message" : "message2"
                     }>
+                      {console.log(mens)}
                     {user.usuario === mens.usuario ? "Tú" : mens.usuario}:&nbsp;
                     {mens.mensaje}
+                    <p className="hora" >{mens.fecha}</p>
                   </li>
                 </>
               ))}
