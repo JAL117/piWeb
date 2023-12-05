@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Chart, ArcElement, Tooltip, Legend } from "chart.js";
 import { Pie } from "react-chartjs-2";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -55,7 +56,7 @@ function GraficaPastel() {
 
   const obtenerDatos = async () => {
     try {
-      const response = await axios.get("http://localhost:3006/pedidos/fecha");
+      const response = await axios.get(apiUrl+"pedidos/fecha");
       setProductos(response.data.pedidos);
     } catch (error) {
       console.error("Error al obtener datos:", error);

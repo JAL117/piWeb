@@ -1,5 +1,5 @@
 import React from 'react'
-import Pedidos from '../components/Pedidos/Pedidos'
+import Pedidos from '../components/Pedidos/MemuParaPedidos'
 
 function Ordenes() {
   return (

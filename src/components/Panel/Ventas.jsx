@@ -4,6 +4,7 @@ import { RiMoneyDollarCircleFill } from "react-icons/ri";
 import Panel from "./ControlVentas";
 import { Col, Row } from "react-bootstrap";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function MyComponent() {
   const [ped, setPed] = useState([]);
@@ -12,7 +13,7 @@ function MyComponent() {
 
   const pedidos = async () => {
     await axios
-      .get("http://localhost:3006/pedidos/realizados")
+      .get(apiUrl+"pedidos/realizados")
       .then((result) => {
         setPed(result.data);
         setTotalOrdenes(result.data.length);

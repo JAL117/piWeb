@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
 import Nav from "react-bootstrap/Nav";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 import Swal from "sweetalert2";
 
 function Navbar({ onCategoriaSeleccionada }) {
   const [categorias, setCategorias] = useState([]);
  const categorys = async () => {
    try {
-     const result = await axios.get("http://localhost:3006/categoria");
+     const result = await axios.get(apiUrl+"categoria");
      setCategorias([...result.data[0].nombre]);
    } catch (error) {
      console.log(error.message);

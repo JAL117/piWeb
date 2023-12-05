@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Form, Table } from "react-bootstrap";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const TablaHistorial = () => {
   const [searchDate, setSearchDate] = useState("");
@@ -15,7 +16,7 @@ const TablaHistorial = () => {
     try {
       const fechaFormateada = formatearFecha(searchDate);
       const response = await axios.get(
-        `http://localhost:3006/pedidos/tabla/${fechaFormateada}`
+        apiUrl+`pedidos/tabla/${fechaFormateada}`
       );
 
       setSearchResults(response.data);

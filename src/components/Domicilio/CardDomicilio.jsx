@@ -1,34 +1,51 @@
 import React from "react";
+import { BsClipboard2CheckFill } from "react-icons/bs";
 import { MdDeleteForever } from "react-icons/md";
-import { GiReceiveMoney } from "react-icons/gi";
+import { FaAddressCard } from "react-icons/fa";
 import Swal from "sweetalert2";
 import axios from "axios";
 import "animate.css";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function OrderCard({ order, index, pedidos }) {
   if (!order) {
     return null;
   }
-console.log(order);
-  const { _id, total, mesa, fecha, nota, productos, cocina } = order;
+  const {
+    _id,
+    total,
+    envio,
+    direccion,
+    cliente,
+    fecha,
+    nota,
+    productos,
+    cocina,
+  } = order;
+
   const formatDate = (fecha) => {
     const date = new Date(fecha);
     return date.toLocaleDateString();
   };
-      console.log(cocina);
-  const confirmarEntrega = async () => {
 
+  const credenciales = () => {
+    Swal.fire({
+      title: "Información de entrega",
+      html: `<span style="font-size:20pt;">Cliente: ${cliente}</span><br><span style="font-size:20pt;">Domicilio: ${direccion}</span>`,
+      icon: "info",
+    });
+  };
+  const confirmarEntrega = async () => {
     if (cocina === false) {
       Swal.fire({
         title: "Permiso denegado",
         text: "El pedido aún no se ha realizado en cocina",
         icon: "error",
       });
-      return
     } else {
       try {
         await axios
-          .put("http://localhost:3006/pedidos/estatus", {
+          .put(apiUrl+"pedidos/estatus", {
             estatus: "realizado",
             id: _id,
           })
@@ -36,24 +53,10 @@ console.log(order);
             console.log(data.data);
             Swal.fire({
               position: "center",
-              title: "Pedido pagado",
+              title: "Pedido entregado",
               icon: "success",
               showConfirmButton: false,
               timer: 2000,
-              showClass: {
-                popup: `
-      animate__animated
-      animate__fadeInUp
-      animate__faster
-    `,
-              },
-              hideClass: {
-                popup: `
-      animate__animated
-      animate__fadeOutDown
-      animate__faster
-    `,
-              },
             });
             pedidos();
           });
@@ -75,7 +78,7 @@ console.log(order);
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:3006/pedidos/eliminar/${_id}`)
+          .delete(apiUrl+`pedidos/eliminar/${_id}`)
           .then(() => {
             Swal.fire(
               "Borrado!",
@@ -95,14 +98,12 @@ console.log(order);
     <div
       className="card text-center"
       style={{
-        backgroundColor: "rgba(209, 35, 35, 0.2)",
+        backgroundColor: "rgba(0, 128, 0, 0.2)",
         boxShadow: "0px 0px 15px 3px rgba(0, 0, 0, 0.1)",
       }}>
       <div className="card-body">
         <h5 className="card-title">Orden #{index + 1}</h5>
         <p className="card-text">Fecha del pedido: {formatDate(fecha)}</p>
-        <br />
-        <p className="card-text">Número de mesa: {mesa}</p>
         <h5>Productos:</h5>
         <textarea
           className="form-control text-center"
@@ -116,8 +117,12 @@ console.log(order);
         <p className="card-text">Total a pagar: ${total}</p>
       </div>
       <div className="card-footer d-flex justify-content-center">
-        <button className="btn btn-success mx-1" onClick={confirmarEntrega}>
-          <GiReceiveMoney size={25} />
+        <button className="btn btn-success  mx-1" onClick={credenciales}>
+          <FaAddressCard size={25} />
+        </button>
+
+        <button className="btn btn-primary mx-1" onClick={confirmarEntrega}>
+          <BsClipboard2CheckFill size={25} />
         </button>
         <button className="btn btn-danger mx-1" onClick={eliminarPedido}>
           <MdDeleteForever size={25} />

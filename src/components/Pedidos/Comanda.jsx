@@ -8,6 +8,7 @@ import { MdDriveFileRenameOutline } from "react-icons/md";
 import { MdTableBar } from "react-icons/md";
 import { MdEditSquare } from "react-icons/md";
 import { MdFoodBank } from "react-icons/md";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const Comanda = (pedidos) => {
   const [tipoEntrega, setTipoEntrega] = useState("sucursal");
@@ -66,7 +67,7 @@ const Comanda = (pedidos) => {
       });
     } else {
       const result = await axios
-        .post("http://localhost:3006/pedidos/pedidos", {
+        .post(apiUrl+"pedidos/pedidos", {
           mesa: numeroMesa,
           total: total,
           envio: envio,

@@ -4,14 +4,14 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-d
 import Layout from "./pages/Layout";
 import LayoutInicial from "./pages/LayoutInicial";
 import Panel from "./pages/Panel";
-import Ordenes from "./pages/Ordenes";
+import Ordenes from "./pages/ComandasMesero";
 import AgregarUsuario from "./pages/AgregarUsuario";
 import Empleados from "./pages/Empleados";
 import Cocina from "./pages/Cocina";
 import Pedidos from "./pages/Pedidos";
 import Login from "./pages/Login";
-import Envios from "./pages/Adomicilio";
-import Imsumos from "./pages/Imsumos";
+import Envios from "./pages/ComandasAdomicilio";
+import Imsumos from "./pages/ActualizarMenu";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Principal from "./pages/Inicio";
 
@@ -30,7 +30,7 @@ function App() {
             <Route path="empleados" element={<Empleados />} />
             <Route path="ordenes" element={<Ordenes />} />
             <Route path="envios" element={<Envios />} />
-            <Route path="pedidos" element={<Pedidos />} />
+            <Route path="realizarPedido" element={<Pedidos />} />
             <Route path="cocina" element={<Cocina />} />
             <Route path="actualizar-menu" element={<Imsumos />} />
             <Route path="principal" element={<Principal />} />

@@ -4,6 +4,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import "animate.css";
 import io from "socket.io-client"
+const apiUrl = import.meta.env.VITE_API_URL;
 
 const socket = io("http://localhost:3006");
 function OrderCard({ order, index, pedidos }) {
@@ -20,7 +21,7 @@ function OrderCard({ order, index, pedidos }) {
   const confirmarEntrega = async () => {
     try {
       await axios
-        .put("http://localhost:3006/pedidos/cocinaStatus", {
+        .put(apiUrl+`pedidos/cocinaStatus`, {
           cocina: true,
           id: _id,
         })

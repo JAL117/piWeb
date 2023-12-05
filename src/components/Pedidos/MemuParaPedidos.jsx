@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "./NavPedidos";
-import CardList from "./CardsList";
+import Navbar from "./NavbarMenu";
+import CardList from "./Cards";
 import OrderSection from "./Comanda";
 import Animaciones from "../utils/Animaciones";
 import axios from "axios";
+const apiUrl = import.meta.env.VITE_API_URL;
 
 function Pedidos() {
   const [productos, setProductos] = useState([]);
@@ -14,7 +15,7 @@ function Pedidos() {
   useEffect(() => {
     const cards = async () => {
       try {
-        const response = await axios.get("http://localhost:3006/producto");
+        const response = await axios.get(apiUrl+"producto");
         setProductos(response.data);
       } catch (error) {
         console.log("Error obteniendo los datos: ", error);

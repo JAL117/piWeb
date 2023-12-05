@@ -1,5 +1,5 @@
 import React from 'react'
-import Registro from '../components/Imsumos/Pedidos'
+import Registro from '../components/ActualizarMenu/MenuParaActualizar'
 
 function Imsumos() {
   return (
