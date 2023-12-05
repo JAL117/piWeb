@@ -35,7 +35,7 @@ function Login() {
           result.data.message !== "Usuario no encontrado"
         ) {
           localStorage.setItem("Usuario", JSON.stringify(result.data));
-          socket.emit('usuarioConectado'); // Emitir evento al iniciar sesión
+          socket.emit('usuarioConectado'); 
           navigate("/inicio/principal");
           window.location.reload();
         } else {
